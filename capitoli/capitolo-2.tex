@@ -11,19 +11,54 @@
 
 %**************************************************************
 \section{Descrizione del progetto}
-Il progetto di stage è legato ad uno degli ambiti più innovativi della ricerca scientifica e tecnologica: il riconoscimento del linguaggio naturale.
-Nel corso degli ultimi anni l'azienda sta affrontando la nuova sfida della comprensione di comandi vocali integrata nei propri prodotti e ha deciso di puntare sulle capacità di giovani studenti universitari per esplorare ancor più questo tema. È tuttora in via di sviluppo una tecnologia che permette la creazione di grammatiche attraverso regole ben precise ed in merito a questo argomento è stato costruito lo stage.\\
-La proposta di Zucchetti è di analizzare in modo dettagliato e comparativo i tre assistenti virtuali più utilizzati e, sulla carta, migliori:
+Il progetto di stage è legato ad uno degli ambiti più innovativi della ricerca scientifica e informatica: il riconoscimento e l'elaborazione del linguaggio naturale da parte di un calcolatore. \\
+Nel corso degli ultimi anni, l'azienda sta affrontando la sfida della comprensione di comandi vocali per permette agli utenti di comunicare con i propri prodotti. È infatti in via di sviluppo una loro tecnologia in grado di creare grammatiche atte a riconoscere il linguaggio naturale mediante regole ben precise. In merito a questo argomento si è costruito il progetto di stage articolato poi in due parti:
+\begin{enumerate}
+	\item studio degli assistenti virtuali più comuni ed utilizzati;
+	\item creazione di un'applicazione sotto forma di \textit{proof of concept} capace di intrattenere una conversazione.
+\end{enumerate}
+La prima parte richiede un'analisi dettagliata e comparativa dei tre assistenti virtuali più utilizzati e, secondo diversi studi, migliori:
 \begin{itemize}
-	\item Assistant: assistente di Google presente in quasi tutti i dispositivi Android oltre ad essere integrato nella linea Google Home e Nest;
-	\item Alexa: assistente di Amazon presente principalemente nella linea di dispositivi Echo ma integrabile nei dispositivi con sistema operativo Android e IOS;
+	\item Assistant: assistente di Google presente in quasi tutti i dispositivi Android e nei prodotti della linea Google Home e Nest;
+	\item Alexa: assistente di Amazon presente in tutta la linea di dispositivi Echo ed integrabile anche nei dispositivi con sistema operativo Android e IOS;
 	\item Siri: assistente di Apple presente esclusivamente in tutti i prodotti Apple.
 \end{itemize}
-Lo studio deve comprendere tutte le capacità che posseggono, ad eccezione di quelle relative alla costruzione di smart home in quanto non di diretto interesse per i prodotti aziendali, mentre di particolare interesse è la costruzione di \textit{Skill} personalizzate ed integrabili nei propri progetti. \\
-Sulla base dei risultati riscontrati emerge l'idea concreta proposta dall'azienda per lo stage: creare un'applicazione con un'interfaccia vocale, progettata secondo i canoni studiati in precedenza dagli altri assistenti e basata su grammatiche costruite tramite la tecnologia di Zucchetti, che permetta di intrattenere una conversazione con l'utente rispondendo alle sue richieste.
+Lo studio deve comprendere tutte le capacità che posseggono, con particolare attenzione alla costruzione di \textit{Skill} personalizzate ed integrabili nei propri progetti, ad eccezione di quelle relative alla costruzione di \textit{smart home} in quanto non sono di diretto interesse per i prodotti aziendali; l'azienda infatti punta alla realizzazione di un assistente utile solo nei propri prodotti e non su larga scala. Inoltre, per ogni assistente, è richiesto un \textit{proof of concept} atto a dimostrare le funzionalità più significative che sono state riscontrate.\\
+Sulla base dei risultati ottenuti nel corso dell'analisi si concretizza la seconda parte del lavoro: creare un'applicazione con un'interfaccia vocale, progettata secondo i canoni studiati in precedenza dagli altri assistenti e basata su grammatiche costruite mediante la tecnologia di Zucchetti, che permetta di intrattenere una conversazione con l'utente rispondendo alle sue richieste. \\
+Il contenuto dell'applicazione non è vincolato dall'azienda in quanto l'obiettivo è approfondire l'abilità conversazionale e non costruire un'applicazione direttamente utilizzata nel software Zucchetti. In comune accordo è stato scelto il contesto della data di nascita poiché risulta ricca di sfumature sia nella richieste che nelle risposte e possiede parametri specifici e funzionali alla sperimentazione sulla capacità di conversazione.
+Lo scopo generale del progetto di stage è quindi svolgere un'attività di ricerca e di approfondimento nella tematica del linguaggio naturale poiché è una tecnologia non ancora pienamente affermata ma con ampi margini di sviluppo.
 
-%Descrizione
-%Obiettivi
-%Pianificazione attività
+\section{Obiettivi}
+\subsection{Classificazione}
+La classificazione degli obiettivi permette di identificarli univocamente e rispetta la seguente notazione:
+\begin{itemize}
+	\item \textit{OB-x}: obiettivi obbligatori, vincolanti e primario richiesti dall'azienda;
+	\item \textit{OD-x}: obiettivi desiderabili, non vincolanti o strettamente necessari ma dal riconoscibile valore aggiunto;
+	\item \textit{OF-x}: obiettivi facoltativi dal valore aggiunto riconoscibile ma difficilmente raggiunbili a causa di agenti esterni all'attività di stage.
+\end{itemize}
+Il simbolo 'x' rappresenta un numero progressivo intero maggiore di zero.
+
+\subsection{Obiettivi obbligatori}
+\begin{itemize}
+	\item \textit{\underline{OB-1}}: studio e analisi delle capacità e delle modalità di utilizzo lato sviluppatore di Assistant;
+	\item \textit{\underline{OB-2}}: implementazione sottoforma di \textit{proof of concept} di una \textit{Action} basata su una funzionalità particolarmente rilevante di Assistant, scoperta durante la ricerca;
+	\item \textit{\underline{OB-3}}: studio e analisi delle capacità e delle modalità di utilizzo lato sviluppatore di Alexa;
+	\item \textit{\underline{OB-4}}: implementazione sottoforma di \textit{proof of concept} di una \textit{Skill} basata su una funzionalità particolarmente rilevante di Alexa, scoperta durante la ricerca;
+	\item \textit{\underline{OB-5}}: redazione di un documento che tratti l'analisi dettagliata e comparativa in merito alle tecnologie degli assistenti virtuali studiati;
+	\item \textit{\underline{OB-6}}: studio di regole e caratteristiche dell'algoritmo \textit{HPP (Hidden Probabilistic Parser)} di Zucchetti per la costruzione di grammatiche che riconoscono il linguaggio naturale;
+	\item \textit{\underline{OB-7}}: realizzazione di un'applicazione basata su una grammatica generata da \textit{HPP} con interfaccia vocale e capacità conversazionale.
+\end{itemize}
+\subsection{Obiettivi desiderabili} 
+\begin{itemize}
+	\item \textit{\underline{OD-1}}: implementazione di un meccanismo che permetta lo scambio di informazioni specifiche e possibilmente memorizzate durante la conversazione.
+\end{itemize}
+\subsection{Obiettivi facoltativi}
+\begin{itemize}
+	\item \textit{\underline{OF-1}}: studio e analisi delle capacità e delle modalità di utilizzo lato sviluppatore di Siri;
+	\item \textit{\underline{OF-2}}: implementazione sottoforma di \textit{proof of concept} di una \textit{Skill} basata su una funzionalità particolarmente rilevante di Siri, scoperta durante la ricerca.
+\end{itemize} 
+
+
+\section{Pianificazione delle attività}
 %Strumenti utilizzati
 %Aspettative
