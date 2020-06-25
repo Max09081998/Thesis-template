@@ -3,30 +3,146 @@
 % !TEX root = ../tesi.tex
 
 %**************************************************************
-\chapter{Descrizione dello stage}
+\chapter{Gli assistenti virtuali}
 \label{cap:descrizione-stage}
 %**************************************************************
 
-\intro{Breve introduzione al capitolo}\\
+%\intro{Breve introduzione al capitolo}\\
 
 %**************************************************************
-\section{Introduzione al progetto}
+\section{Premessa}
+Un assistente virtuale è un software capace di interpretare il linguaggio naturale e dialogare con gli utenti che ne fanno uso, eseguendo determinati compiti. Generalmente necessita di un'attività di addestramento, precedente al suo utilizzo, che gli permetta di apprendere e migliorare le proprie abilità. \\
+Gli assistenti virtuali analizzati in seguito sono Assistant, Alexa e Siri; nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile. Inizialmente lo sviluppatore deve costruire un'abilità che l'assistente virtuale può svolgere assegnando nome, frasi di richiamo e azioni da eseguire. Queste abilità sono chiamate \textit{Action} per Assistant, \textit{Skill} per Alexa e \textit{comandi} per Siri. Dato che gli assistenti virtuali attuali sono pensati per un utilizzo di breve durata è molto importante progettare le loro funzioni considerando questo fattore per fornire agli utenti una migliore esperienza d'uso. \\
 
 %**************************************************************
-\section{Analisi preventiva dei rischi}
-
-Durante la fase di analisi iniziale sono stati individuati alcuni possibili rischi a cui si potrà andare incontro.
-Si è quindi proceduto a elaborare delle possibili soluzioni per far fronte a tali rischi.\\
-
-\begin{risk}{Performance del simulatore hardware}
-    \riskdescription{le performance del simulatore hardware e la comunicazione con questo potrebbero risultare lenti o non abbastanza buoni da causare il fallimento dei test}
-    \risksolution{coinvolgimento del responsabile a capo del progetto relativo il simulatore hardware}
-    \label{risk:hardware-simulator} 
-\end{risk}
+\section{Assistant}
+	\subsection{Introduzione}
+	Assistant è l'assistente virtuale di Google ed è capace di riconoscere un comando vocale, elaborarlo attraverso un ragionamento e fornire una risposta. È una tecnologia in continuo miglioramento grazie all'immensa mole di dati che Google ha a disposizione per il suo addestramento. \\
+	Reso pubblico dal 2016, Assistant è ora integrato in tutti i dispositivi con sistema operativo Android, a partire dalla versione 6.0 se hanno a disposizione almeno 1.5 GB di memoria RAM oppure dalla versione 5.0 se hanno a disposizione almeno 1 GB di memoria RAM. È installabile anche nei dispositivi con sistema operativo iOS a partire dalla versione 10 e iPadOS; tuttavia l'integrazione è pessima in quanto per richiamarlo è necessario invocare prima l'assistente virtuale Siri. È infine fruibile nei dispositivi della linea Home e Nest di Google, costruiti e pensati appositamente per ottimizzarne le funzionalità.
+	\subsection{Casi d'uso}
+	\begin{itemize}
+		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico: \textit{Home Actions};
+		\item dialogo con l'utente eseguendo anche operazioni specifiche: \textit{Conversational Actions};
+		\item integrazione di contenuti multimediali pensati per Assistant all'interno di pagine web: \textit{Content Actions}.
+		\item integrazione di Assistant nelle applicazioni Android per eseguire determinate funzioni: \textit{App Actions}.
+	\end{itemize}
+	Le \textit{Home Actions} non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
+	\subsection{Conversational Actions}
+		\subsubsection{Descrizione}
+		Le \textit{Conversational Actions} estendono le funzionalità di Assistant consentendo di creare esperienza di conversazione personalizzate con gli utenti. Essa infatti permette di gestire le richieste dell'utente all'Assistente e le risposte costruite a seguito dell'elaborazione. Infine hanno il vantaggio di poter comunicare con servizi Web esterni in modo da aggiungere una logica di conversazione aziendale aggiuntiva.
+		\subsubsection{Funzionamento}
+		%TODO: CONTROLLARE CHE SIA BEN SPECIFICATO COS'È UN INTENTO E COME SI DIFFERENZIA DA UNA ACTIONS
+		Il loro principio di funzionamento si basa sul concetto di intento: azione che soddisfa la richiesta di un utente. Si articola nei seguenti passi:
+		\begin{enumerate}
+			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
+			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
+			\item il dispositivo manda la stringa riconosciuta ad un server remoto per l'elaborazione;
+			\item il server remoto attiva un apposito componente software che prova ad eseguire un match tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito nella propria abilità;
+			\item se il match ha dato esito positivo viene selezionato l'intento corretto, sulla base del contenuto della stringa;
+			\item viene richiamato il servizio di \textit{fulfillment}, rappresentante il codice da eseguire, che porterà a termine l'intento;
+			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
+			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
+		\end{enumerate}
+		\subsubsection{Costruzione}
+		Nella costruzione di una Conversational Action è necessario svolgere un'attività di progettazione mirata ai seguenti tre aspetti:
+		\begin{itemize}
+			\item modalità di invocazione;
+			\item tipologia e formato delle richieste accettate;
+			\item tipologia e formato delle risposte che ragionevolmente l'utente si aspetta.
+		\end{itemize}
+		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo dell'Action che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi dall'assistente, cercando di rendere la conversazione più naturale possibile. Una volta inserite le frasi, Assistant verrà addestrato su di esse poterle interpretare corretttamente.
+		Per le modalità di invocazione, invece, Google fa una distinzione:
+		\begin{itemize}
+			\item invocazione esplicita;
+			\item invocazione implicita.
+		\end{itemize}
+		L'invocazione esplicita consiste nell'esprimere una frase con la struttura:
+		\begin{enumerate}
+			\item parola di attivazione: "Hey Google" oppure "Ok Google";
+			\item parola di avvio: chiedi, fai, raccontami e vocaboli simili;
+			\item nome di invocazione: nome deve identifica la Action;
+			\item tips: parametri aggiuntivi, possibilmente opzionali, implementati come variabili che specificano ulteriormente la richiesta dell'utente;
+			\item elementi aggiuntivi dell'utente con lo scopo di contestualizzare o precisare il dominio della richiesta.
+		\end{enumerate}
+		In questo modo Assistant potrà capire quale Action attivare e di conseguenza far partire la conversazione. \\
+		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver specificato esplicitamente l'Action da eseguire. In questo caso la business logic di Assistant si occuperà di comprendere la richiesta e associazione l'Action che ritiene più corretta ma, qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa. Tuttavia il funzionamento di questa modalità non è garantito da Google in quanto è ancora in via di sviluppo e richiede che lo sviluppatore abbia inserito un numero di frasi per l'addestramento sufficientemente ampio e completo.
+		Successivamente alla progettazione è necessario scegliere lo strumento con cui implementarla. Google ne offre due:
+		\begin{itemize}
+			\item Dialogflow;
+			\item Conversational Actions SDK.
+		\end{itemize}
+		Dialogflow è uno strumento utilizzato per creare conversazioni personalizzate in modo semplice ed intuitivo. Si basa interamento sulla \textit{NLU} di Assistant per la comprensione del linguaggio naturale e si appoggia di default a Firebase come \textit{webhook}. Per costruire una Conversational Action con \textit{Dialogflow} è necessario creare un agente ovvero un modulo di comprensione del linguaggio naturale che gestisce le conversazioni con gl utenti. Ogni agente è composto dalle seguenti componenti:
+		\begin{itemize}
+			\item definire la Default Actions ovvero l'azione a cui corrisponde l'evento GOOGLE\_ASSISTANT\_WELCOME che rappresenta la prima interazione con la Actions. La condizione necessaria è ogni agente deve avere uno ed un solo intento per gestire questo evento. La risposta predefinita che viene fornita è statica e preconfigurata ma è comunque possibile renderla dimanica costruendo un servizio di fulfillment che la compone a tempo di esecuzione;
+			\item 
+		\end{itemize}
+	\subsection{Content Actions}
+		\subsubsection{Descrizione}
+		\subsubsection{Funzionamento}
+		\subsubsection{Costruzione}
+	\subsection{App Actions}
+		\subsubsection{Descrizione}
+		\subsubsection{Funzionamento}
+		\subsubsection{Costruzione}
+	\subsection{Proof of concept}	
 
 %**************************************************************
-\section{Requisiti e obiettivi}
-
+\section{Alexa}
+	\subsection{Introduzione}
+	Alexa è l'assistente virtuale di Amazon ed è capace di riconoscere un comando vocale, elaborarlo attraverso un ragionamento e fornire una risposta. È una tecnologia in continuo sviluppo grazie anche alla consistente mole di dati che Amazon ha a disposizione per il suo addestramento. \\
+	La prima versione di Alexa risale al 2014 e da allora ha fatto notevoli miglioramenti. È integrato in tutti i dispositivi della linea Echo di Amazon costruiti appositamente per ottimizzarne l'utilizzo; tuttavia è installabile in tutti i dispositivi con sistema operativo Android in versione 5.0 o maggiore, iOS in versione 9.0 o maggiore e iPadOS.
+	\subsection{Casi d'uso}
+	\begin{itemize}
+		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico attraverso le \textit{Skill};
+		\item dialogo con l'utente eseguendo anche operazioni specifiche attraverso le \textit{Skill}.
+	\end{itemize}
+	Le \textit{Skill} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
+	\subsection{Skill di conversazione}
+		\subsubsection{Descrizione}
+		
+		\subsubsection{Costruzione}
+		\subsubsection{Funzionamento}
+		Il loro principio di funzionamento si basa sul concetto di intento: azione che soddisfa la richiesta di un utente. Si articola nei seguenti passi:
+		\begin{enumerate}
+			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
+			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
+			\item il dispositivo manda la stringa riconosciuta ad un server remoto per l'elaborazione;
+			\item il server remoto attiva un apposito componente software che prova ad eseguire un match tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito nella propria abilità;
+			\item se il match ha dato esito positivo viene selezionato l'intento corretto, sulla base del contenuto della stringa;
+			\item viene richiamato il servizio di \textit{fulfillment}, rappresentante il codice da eseguire, che porterà a termine l'intento;
+			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
+			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
+		\end{enumerate}
+	\subsection{Proof of concept}
 
 %**************************************************************
-\section{Pianificazione}
+\section{Siri}
+	\subsection{Introduzione}
+	Siri è l'assistente virtuale di Apple ed è capace di riconoscere un comando vocale, elaborarlo attraverso un ragionamento e fornire una risposta. È una tecnologia in continuo sviluppo grazie anche alla contingente mole di dati a disposizione di Apple per il suo addestramento. \\
+	La prima versione è stata introdotta in iOS 5 nel 2012, senza ancora offrire il supporto a tutte le lingue e a tutti i dispositivi. Ora invece è integrato in Homepod e tutti i dispositivi con sistema operativo iOS versione 8.0 o superiore, iPadOS, watchOS, tvOS e MacOS versione 10.12 o superiore. Rimane comunque un esclusiva di Apple e non è installabile in altri sistemi.
+	\subsection{Casi d'uso}
+	\begin{itemize}
+		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico attraverso i \textit{comandi}.
+		\item dialogo con l'utente eseguendo anche operazioni specifiche attraverso i \textit{comandi}.
+		\item integrazione di Siri nelle applicazioni per i dispositivi Apple per eseguire determinate funzionalità.
+	\end{itemize}
+	Le \textit{Skill} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
+	\subsection{Comandi di conversazione}
+		\subsubsection{Descrizione}
+		\subsubsection{Costruzione}
+		\subsubsection{Funzionamento}
+		Il loro principio di funzionamento si basa sul concetto di intento: azione che soddisfa la richiesta di un utente. Si articola nei seguenti passi:
+		\begin{enumerate}
+			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
+			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
+			\item il dispositivo manda la stringa riconosciuta ad un server remoto per l'elaborazione;
+			\item il server remoto attiva un apposito componente software che prova ad eseguire un match tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito nella propria abilità;
+			\item se il match ha dato esito positivo viene selezionato l'intento corretto, sulla base del contenuto della stringa;
+			\item viene richiamato il servizio di \textit{fulfillment}, rappresentante il codice da eseguire, che porterà a termine l'intento;
+			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
+			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
+		\end{enumerate}
+	\subsection{Proof of concept}
+
+%**************************************************************
+\section{Analisi comparativa}
