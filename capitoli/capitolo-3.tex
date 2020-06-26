@@ -12,70 +12,107 @@
 %**************************************************************
 \section{Premessa}
 Un assistente virtuale è un software capace di interpretare il linguaggio naturale e dialogare con gli utenti che ne fanno uso, eseguendo determinati compiti. Generalmente necessita di un'attività di addestramento, precedente al suo utilizzo, che gli permetta di apprendere e migliorare le proprie abilità. \\
-Gli assistenti virtuali analizzati in seguito sono Assistant, Alexa e Siri; nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile. Inizialmente lo sviluppatore deve costruire un'abilità che l'assistente virtuale può svolgere assegnando nome, frasi di richiamo e azioni da eseguire. Queste abilità sono chiamate \textit{Action} per Assistant, \textit{Skill} per Alexa e \textit{comandi} per Siri. Dato che gli assistenti virtuali attuali sono pensati per un utilizzo di breve durata è molto importante progettare le loro funzioni considerando questo fattore per fornire agli utenti una migliore esperienza d'uso. \\
+Gli assistenti virtuali analizzati sono Assistant, Alexa e Siri ma, nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile. Inizialmente lo sviluppatore deve costruire un'abilità che viene richiamata attraverso l'assistente virtuale assegnando nome, frasi di richiamo e azioni da eseguire. Queste abilità sono chiamate \textit{Action} per Assistant, \textit{Skill} per Alexa e \textit{Comandi} per Siri. Dato che gli assistenti virtuali attuali sono pensati per un utilizzo di breve durata, è molto importante progettare le abilità considerando questo fattore, con l'obiettivo di dare agli utenti una migliore esperienza d'uso. \\
+Una caratteristica comune alle abilità di tutti gli assistenti successivamente trattati è il meccanismo di funzionamento su cui si fondano: gli intenti. Questi consistono in un'azione che soddisfa una richiesta vocale effettuata da un utente e il servizio che la esegue, più concretamente il codice, viene detto \textit{fulfillment}. Questo concetto sarà spiegato più dettagliatamente per ciascun assistente nel paragrafo dedicato al funzionamento.
 
 %**************************************************************
 \section{Assistant}
 	\subsection{Introduzione}
-	Assistant è l'assistente virtuale di Google ed è capace di riconoscere un comando vocale, elaborarlo attraverso un ragionamento e fornire una risposta. È una tecnologia in continuo miglioramento grazie all'immensa mole di dati che Google ha a disposizione per il suo addestramento. \\
-	Reso pubblico dal 2016, Assistant è ora integrato in tutti i dispositivi con sistema operativo Android, a partire dalla versione 6.0 se hanno a disposizione almeno 1.5 GB di memoria RAM oppure dalla versione 5.0 se hanno a disposizione almeno 1 GB di memoria RAM. È installabile anche nei dispositivi con sistema operativo iOS a partire dalla versione 10 e iPadOS; tuttavia l'integrazione è pessima in quanto per richiamarlo è necessario invocare prima l'assistente virtuale Siri. È infine fruibile nei dispositivi della linea Home e Nest di Google, costruiti e pensati appositamente per ottimizzarne le funzionalità.
+	Assistant è l'assistente virtuale di Google ed è capace di riconoscere un comando vocale, elaborarlo attraverso un ragionamento e fornire una risposta. È una tecnologia in continuo miglioramento grazie anche all'immensa mole di dati che Google ha a disposizione per il suo addestramento. \\
+	Reso pubblico dal 2016, Assistant è ora integrato in tutti i dispositivi con sistema operativo Android, a partire dalla versione 6.0 se hanno a disposizione almeno 1.5 GB di memoria RAM oppure dalla versione 5.0 se hanno a disposizione almeno 1 GB di memoria RAM. È inoltre installabile nei dispositivi con sistema operativo iOS a partire dalla versione 10 e iPadOS; tuttavia l'integrazione è pessima in quanto per richiamarlo è necessario invocare Siri. Infine è fruibile nei dispositivi della linea Home e Nest di Google, costruiti e pensati appositamente per ottimizzarne le funzionalità.
 	\subsection{Casi d'uso}
 	\begin{itemize}
 		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico: \textit{Home Actions};
 		\item dialogo con l'utente eseguendo anche operazioni specifiche: \textit{Conversational Actions};
 		\item integrazione di contenuti multimediali pensati per Assistant all'interno di pagine web: \textit{Content Actions}.
-		\item integrazione di Assistant nelle applicazioni Android per eseguire determinate funzioni: \textit{App Actions}.
+		\item integrazione di Assistant nelle applicazioni Android per eseguirne determinate funzionalità: \textit{App Actions}.
 	\end{itemize}
 	Le \textit{Home Actions} non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Conversational Actions}
 		\subsubsection{Descrizione}
-		Le \textit{Conversational Actions} estendono le funzionalità di Assistant consentendo di creare esperienza di conversazione personalizzate con gli utenti. Essa infatti permette di gestire le richieste dell'utente all'Assistente e le risposte costruite a seguito dell'elaborazione. Infine hanno il vantaggio di poter comunicare con servizi Web esterni in modo da aggiungere una logica di conversazione aziendale aggiuntiva.
+		Le \textit{Conversational Actions} estendono le funzionalità di Assistant consentendo di creare esperienza di conversazione personalizzata con gli utenti. Esse infatti permettono di gestire le richieste rivolte all'Assistente e le risposte costruite a seguito dell'elaborazione. \\
+		Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle apposite \textit{SDK}.
 		\subsubsection{Funzionamento}
-		%TODO: CONTROLLARE CHE SIA BEN SPECIFICATO COS'È UN INTENTO E COME SI DIFFERENZIA DA UNA ACTIONS
-		Il loro principio di funzionamento si basa sul concetto di intento: azione che soddisfa la richiesta di un utente. Si articola nei seguenti passi:
+		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
-			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
+			\item un utente lancia una richiesta sotto forma di comando vocale al dispositivo che ospita Assistant;
 			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
-			\item il dispositivo manda la stringa riconosciuta ad un server remoto per l'elaborazione;
-			\item il server remoto attiva un apposito componente software che prova ad eseguire un match tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito nella propria abilità;
-			\item se il match ha dato esito positivo viene selezionato l'intento corretto, sulla base del contenuto della stringa;
-			\item viene richiamato il servizio di \textit{fulfillment}, rappresentante il codice da eseguire, che porterà a termine l'intento;
-			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
-			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
+			\item il dispositivo invia la stringa riconosciuta ad un server remoto di Google, tramite protocollo \textit{HTTPs}, dove risiede la \textit{NLU} per l'elaborazione;
+			\item la business logic contenuta nel server remoto prova a verificare la possibile corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito durante la costruzione della propria abilità;
+			\item se non vi è alcuna corrispondenza viene subito ritornata una risposta negativa e riferito all'utente. Si ricomincia quindi dal punto 1;
+			\item se una corrispondenza dà esito positivo viene selezionato l'intento associato con il suo servizio di \textit{fulfillment} che si occupa dell'esecuzione;
+			\item la conclusione dell'esecuzione prevede la costruzione e l'invio della risposta al dispositivo mittente;
+			\item il dispositivo riferisce la riposta all'utente che potrà poi procedere con una nuova richiesta, fino al termine dell'esecuzione dell'abilità previsto dal programmatore durante la costruzione, oppure interrompere forzatamente la conversazione.
 		\end{enumerate}
+		Qualora la richiesta dell'utente fosse di invocazione, prima di scegliere l'intento da eseguire viene cercata una corrispondenza tra le Action a disposizione per capire quale avviare.
+		Infine, affinché la Action tenga un comportamento adeguato, è necessario applicare correttamente i principi di costruzione e svolgere una consistente attività di addestramento durante lo sviluppo.
+		%TODO: METTERE DEPLOY NEL GLOSSARIO 
 		\subsubsection{Costruzione}
-		Nella costruzione di una Conversational Action è necessario svolgere un'attività di progettazione mirata ai seguenti tre aspetti:
+		Nella costruzione di una Conversational Action la prima attività da svolgere è la progettazione che deve essere mirata a tre aspetti:
 		\begin{itemize}
 			\item modalità di invocazione;
 			\item tipologia e formato delle richieste accettate;
-			\item tipologia e formato delle risposte che ragionevolmente l'utente si aspetta.
+			\item tipologia e formato delle risposte che l'utente si aspetta.
 		\end{itemize}
-		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo dell'Action che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi dall'assistente, cercando di rendere la conversazione più naturale possibile. Una volta inserite le frasi, Assistant verrà addestrato su di esse poterle interpretare corretttamente.
-		Per le modalità di invocazione, invece, Google fa una distinzione:
+		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo dell'Action che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi da Assistant, cercando di rendere la conversazione più naturale possibile. Una volta inserite le frasi, Assistant viene addestrato su di esse al fine di interpretarle correttamente. \\
+		Per la modalità di invocazione Google fa una distinzione:
 		\begin{itemize}
 			\item invocazione esplicita;
 			\item invocazione implicita.
 		\end{itemize}
-		L'invocazione esplicita consiste nell'esprimere una frase con la struttura:
+		L'invocazione esplicita consiste nell'esprimere una frase che riporti la seguente struttura:
 		\begin{enumerate}
 			\item parola di attivazione: "Hey Google" oppure "Ok Google";
-			\item parola di avvio: chiedi, fai, raccontami e vocaboli simili;
+			\item parola di avvio: chiedi, fai, dimmi, raccontami e vocaboli simili;
 			\item nome di invocazione: nome deve identifica la Action;
 			\item tips: parametri aggiuntivi, possibilmente opzionali, implementati come variabili che specificano ulteriormente la richiesta dell'utente;
-			\item elementi aggiuntivi dell'utente con lo scopo di contestualizzare o precisare il dominio della richiesta.
+			\item elementi aggiuntivi: l'utente può pronunciare parole aggiuntive con lo scopo di contestualizzare o precisare il dominio della richiesta.
 		\end{enumerate}
-		In questo modo Assistant potrà capire quale Action attivare e di conseguenza far partire la conversazione. \\
-		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver specificato esplicitamente l'Action da eseguire. In questo caso la business logic di Assistant si occuperà di comprendere la richiesta e associazione l'Action che ritiene più corretta ma, qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa. Tuttavia il funzionamento di questa modalità non è garantito da Google in quanto è ancora in via di sviluppo e richiede che lo sviluppatore abbia inserito un numero di frasi per l'addestramento sufficientemente ampio e completo.
-		Successivamente alla progettazione è necessario scegliere lo strumento con cui implementarla. Google ne offre due:
+		Grazie a questa struttura fissa, Assistant riesce a comprendere quale Action attivare per avviare la conversazione. \\
+		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver esplicitato l'Action da eseguire. In questo caso la business logic di Assistant ha il compito di comprendere la richiesta e associare l'Action che ritiene più corretta. Qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa e ne ritornerà i risultati come risposta. Tuttavia il funzionamento di questa modalità non è garantito da Google in quanto è ancora in via di sviluppo e richiede che lo sviluppatore abbia inserito un numero di frasi per l'addestramento sufficientemente ampio e completo. \\
+		L'attività che segue la progettazione è l'implementazione e per svolgerla Google offre due strumenti:
 		\begin{itemize}
 			\item Dialogflow;
 			\item Conversational Actions SDK.
 		\end{itemize}
-		Dialogflow è uno strumento utilizzato per creare conversazioni personalizzate in modo semplice ed intuitivo. Si basa interamento sulla \textit{NLU} di Assistant per la comprensione del linguaggio naturale e si appoggia di default a Firebase come \textit{webhook}. Per costruire una Conversational Action con \textit{Dialogflow} è necessario creare un agente ovvero un modulo di comprensione del linguaggio naturale che gestisce le conversazioni con gl utenti. Ogni agente è composto dalle seguenti componenti:
+		Dialogflow è uno strumento utilizzato per creare conversazioni personalizzate in modo semplice ed intuitivo. Si basa sulla \textit{NLU} di Assistant per la comprensione del linguaggio naturale e si appoggia ad un \textit{webhook} per la gestione dei dati, \textit{Firebase} è quello predefinito. Per costruire una Conversational Action con \textit{Dialogflow} è necessario creare un agente ovvero un modulo di comprensione del linguaggio naturale che gestisce le conversazioni con gli utenti sgravando lo sviluppatore di numerosi oneri. \\
+		Le Conversational Actions SDK consistono in un'interfaccia HTTPs che permette di costruire ed eseguire le Conversational Actions all'interno di una propria applicazione per elaborare le richieste effettuate ad Assistant. Grazie all'interfaccia HTTPs infatti Assistant può comunicare con applicazioni terze. Il requisito che ne deriva è possedere una propria \textit{NLU} per la comprensione del linguaggio naturale. L'architettura ad alto livello del sistema che rappresenta l'utilizzo delle Conversational Actions attraverso SDK è così composta:
 		\begin{itemize}
-			\item definire la Default Actions ovvero l'azione a cui corrisponde l'evento GOOGLE\_ASSISTANT\_WELCOME che rappresenta la prima interazione con la Actions. La condizione necessaria è ogni agente deve avere uno ed un solo intento per gestire questo evento. La risposta predefinita che viene fornita è statica e preconfigurata ma è comunque possibile renderla dimanica costruendo un servizio di fulfillment che la compone a tempo di esecuzione;
-			\item 
+			\item dispositivo fisico con Assistant integrato che riceve la richiesta vocale dell'utente;
+			\item \textit{NLU} di Google che ha il compito di riconoscere la richiesta dell'utente e associare l'intento corretto;
+			\item servizio cloud remoto che, ricevuta la richiesta di esecuzione dell'intento, esegue il servizio di fulfillment associato e ritorna la risposta alla \textit{NLU} che a sua volta la ritorna al dispositivo.
 		\end{itemize}
+		%Segue un'immagine illustrativa dell'architettura.
+		%TODO: INSERIRE IMMAGINE
+		Le componenti di un agente di Dialogflow oppure una Conversational Actions costruita con le \textit{SDK} sono uguali:
+		\begin{itemize}
+			\item Default Actions: azione cui corrisponde l'evento chiamato \textit{GOOGLE}\_\textit{ASSISTANT}\\ \_\textit{WELCOME} per Dialogflow e \textit{actions.intent.MAIN} per le \textit{SDK} che rappresenta la prima interazione con l'Action; una condizione necessaria che la caratterizza è l'esistenza di uno ed un solo intento per gestire questo evento. La risposta predefinita è statica e preconfigurata ma è comunque possibile renderla dinamica costruendo un servizio di \textit{fulfillment} che la compone a tempo di esecuzione;
+			\item Addictional Actions: azione aggiuntiva alla Default Actions utilizzata per aggiungere e specificare le capacità dell'Action. Possono essere molteplici e sono automaticamente indicizzate per l'invocazione implicita.
+		\end{itemize}
+		Ognuna di queste componenti corrisponde ad un intento che l'Action può gestire. \\
+		Una volta stabilite queste componenti, è necessario definire l'interfaccia della propria conversazione. Per poterlo fare si deve creare un intento definendo:
+		\begin{itemize}
+			\item nome;
+			\item contesto;
+			\item evento scatenante;
+			\item frasi di input per l'addestramento;
+			\item azioni da eseguire;
+			\item eventuali parametri aggiuntivi per la conversazione e formato della risposta.
+		\end{itemize}
+		Le azioni da eseguire corrispondono alla creazione di un \textit{fulfillment} che fornisce la logica per processare la richiesta dell'utente e genera una risposta. \\
+		Qui emerge una grande differenza tra Dialogflow e \textit{SDK}: mentre il primo utilizza la \textit{NLU} di Google rivelandosi quindi di poco interesse per i progetti dell'azienda, il secondo prevede l'utilizzo obbligatorio di una \textit{NLU} proprietaria dello sviluppatore che invece si è rivelato utile per l'azienda.
+		\subsubsection{Comunicazione}
+		Un'altra differenza riscontrata è una diretta conseguenza della prima in quanto per le \textit{SDK}, utilizzando la propria \textit{NLU}, diventa obbligatorio un metodo di comunicazione tra le componenti dell'architettura illustrata. Google infatti impone lo scambio di dati tramite oggetti JSON con la seguente struttura:
+		\begin{itemize}
+			\item isInSandbox: attributo booleano, se vale true indica l'utilizzo in un ambiente di prova e, qualora sia utilizzato, vieta lo scambio di denaro;
+			\item Surface: oggetto che contiene la modalità di interazione, scelta tra solo testuale, solo visiva e multimediale;
+			\item Inputs: oggetto che contiene l'insieme degli input specificati per la Actions tra cui la richiesta dell'utente sotto forma di stringa testuale;
+			\item User: oggetto che contiene le informazioni dell'utente che ha eseguito la richiesta;
+			\item Device: oggetto che contiene le informazioni del dispositivo da cui è arrivata la richiesta;
+			\item Conversation: oggetto che contiene i dati strettamente legati alla conversazione in corso tra cui conversationId che la identifica univocamente e conversationToken che salva i dati durante la conversazione.
+		\end{itemize}
+		Di particolare rilevanza è la possibilità di salvare i dati durante la conversazione in quanto permette sia di richiedere all'utente determinati dati importanti per la corretta esecuzione dell'Action ma soprattutto di dare all'utente la sensazione di interagire con un'intelligenza che ha capacità di memoria. Questo è molto importante perché permette di definire e mantere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso dell'utente. \\
+		Per capire quali elementi devono essere salvati, Assistant utilizza delle variabili all'interno delle possibli frasi di richiesta dette \textit{tips}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna storicizzare i dati in un database.
 	\subsection{Content Actions}
 		\subsubsection{Descrizione}
 		\subsubsection{Funzionamento}
@@ -99,10 +136,10 @@ Gli assistenti virtuali analizzati in seguito sono Assistant, Alexa e Siri; nono
 	Le \textit{Skill} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Skill di conversazione}
 		\subsubsection{Descrizione}
-		
-		\subsubsection{Costruzione}
+		Le \textit{Skill} consistono in funzionalità personalizzate e aggiuntive per Alexa con l'obiettivo di migliorare l'esperienza d'suo degli utenti. Attraverso le Skill lo sviluppatore può ricevere le richieste rivolte ad Alexa, soddisfarle e restituire una risposta. \\
+		Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle \textit{API} presenti nell'Alexa Skill Kit.
 		\subsubsection{Funzionamento}
-		Il loro principio di funzionamento si basa sul concetto di intento: azione che soddisfa la richiesta di un utente. Si articola nei seguenti passi:
+		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
 			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
 			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
@@ -113,6 +150,7 @@ Gli assistenti virtuali analizzati in seguito sono Assistant, Alexa e Siri; nono
 			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
 			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
 		\end{enumerate}
+		\subsubsection{Costruzione}
 	\subsection{Proof of concept}
 
 %**************************************************************
@@ -129,9 +167,9 @@ Gli assistenti virtuali analizzati in seguito sono Assistant, Alexa e Siri; nono
 	Le \textit{Skill} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Comandi di conversazione}
 		\subsubsection{Descrizione}
-		\subsubsection{Costruzione}
+		I \textit{Comandi} consistono in funzionalità aggiuntive e personalizzate per Siri che migliorano l'esperienza d'uso degli utenti. Permettono di ricevere le richieste effettuate a Siri, soddisfarle e fornire delle risposte adeguate.
 		\subsubsection{Funzionamento}
-		Il loro principio di funzionamento si basa sul concetto di intento: azione che soddisfa la richiesta di un utente. Si articola nei seguenti passi:
+		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
 			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
 			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
@@ -142,6 +180,7 @@ Gli assistenti virtuali analizzati in seguito sono Assistant, Alexa e Siri; nono
 			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
 			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
 		\end{enumerate}
+		\subsubsection{Costruzione}
 	\subsection{Proof of concept}
 
 %**************************************************************
