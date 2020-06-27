@@ -12,7 +12,7 @@
 %**************************************************************
 \section{Premessa}
 Un assistente virtuale è un software capace di interpretare il linguaggio naturale e dialogare con gli utenti che ne fanno uso, eseguendo determinati compiti. Generalmente necessita di un'attività di addestramento, precedente al suo utilizzo, che gli permetta di apprendere e migliorare le proprie abilità. \\
-Gli assistenti virtuali analizzati sono Assistant, Alexa e Siri ma, nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile. Inizialmente lo sviluppatore deve costruire un'abilità che viene richiamata attraverso l'assistente virtuale assegnando nome, frasi di richiamo e azioni da eseguire. Queste abilità sono chiamate \textit{Action} per Assistant, \textit{Skill} per Alexa e \textit{Comandi} per Siri. Dato che gli assistenti virtuali attuali sono pensati per un utilizzo di breve durata, è molto importante progettare le abilità considerando questo fattore, con l'obiettivo di dare agli utenti una migliore esperienza d'uso. \\
+Gli assistenti virtuali analizzati sono Assistant, Alexa e Siri ma, nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile. Inizialmente lo sviluppatore deve costruire un'abilità che viene richiamata attraverso l'assistente virtuale assegnando nome, frasi di richiamo e azioni da eseguire. Queste abilità sono chiamate \textit{Action} per Assistant, \textit{Skill} per Alexa e \textit{Shortcuts} per Siri. Dato che gli assistenti virtuali attuali sono pensati per un utilizzo di breve durata, è molto importante progettare le abilità considerando questo fattore, con l'obiettivo di dare agli utenti una migliore esperienza d'uso. \\
 Una caratteristica comune alle abilità di tutti gli assistenti successivamente trattati è il meccanismo di funzionamento su cui si fondano: gli intenti. Questi consistono in un'azione che soddisfa una richiesta vocale effettuata da un utente e il servizio che la esegue, più concretamente il codice, viene detto \textit{fulfillment}. Questo concetto sarà spiegato più dettagliatamente per ciascun assistente nel paragrafo dedicato al funzionamento.
 
 %**************************************************************
@@ -25,9 +25,10 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico: \textit{Home Actions};
 		\item dialogo con l'utente eseguendo anche operazioni specifiche: \textit{Conversational Actions};
 		\item integrazione di contenuti multimediali pensati per Assistant all'interno di pagine web: \textit{Content Actions}.
-		\item integrazione di Assistant nelle applicazioni Android per eseguirne determinate funzionalità: \textit{App Actions}.
+		\item integrazione di Assistant nelle applicazioni Android per eseguirne determinate funzionalità: \textit{App Actions};
+		\item integrazione di Assistant all'interno di propri dispositivi per usi sperimentali.
 	\end{itemize}
-	Le \textit{Home Actions} non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
+	Le \textit{Home Actions} e l'integrazione ad uso sperimentale non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Conversational Actions}
 		\subsubsection{Descrizione}
 		Le \textit{Conversational Actions} estendono le funzionalità di Assistant consentendo di creare esperienza di conversazione personalizzata con gli utenti. Esse infatti permettono di gestire le richieste rivolte all'Assistente e le risposte costruite a seguito dell'elaborazione. \\
@@ -36,7 +37,7 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
 			\item un utente lancia una richiesta sotto forma di comando vocale al dispositivo che ospita Assistant;
-			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
+			\item il dispositivo attiva la propria \textit{NLU} che riconosce le parole pronunciate trasformandole in stringhe di testo;
 			\item il dispositivo invia la stringa riconosciuta ad un server remoto di Google, tramite protocollo \textit{HTTPs}, dove risiede la \textit{NLU} per l'elaborazione;
 			\item la business logic contenuta nel server remoto prova a verificare la possibile corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito durante la costruzione della propria abilità;
 			\item se non vi è alcuna corrispondenza viene subito ritornata una risposta negativa e riferito all'utente. Si ricomincia quindi dal punto 1;
@@ -47,20 +48,20 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		Qualora la richiesta dell'utente fosse di invocazione, prima di scegliere l'intento da eseguire viene cercata una corrispondenza tra le Action a disposizione per capire quale avviare.
 		Infine, affinché la Action tenga un comportamento adeguato, è necessario applicare correttamente i principi di costruzione e svolgere una consistente attività di addestramento durante lo sviluppo.
 		%TODO: METTERE DEPLOY NEL GLOSSARIO 
-		\subsubsection{Costruzione}
-		Nella costruzione di una Conversational Action la prima attività da svolgere è la progettazione che deve essere mirata a tre aspetti:
+		\subsubsection{Progettazione}
+		Nella costruzione di una Action la prima attività da svolgere è l'analisi dei requisiti ovvero comprendere dettagliatamente il comportamento che si vuole ottenere. L'attività successiva, invece, è la progettazione che deve essere mirata a tre aspetti:
 		\begin{itemize}
 			\item modalità di invocazione;
 			\item tipologia e formato delle richieste accettate;
 			\item tipologia e formato delle risposte che l'utente si aspetta.
 		\end{itemize}
-		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo dell'Action che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi da Assistant, cercando di rendere la conversazione più naturale possibile. Una volta inserite le frasi, Assistant viene addestrato su di esse al fine di interpretarle correttamente. \\
-		Per la modalità di invocazione Google fa una distinzione:
+		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo dell'Action che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi dall'assistente, cercando di rendere la conversazione più naturale possibile. Durante l'esecuzione della \textit{build} della Action, Assistant sarà addestrato sulle frasi immesse al fine di interpretarle correttamente. \\
+		Per la modalità di invocazione, invece, Google fa una distinzione:
 		\begin{itemize}
 			\item invocazione esplicita;
 			\item invocazione implicita.
 		\end{itemize}
-		L'invocazione esplicita consiste nell'esprimere una frase che riporti la seguente struttura:
+		L'invocazione esplicita è la più comunemente utilizzata e consiste nell'esprimere una frase che riporti la seguente struttura:
 		\begin{enumerate}
 			\item parola di attivazione: "Hey Google" oppure "Ok Google";
 			\item parola di avvio: chiedi, fai, dimmi, raccontami e vocaboli simili;
@@ -69,14 +70,16 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 			\item elementi aggiuntivi: l'utente può pronunciare parole aggiuntive con lo scopo di contestualizzare o precisare il dominio della richiesta.
 		\end{enumerate}
 		Grazie a questa struttura fissa, Assistant riesce a comprendere quale Action attivare per avviare la conversazione. \\
-		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver esplicitato l'Action da eseguire. In questo caso la business logic di Assistant ha il compito di comprendere la richiesta e associare l'Action che ritiene più corretta. Qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa e ne ritornerà i risultati come risposta. Tuttavia il funzionamento di questa modalità non è garantito da Google in quanto è ancora in via di sviluppo e richiede che lo sviluppatore abbia inserito un numero di frasi per l'addestramento sufficientemente ampio e completo. \\
+		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver esplicitato l'Action o direttamente l'intento da eseguire. In questo caso la business logic di Assistant ha il compito di comprendere la richiesta e associare l'Action che ritiene più corretta; qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa e ritornerà i risultati come risposta. Tuttavia il funzionamento di questa modalità non è garantito da Google in quanto è ancora in via di sviluppo e richiede, come condizione necessaria ma non sufficiente, che lo sviluppatore abbia inserito un numero di frasi ampio e completo per l'addestramento.
+		\subsubsection{Implementazione}
 		L'attività che segue la progettazione è l'implementazione e per svolgerla Google offre due strumenti:
 		\begin{itemize}
 			\item Dialogflow;
 			\item Conversational Actions SDK.
 		\end{itemize}
-		Dialogflow è uno strumento utilizzato per creare conversazioni personalizzate in modo semplice ed intuitivo. Si basa sulla \textit{NLU} di Assistant per la comprensione del linguaggio naturale e si appoggia ad un \textit{webhook} per la gestione dei dati, \textit{Firebase} è quello predefinito. Per costruire una Conversational Action con \textit{Dialogflow} è necessario creare un agente ovvero un modulo di comprensione del linguaggio naturale che gestisce le conversazioni con gli utenti sgravando lo sviluppatore di numerosi oneri. \\
-		Le Conversational Actions SDK consistono in un'interfaccia HTTPs che permette di costruire ed eseguire le Conversational Actions all'interno di una propria applicazione per elaborare le richieste effettuate ad Assistant. Grazie all'interfaccia HTTPs infatti Assistant può comunicare con applicazioni terze. Il requisito che ne deriva è possedere una propria \textit{NLU} per la comprensione del linguaggio naturale. L'architettura ad alto livello del sistema che rappresenta l'utilizzo delle Conversational Actions attraverso SDK è così composta:
+		Dialogflow è uno strumento utilizzato per creare conversazioni personalizzate in modo semplice ed intuitivo. Si basa sulla \textit{NLU} di Assistant e si appoggia ad un \textit{webhook} per la gestione dei dati, \textit{Firebase} è quello predefinito. \\
+		Per costruire una Conversational Action necessita un agente ovvero un modulo di comprensione del linguaggio naturale che gestisce le conversazioni con gli utenti sgravando lo sviluppatore di numerosi oneri; deve quindi essere creato prima di iniziare l'effettiva costruzione. A causa dei limiti imposti dall'account \textit{Firebase} disponibile non si è potuto approfondire il suo funzionamento come invece si è fatto per uno strumento simile con Alexa; tuttavia i principi di funzionamento e implementazione sono molto simili. \\
+		Le Conversational Actions SDK consistono in un'interfaccia HTTPs che permette di costruire ed eseguire le Conversational Actions all'interno di una propria applicazione per elaborare le richieste effettuate ad Assistant. Grazie all'interfaccia HTTPs infatti Assistant può comunicare con applicazioni terze; il requisito che ne deriva è possedere una propria \textit{NLU} per la comprensione del linguaggio naturale. L'architettura ad alto livello del sistema che rappresenta l'utilizzo delle Conversational Actions attraverso SDK è così composta:
 		\begin{itemize}
 			\item dispositivo fisico con Assistant integrato che riceve la richiesta vocale dell'utente;
 			\item \textit{NLU} di Google che ha il compito di riconoscere la richiesta dell'utente e associare l'intento corretto;
@@ -102,7 +105,8 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		Le azioni da eseguire corrispondono alla creazione di un \textit{fulfillment} che fornisce la logica per processare la richiesta dell'utente e genera una risposta. \\
 		Qui emerge una grande differenza tra Dialogflow e \textit{SDK}: mentre il primo utilizza la \textit{NLU} di Google rivelandosi quindi di poco interesse per i progetti dell'azienda, il secondo prevede l'utilizzo obbligatorio di una \textit{NLU} proprietaria dello sviluppatore che invece si è rivelato utile per l'azienda.
 		\subsubsection{Comunicazione}
-		Un'altra differenza riscontrata è una diretta conseguenza della prima in quanto per le \textit{SDK}, utilizzando la propria \textit{NLU}, diventa obbligatorio un metodo di comunicazione tra le componenti dell'architettura illustrata. Google infatti impone lo scambio di dati tramite oggetti JSON con la seguente struttura:
+		Lo scambio di dati tra il dispositivo che interagisce direttamente con l'utente e la \textit{NLU} di Assistant avviene tramite oggetti JSON di cui però non viene fornita la struttura nella documentazione. \\
+		Lo scambio di dati che invece avviene tra la \textit{NLU} di Assistant e quella della proprio applicativo, diretta conseguenza dell'utilizzo delle \textit{SDK}, prevede un metodo di comunicazione dedicato. Google perciò impone l'utilizzo di oggetti JSON con una struttura fissata in cui campi dati più importanti sono:
 		\begin{itemize}
 			\item isInSandbox: attributo booleano, se vale true indica l'utilizzo in un ambiente di prova e, qualora sia utilizzato, vieta lo scambio di denaro;
 			\item Surface: oggetto che contiene la modalità di interazione, scelta tra solo testuale, solo visiva e multimediale;
@@ -111,8 +115,8 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 			\item Device: oggetto che contiene le informazioni del dispositivo da cui è arrivata la richiesta;
 			\item Conversation: oggetto che contiene i dati strettamente legati alla conversazione in corso tra cui conversationId che la identifica univocamente e conversationToken che salva i dati durante la conversazione.
 		\end{itemize}
-		Di particolare rilevanza è la possibilità di salvare i dati durante la conversazione in quanto permette sia di richiedere all'utente determinati dati importanti per la corretta esecuzione dell'Action ma soprattutto di dare all'utente la sensazione di interagire con un'intelligenza che ha capacità di memoria. Questo è molto importante perché permette di definire e mantere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso dell'utente. \\
-		Per capire quali elementi devono essere salvati, Assistant utilizza delle variabili all'interno delle possibli frasi di richiesta dette \textit{tips}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna storicizzare i dati in un database.
+		Di particolare rilevanza è il salvataggio dei dati durante la conversazione in quanto permette di richiedere determinati dati possibilmente importanti per la corretta esecuzione dell'Action ma soprattutto di dare all'utente la sensazione di interagire con un'intelligenza che ha capacità di memoria. Quest'ultima caratteristica è molto importante perché consente di definire e mantenere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso dell'utente. \\
+		Per capire quali elementi devono essere salvati, Assistant utilizza delle variabili all'interno delle frasi di richiesta dette \textit{tips}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
 	\subsection{Content Actions}
 		\subsubsection{Descrizione}
 		\subsubsection{Funzionamento}
@@ -131,26 +135,92 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	\subsection{Casi d'uso}
 	\begin{itemize}
 		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico attraverso le \textit{Skill};
-		\item dialogo con l'utente eseguendo anche operazioni specifiche attraverso le \textit{Skill}.
+		\item dialogo con l'utente eseguendo anche operazioni specifiche attraverso le \textit{Skill};
+		\item integrazione di Alexa all'interno di un proprio dispositivo per usi sperimentali.
 	\end{itemize}
-	Le \textit{Skill} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
+	Le \textit{Skill} per il controllo di dispositivi intelligenti e l'integrazione di Alexa in un dispositivo per usi sperimentali non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Skill di conversazione}
 		\subsubsection{Descrizione}
-		Le \textit{Skill} consistono in funzionalità personalizzate e aggiuntive per Alexa con l'obiettivo di migliorare l'esperienza d'suo degli utenti. Attraverso le Skill lo sviluppatore può ricevere le richieste rivolte ad Alexa, soddisfarle e restituire una risposta. \\
-		Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle \textit{API} presenti nell'Alexa Skill Kit.
+		Le \textit{Skill} consistono in funzionalità personalizzate e aggiuntive per Alexa con l'obiettivo di migliorare l'esperienza d'uso degli utenti. Attraverso le Skill lo sviluppatore può ricevere le richieste rivolte ad Alexa, soddisfarle e restituire una risposta. \\
+		Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle \textit{API} presenti nell'\textit{Alexa Skill Kit}.
 		\subsubsection{Funzionamento}
 		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
 			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
 			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
 			\item il dispositivo manda la stringa riconosciuta ad un server remoto per l'elaborazione;
-			\item il server remoto attiva un apposito componente software che prova ad eseguire un match tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito nella propria abilità;
-			\item se il match ha dato esito positivo viene selezionato l'intento corretto, sulla base del contenuto della stringa;
-			\item viene richiamato il servizio di \textit{fulfillment}, rappresentante il codice da eseguire, che porterà a termine l'intento;
+			\item il server remoto attiva la propria \textit{NLU} che prova a cercare una corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito nella propria abilità;
+			\item se la ricerca delle corrispondenze ha dato esito positivo viene selezionato l'intento corretto sulla base del contenuto della stringa;
+			\item prima di eseguire il codice dell'intento vengono invocati gli eventuali \textit{Request Interceptors} definiti dallo sviluppatore, illustrati in un paragrafo successivo;
+			\item viene richiamato gestore dell'intento, rappresentante il codice da eseguire, che porterà a termine l'intento;
+			\item dopo aver gestito l'evento, vengono richiamati gli eventuali \textit{Response Interceptors} definiti dallo sviluppatore, illustrati in un paragrafo successivo;
 			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
-			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
+			\item il dispositivo riferisce la riposta all'utente che potrà poi procedere con una nuova richiesta, fino al termine dell'esecuzione dell'abilità previsto dal programmatore durante la costruzione, oppure interrompere forzatamente la conversazione.
 		\end{enumerate}
-		\subsubsection{Costruzione}
+		\subsubsection{Progettazione}
+		Nella costruzione di una Skill la prima attività da svolgere è l'analisi dei requisiti ovvero comprendere dettagliatamente il comportamento che si vuole ottenere. L'attività successiva, invece, è la progettazione che deve essere mirata a tre aspetti:
+		\begin{itemize}
+			\item tipologia e formato delle richieste accettate;
+			\item tipologia e formato delle risposte che l'utente si aspetta;
+			\item modalità di invocazione.
+		\end{itemize}
+		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo della Skill che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi dall'assistente. L'obiettivo infatti è rendere la conversazione più naturale possibile. Durante l'esecuzione della \textit{build} della Skill, Alexa sarà addestrato sulle frasi immesse per interpretarle correttamente. \\
+		Per la modalità di invocazione, anche Amazon fa una distinzione:
+		\begin{itemize}
+			\item invocazione esplicita;
+			\item invocazione implicita.
+		\end{itemize}
+		L'invocazione esplicita è la più comunemente utilizzata e consiste nell'esprimere una frase che riporti la seguente struttura:
+		\begin{enumerate}
+			\item parola di attivazione: "Alexa";
+			\item parola di avvio: chiedi, fai, dimmi, raccontami e vocaboli simili;
+			\item nome di invocazione: nome deve identifica la \textit{Skill};
+			\item slots: parametri aggiuntivi, possibilmente opzionali, implementati come variabili che specificano ulteriormente la richiesta dell'utente;
+			\item elementi aggiuntivi: l'utente può pronunciare parole aggiuntive con lo scopo di contestualizzare o precisare il dominio della richiesta.
+		\end{enumerate}
+		Grazie a questa struttura fissa, Alexa è in grado di comprendere quale Skill attivare per avviare la conversazione. \\
+		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver esplicitato la Skill o l'intento da eseguire. In questo caso la business logic di Alexa deve comprendere la richiesta e associare la Skill che ritiene più corretta; qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa e ritornerà come risposta i risultati. Tuttavia il funzionamento di questa modalità non è garantito da Amazon in quanto è ancora in uno stato embrionale e richiede, come condizione necessaria ma non sufficiente, che lo sviluppatore abbia inserito un numero di frasi ampio e completo per l'addestramento.
+		\subsubsection{Implementazione}
+		L'attività che segue la progettazione è l'implementazione. In merito a ciò Amazon offre due strumenti:
+		\begin{itemize}
+			\item Alexa Developer Console;
+			\item Alexa \textit{SDK}.
+		\end{itemize}
+		Il primo è Alexa Developer Console è uno strumento che integra \textit{Alexa Skills Kit} e fornisce un'interfaccia allo sviluppare per creare Skill personalizzate di diverse tipologie, tra cui quelle di conversazione, in modo semplice e intuitivo. Si basa sulla \textit{NLU} di Alexa e si appoggia ad \textit{AWS Lambda} come \textit{webhook} predefinito per la gestione dei dati. \\
+		Per implementare una Skill necessita di due macro compiti:
+		\begin{itemize}
+			\item costruire un modello di interazione;
+			\item implementare la logica interna.
+		\end{itemize}
+		Costruire un modello di interazione significa definire l'interfaccia vocale e gli intenti che si vogliono implementare. Più in dettaglio si intende formalizzare ed inserire nell'interfaccia grafica le possibili frasi di invocazione, richiesta e risposta e gli eventuali slot. Con definizione degli intenti, invece, si intende formalizzare le azioni che la Skill deve essere capace di eseguire. In particolare è possibile scegliere tra gli intenti \textit{built-in} ovvero quelli già preconfigurati da Amazon e quelli personalizzati, interamente a carico dello sviluppatore, dei quali è necessario definire:
+		\begin{itemize}
+			\item nome;
+			\item contesto;
+			\item evento scatenante;
+			\item frasi di input per l'addestramento;
+			\item azioni da eseguire;
+			\item eventuali parametri aggiuntivi per la conversazione e formato della risposta.
+		\end{itemize}
+		Non ci sono vincoli sull'utilizzo di uno piuttosto che dell'altro e infatti possono anche essere usati contemporaneamente. \\
+		%TODO:FORNIRE ALCUNI ESEMPI SE POSSIBILE
+		Implementare la logica interna significa implementare il codice che definisce il comportamento dei singoli intenti e quindi della Skill nel suo complesso. \\
+		Il secondo strumento disponibile è \textit{Alexa SDK} e consiste a sua volta in un insieme di strumenti che permettono allo sviluppatore di interagire con Alexa da un'applicativo esterno che possiede una propria \textit{NLU}. È disponibile nei linguaggi Javascript/Typescript, Java e Phyton. I principi di progettazione e implementazione sono gli stessi di quelli analizzati per Alexa Developer Console con la sola differenza che, utilizzando \textit{Alexa SDK}, è necessario aggiungere uno strato di comunicazione per lo scambio di dati tra Alexa ed il proprio applicativo che avviene sotto forma di oggetti JSON.
+		\subsubsection{Comunicazione}
+		Lo scambio di dati tra il dispositivo che interagisce direttamente con l'utente e la \textit{NLU} di Alexa avviene tramite oggetti JSON di cui però non viene fornita la struttura nella documentazione. \\
+		Lo scambio di dati che invece avviene tra la \textit{NLU} di Alexa e quella della proprio applicativo, diretta conseguenza dell'utilizzo delle \textit{SDK}, prevede un metodo di comunicazione dedicato. Amazon ha deciso di utilizzare gli oggetti JSON come mezzo per lo scambio di dati con strutture fissate ma differenti per richiesta e risposta. \\
+		I campi principali dell'oggetto di richiesta sono:
+		\begin{itemize}
+			\item session: oggetto che fornisce informazioni riguardanti il contesto associato alla richiesta. È disponibile solo per conversazioni che non contengono contenuti multimediali;
+			\item context: oggetto che fornisce le informazioni riguarrdanti lo stato della conversazione corso, del servizio di Alexa in esecuzione e del dispositivo con cui interagisce l'utente;
+			\item request: oggetto che fornisce i dettagli della richiesta utente.
+		\end{itemize}
+		I campi principali dell'oggetto di risposta sono:
+		\begin{itemize}
+			\item sessionAttributes: mappa chiave-valore di tutti i dati di sessione;
+			\item response: oggetto che definisce che cosa il dispositivo deve renderizzare per rispondere all'utente.
+		\end{itemize}
+		Di particolare rilevanza è il salvataggio dei dati durante la conversazione in quanto permette di richiedere determinati dati possibilmente importanti per la corretta esecuzione della Skill ma soprattutto di dare all'utente la sensazione di interagire con un'intelligenza che ha capacità di memoria. Quest'ultima caratteristica è molto importante perché consente di definire e mantenere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso dell'utente. \\
+		Per capire quali elementi devono essere salvati, Alexa utilizza delle variabili all'interno delle frasi di richiesta dette \textit{slots}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
 	\subsection{Proof of concept}
 
 %**************************************************************
@@ -160,28 +230,33 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	La prima versione è stata introdotta in iOS 5 nel 2012, senza ancora offrire il supporto a tutte le lingue e a tutti i dispositivi. Ora invece è integrato in Homepod e tutti i dispositivi con sistema operativo iOS versione 8.0 o superiore, iPadOS, watchOS, tvOS e MacOS versione 10.12 o superiore. Rimane comunque un esclusiva di Apple e non è installabile in altri sistemi.
 	\subsection{Casi d'uso}
 	\begin{itemize}
-		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico attraverso i \textit{comandi}.
-		\item dialogo con l'utente eseguendo anche operazioni specifiche attraverso i \textit{comandi}.
-		\item integrazione di Siri nelle applicazioni per i dispositivi Apple per eseguire determinate funzionalità.
+		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico attraverso el \textit{Shortcuts};
+		\item dialogo con l'utente eseguendo operazioni specifiche nelle applicazioni per l'ecosistema Apple attraverso i \textit{Comandi}.
 	\end{itemize}
 	Le \textit{Skill} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
-	\subsection{Comandi di conversazione}
+	\subsection{Shortcuts}
 		\subsubsection{Descrizione}
-		I \textit{Comandi} consistono in funzionalità aggiuntive e personalizzate per Siri che migliorano l'esperienza d'uso degli utenti. Permettono di ricevere le richieste effettuate a Siri, soddisfarle e fornire delle risposte adeguate.
+		Le \textit{Shortcuts} consistono in funzionalità aggiuntive e personalizzate per Siri che migliorano l'esperienza d'uso degli utenti. L'utente può accedere all'applicazione Shortcuts (Comandi se le impostazioni sono in lingua italiana) e al suo interno, per ogni altra applicazione installata nel proprio dispositivo, può visualizzare tutte le frasi messe a disposizione dagli sviluppatori per eseguire operazioni tramite Siri. Può inoltre personalizzare tali frasi per renderle più intuitive e facili da ricordare.
 		\subsubsection{Funzionamento}
 		Il principio di funzionamento si articola nei seguenti passi:
+		%TODO:CONTROLLARE CHE SIA CORRETTO
 		\begin{enumerate}
-			\item un utente lancia un comando vocale al dispositivo che ospita l'assistente;
+			\item un utente lancia un comando vocale al dispositivo che ospita Siri;
 			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
 			\item il dispositivo manda la stringa riconosciuta ad un server remoto per l'elaborazione;
-			\item il server remoto attiva un apposito componente software che prova ad eseguire un match tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito nella propria abilità;
-			\item se il match ha dato esito positivo viene selezionato l'intento corretto, sulla base del contenuto della stringa;
+			\item La \textit{NLU} di Siri presente nel server remoto prova a cercare una corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito come Shortcuts per la propria applicazione;
+			\item se la ricerca della corrispondenza ha dato esito positivo allora viene selezionato l'intento corretto sulla base del contenuto della stringa;
 			\item viene richiamato il servizio di \textit{fulfillment}, rappresentante il codice da eseguire, che porterà a termine l'intento;
 			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
 			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
 		\end{enumerate}
-		\subsubsection{Costruzione}
+		\subsubsection{Progettazione}
+		\subsubsection{Implementazione}
+		\subsubsection{Comunicazione}
 	\subsection{Proof of concept}
 
 %**************************************************************
-\section{Analisi comparativa}
+\section{Trattamento dei dati}
+
+%**************************************************************
+\section{Risultati della ricerca}
