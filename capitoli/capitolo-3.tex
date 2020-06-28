@@ -31,8 +31,7 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	Le \textit{Home Actions} e l'integrazione ad uso sperimentale non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Conversational Actions}
 		\subsubsection{Descrizione}
-		Le \textit{Conversational Actions} estendono le funzionalità di Assistant consentendo di creare esperienza di conversazione personalizzata con gli utenti. Esse infatti permettono di gestire le richieste rivolte all'Assistente e le risposte costruite a seguito dell'elaborazione. \\
-		Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle apposite \textit{SDK}.
+		Le \textit{Conversational Actions} estendono le funzionalità di Assistant con l'obiettivo di creare esperienza di conversazione personalizzata con gli utenti. Esse infatti permettono di gestire le richieste rivolte all'Assistente e le risposte costruite a seguito dell'elaborazione. Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle apposite \textit{SDK}.
 		\subsubsection{Funzionamento}
 		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
@@ -141,8 +140,8 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	Le \textit{Skill} per il controllo di dispositivi intelligenti e l'integrazione di Alexa in un dispositivo per usi sperimentali non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Skill di conversazione}
 		\subsubsection{Descrizione}
-		Le \textit{Skill} consistono in funzionalità personalizzate e aggiuntive per Alexa con l'obiettivo di migliorare l'esperienza d'uso degli utenti. Attraverso le Skill lo sviluppatore può ricevere le richieste rivolte ad Alexa, soddisfarle e restituire una risposta. \\
-		Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle \textit{API} presenti nell'\textit{Alexa Skill Kit}.
+		Le \textit{Skill} consistono in funzionalità personalizzate e aggiuntive per Alexa mirate a migliorare l'esperienza d'uso degli utenti. Attraverso le Skill lo sviluppatore può ricevere le richieste rivolte ad Alexa, soddisfarle e restituire una risposta. Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle \textit{API} presenti nell'\textit{Alexa Skill Kit}. \\
+		L'obiettivo principale delle Skill è permettere all'utente una conversazione finalizzata a soddisfare un suo bisogno; tuttavia non è danno la possibilità di eseguire applicazioni o anche solo funzionalità al loro interno .
 		\subsubsection{Funzionamento}
 		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
@@ -236,22 +235,91 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	Le \textit{Skill} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non di interesse per lo stage proposto.
 	\subsection{Shortcuts}
 		\subsubsection{Descrizione}
-		Le \textit{Shortcuts} consistono in funzionalità aggiuntive e personalizzate per Siri che migliorano l'esperienza d'uso degli utenti. L'utente può accedere all'applicazione Shortcuts (Comandi se le impostazioni sono in lingua italiana) e al suo interno, per ogni altra applicazione installata nel proprio dispositivo, può visualizzare tutte le frasi messe a disposizione dagli sviluppatori per eseguire operazioni tramite Siri. Può inoltre personalizzare tali frasi per renderle più intuitive e facili da ricordare.
+		Le Shortcuts consistono in funzionalità aggiuntive e personalizzate per Siri che migliorano l'esperienza d'uso degli utenti. In particolare è possibile accedere all'applicazione Shortcuts (Comandi se le impostazioni sono in lingua italiana) e al suo interno, per ogni altra applicazione installata nel proprio dispositivo, vengono visualizzate tutte le frasi messe a disposizione dagli sviluppatori per eseguire operazioni tramite Siri. L'utente ha inoltre la possibilità di personalizzare tali frasi per renderle più intuitive e facili da ricordare. \\
+		L'obiettivo principale delle Shortcuts è di migliorare e personalizzare l'interattività con le applicazioni dell'ecosistema Apple mentre l'aspetto conversazionale diventa solo finalizzato allo scopo principale.
 		\subsubsection{Funzionamento}
 		Il principio di funzionamento si articola nei seguenti passi:
-		%TODO:CONTROLLARE CHE SIA CORRETTO
 		\begin{enumerate}
 			\item un utente lancia un comando vocale al dispositivo che ospita Siri;
 			\item il dispositivo attiva un apposito elaboratore che riconosce le parole pronunciate trasformandole in stringhe di testo;
 			\item il dispositivo manda la stringa riconosciuta ad un server remoto per l'elaborazione;
 			\item La \textit{NLU} di Siri presente nel server remoto prova a cercare una corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito come Shortcuts per la propria applicazione;
-			\item se la ricerca della corrispondenza ha dato esito positivo allora viene selezionato l'intento corretto sulla base del contenuto della stringa;
-			\item viene richiamato il servizio di \textit{fulfillment}, rappresentante il codice da eseguire, che porterà a termine l'intento;
-			\item viene costruita la risposta e ritornata al dispositivo che ospita l'assistente;
+			\item se la ricerca della corrispondenza ha dato esito positivo viene selezionato l'intento corretto sulla base del contenuto della stringa;
+			\item viene richiamata la porzione di codice che porterà a termine l'intento;
+			\item viene costruita e ritornata la risposta al dispositivo che ospita l'assistente;
 			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità.
 		\end{enumerate}
 		\subsubsection{Progettazione}
+		Nella costruzione di una Shortcut la prima attività da svolgere è l'analisi dei requisiti ovvero comprendere dettagliatamente il comportamento che si vuole ottenere. L'attività successiva, invece, è la progettazione che deve essere mirata a tre aspetti:
+		\begin{itemize}
+			\item tipologia e formato delle richieste accettate;
+			\item tipologia e formato delle risposte che l'utente si aspetta;
+			\item modalità di invocazione.
+		\end{itemize}
+		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo della Skill che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi dall'assistente. In questo caso le frasi di richiesta assumono un importanza minore in quanto una delle funzionalità su cui Apple punta molto è fornire all'utente la possibilità di personalizzarle dall'aplicazione Shortcuts. L'obiettivo  primario perciò si sposta dalla conversazione alla capacità di soddisfare un la rihciesta dell'utente mentre assume un ruolo meno rilevante rendere la conversazione più naturale possibile. Durante l'esecuzione della \textit{build} della Skill, Alexa sarà addestrato sulle frasi immesse per interpretarle correttamente. \\
+		Per la modalità di invocazione, anche Amazon fa una distinzione:
+		\begin{itemize}
+			\item invocazione esplicita;
+			\item invocazione implicita.
+		\end{itemize}
+		L'invocazione esplicita è la più comunemente utilizzata e consiste nell'esprimere una frase che riporti la seguente struttura:
+		\begin{enumerate}
+			\item parola di attivazione: "Hey Siri";
+			\item parola di avvio: chiedi, fai, dimmi, raccontami e vocaboli simili;
+			\item nome di invocazione: nome deve identifica il \textit{Comando};
+			\item parametri: parametri aggiuntivi, possibilmente opzionali, implementati come variabili che specificano ulteriormente la richiesta dell'utente;
+			\item elementi aggiuntivi: l'utente può pronunciare parole aggiuntive con lo scopo di contestualizzare o precisare il dominio della richiesta.
+		\end{enumerate}
+		Grazie a questa struttura fissa, Siri è in grado di comprendere quale Skill attivare per avviare la conversazione. \\
+		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver esplicitato la Shortcut o l'intento da eseguire. In questo caso la business logic di Siri deve comprendere la richiesta e associare la Shortcut che ritiene più corretta; qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa e ritornerà come risposta i risultati. Tuttavia il funzionamento di questa modalità non è garantito da Apple in quanto è ancora in uno stato embrionale e richiede, come condizione necessaria ma non sufficiente, che lo sviluppatore abbia inserito un numero di frasi ampio e completo per l'addestramento.
 		\subsubsection{Implementazione}
+		L'attività che segue la progettazione è l'implementazione e in merito a ciò Apple offre uno strumento: Sirikit. Più in dettaglio è un insieme di strumenti che forniscono un'interfaccia per costruire interazioni tra Siri e le applicazioni. le Shortcuts si basano sulla \textit{NLU} di Siri e prevedono l'utilizzo obbligatorio di Xcode in quanto per la loro integrazione devono essere inserite nel progetto designato. \\
+		Apple è da sempre molto pignola in merito di autorizzazioni per l'utilizzo dei propri strumenti e software e anche per implementare una Shortcuts è prevista prima una serie di passaggi:
+		\begin{itemize}
+			\item abilitare la Capability di Siri nel proprio progetto di Xcode;
+			\item configurare il file Info.plist includendo una chiave il cui valore è una stringa che descrive quali informazioni l'applicazione condivide con SiriKit;
+			\item richiedere l’autorizzazione dell’applicazione iOS. Per farlo è necessario includere il metodo requestSiriAuthorization(_:) della classe INPreferences immediatamente dopo il codice che avvia l’applicazione. Grazie a ciò appare il prompt che fa scegliere all’utente se autorizzare o negare l’applicazione all’utilizzo di Siri. È comunque possibile cambiare tale scelta nelle impostazioni del dispositivo.
+		\end{itemize}
+		La maggior parte delle interazioni possibili tramite SiriKit è gestita dalle \textit{App Extension} ovvero estensioni delle funzionalità predefinite per un'applicazione sotto forma di intento. Queste si suddividono in due tipologie:
+		\begin{itemize}
+			\item Intent App Extension: l’utente effettua una richiesta, essa viene ricevuta dall’applicazione che successivamente seleziona l’intento corretto per soddisfarla;
+			\item Intent UI App Extension: consiste in un intent App Extension come la precedente in cui però, dopo aver soddisfatto la richiesta dell’utente, visualizza i contenuti in una finestra personalizzata. È un arricchimento non obbligatorio che si pone l’obiettivo di migliorare la user experience.
+		\end{itemize}
+		Il principio di costruzione è uguale per entrambe con l'ovvia differenza che per la seconda è necessario provvedere ad un'interfaccia grafica aggiuntiva. I passi sono quindi i seguenti:
+		\begin{itemize}
+			\item verificare che il procedimento di autorizzazione sia stato eseguito correttamente. Questo è possibile farlo controllando tramite Xcode che la Capability di Siri sia abilitata;
+			\item aggiungere un Intents App Extension (o Intent UI App Extension) al progetto dal menu File > New > Target;
+			\item specificare gli intenti supportati dall’Extension scelta all’interno del file Info.plist;
+			\item scegliere dove salvare le proprie risorse. per farlo è opportuno utilizzare un container condiviso (scelta consigliata) oppure costruire un proprio servizio in un framework privato;
+			\item creare tante classi handler quanti sono gli intent che si vogliono gestire e definire le operazioni da svolgere al loro interno;
+			\item eseguire i test con procedura fornita da Xcode per le applicazioni iOS.
+		\end{itemize}
+		Per quanto rigurarda l'aggiunta degli intenti anche Apple, come i suoi competitors, fa una distinzione:
+		\begin{itemize}
+			\item System intents: intenti di sistema preconfigurati e forniti da Apple;
+			\item Custom intents: intenti che lo sviluppatore costruisce e personalizzare in base alle sue esigenze.
+		\end{itemize}
+
+
+		Il primo è Alexa Developer Console è uno strumento che integra \textit{Alexa Skills Kit} e fornisce un'interfaccia allo sviluppare per creare Skill personalizzate di diverse tipologie, tra cui quelle di conversazione, in modo semplice e intuitivo.
+		Per implementare una Skill necessita di due macro compiti:
+		\begin{itemize}
+			\item costruire un modello di interazione;
+			\item implementare la logica interna.
+		\end{itemize}
+		Costruire un modello di interazione significa definire l'interfaccia vocale e gli intenti che si vogliono implementare. Più in dettaglio si intende formalizzare ed inserire nell'interfaccia grafica le possibili frasi di invocazione, richiesta e risposta e gli eventuali slot. Con definizione degli intenti, invece, si intende formalizzare le azioni che la Skill deve essere capace di eseguire. In particolare è possibile scegliere tra gli intenti \textit{built-in} ovvero quelli già preconfigurati da Amazon e quelli personalizzati, interamente a carico dello sviluppatore, dei quali è necessario definire:
+		\begin{itemize}
+			\item nome;
+			\item contesto;
+			\item evento scatenante;
+			\item frasi di input per l'addestramento;
+			\item azioni da eseguire;
+			\item eventuali parametri aggiuntivi per la conversazione e formato della risposta.
+		\end{itemize}
+		Non ci sono vincoli sull'utilizzo di uno piuttosto che dell'altro e infatti possono anche essere usati contemporaneamente. \\
+		%TODO:FORNIRE ALCUNI ESEMPI SE POSSIBILE
+		Implementare la logica interna significa implementare il codice che definisce il comportamento dei singoli intenti e quindi della Skill nel suo complesso. \\
+		Il secondo strumento disponibile è \textit{Alexa SDK} e consiste a sua volta in un insieme di strumenti che permettono allo sviluppatore di interagire con Alexa da un'applicativo esterno che possiede una propria \textit{NLU}. È disponibile nei linguaggi Javascript/Typescript, Java e Phyton. I principi di progettazione e implementazione sono gli stessi di quelli analizzati per Alexa Developer Console con la sola differenza che, utilizzando \textit{Alexa SDK}, è necessario aggiungere uno strato di comunicazione per lo scambio di dati tra Alexa ed il proprio applicativo che avviene sotto forma di oggetti JSON.
 		\subsubsection{Comunicazione}
 	\subsection{Proof of concept}
 
