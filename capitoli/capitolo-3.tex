@@ -118,8 +118,21 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		Per capire quali elementi devono essere salvati, Assistant utilizza delle variabili all'interno delle frasi di richiesta dette \textit{tips}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
 	\subsection{Content Actions}
 		\subsubsection{Descrizione}
+		Le Content Actions sono delle funzionalità basate su Assistant ma integrate nelle pagine Web. In particolare, inserendo dati strutturati all'interno di una pagina Web, permettono di costruire Actions che ne presentano il contenuto in modo interattivo ad una richiesta vocale di un utente.
 		\subsubsection{Funzionamento}
+		Il loro funzionamento verte esclusivamente sull'algoritmo di Google ed piuttosto semplice: l'utente esegue una ricerca in internet con un comando vocale lanciato ad Assistant e, se l'algoritmo di Google trova una Content Actions che ha corrispondenza con la richiesta effettuata, il risultato sarà la risposta della Actions stessa.
+		\subsubsection{Dati strutturati}
+		Le Content Actions si basano sui dati strutturati. Essi sono rappresentati da un oggetto JSON iniettato dinamicamente in una pagina HTML e contengono un insieme di metadati che definiscono le proprietà del contenuto multimediale che si vuole creare. Alcune di esse sono obbligatorie perché vengono utilizzate da Assistant per accedere al contenuto multimediale, molte altre sono opzionali ma consigliate per ottenere una migliore indicizzazione nel motore di ricerca. \\
+		Esistono inoltre due formati alternativi agli oggetti JSON ma poco raccomandati:
+		\begin{itemize}
+			\item microdata: tag HTML che permette di includere dati strutturati al suo interno;
+			\item RDFa: estensione di HTML5 che permette di definire contenuti per i motori di ricerca e in particolare per l'indicizzazione.
+		\end{itemize}
+		Sono messi a disposizione principalmente per compatibilità con sistemi che ne fanno uso.
 		\subsubsection{Costruzione}
+		Per costruire una Content Actions è necessaria una progettazione mirata della pagina e a tal proposito Google offre un insieme di template pensati per podcasts ricette, news, \textit{How-to guides} e FAQs. \\
+		Durante la realizzazione della pagina, invece, si devono inserire i dati strutturati in base alle proprie esigenze ed effettuare dei test per verificarne la corretta indicizzazione attraverso gli strumenti forniti da Google. \\
+		È infine importante notare che Google non garantisce il richiamo della propria Actions in nessuna condizione: l'algoritmo di ricerca, infatti, ha come obiettivo principale fornire all'utente i migliori risultati possibili nel momento in cui viene eseguita la ricerca e ciò può non corrispondere con la propria Actions.
 	\subsection{App Actions}
 		\subsubsection{Descrizione}
 		\subsubsection{Funzionamento}
@@ -278,7 +291,7 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		\begin{itemize}
 			\item abilitare la Capability di Siri nel proprio progetto di Xcode;
 			\item configurare il file Info.plist includendo una chiave il cui valore è una stringa che descrive quali informazioni l'applicazione condivide con SiriKit;
-			\item richiedere l’autorizzazione dell’applicazione iOS. Per farlo è necessario includere il metodo \textit{requestSiriAuthorization(_:)} della classe INPreferences immediatamente dopo il codice che avvia l’applicazione. Grazie a ciò appare il prompt che fa scegliere all’utente se autorizzare o negare l’applicazione all’utilizzo di Siri. È comunque possibile cambiare tale scelta nelle impostazioni del dispositivo.
+			\item richiedere l’autorizzazione dell’applicazione iOS. Per farlo è necessario includere il metodo \textit{requestSiriAuthorization(\_:)} della classe INPreferences immediatamente dopo il codice che avvia l’applicazione. Grazie a ciò appare il prompt che fa scegliere all’utente se autorizzare o negare l’applicazione all’utilizzo di Siri. È comunque possibile cambiare tale scelta nelle impostazioni del dispositivo.
 		\end{itemize}
 		La maggior parte delle interazioni possibili tramite SiriKit è gestita dalle \textit{App Extension} ovvero estensioni delle funzionalità predefinite per un'applicazione sotto forma di intento. Queste si suddividono in due tipologie:
 		\begin{itemize}
