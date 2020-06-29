@@ -36,9 +36,9 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		Il principio di funzionamento si articola nei seguenti passi:
 		\begin{enumerate}
 			\item un utente lancia una richiesta sotto forma di comando vocale al dispositivo che ospita Assistant;
-			\item il dispositivo attiva la propria \textit{NLU} che riconosce le parole pronunciate trasformandole in stringhe di testo;
+			\item il dispositivo esegue la porzione di software che riconosce il comando vocale trasformandolo in stringhe di testo;
 			\item il dispositivo invia la stringa riconosciuta ad un server remoto di Google, tramite protocollo \textit{HTTPs}, dove risiede la \textit{NLU} per l'elaborazione;
-			\item la business logic contenuta nel server remoto prova a verificare la possibile corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito durante la costruzione della propria abilità;
+			\item la \textit{NLU} del server remoto prova a verificare la possibile corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito durante la costruzione della propria abilità;
 			\item se non vi è alcuna corrispondenza viene subito ritornata una risposta negativa e riferito all'utente. Si ricomincia quindi dal punto 1;
 			\item se una corrispondenza ha dato esito positivo viene selezionato l'intento associato con il suo servizio di \textit{fulfillment} che si occupa dell'esecuzione;
 			\item la conclusione dell'esecuzione prevede la costruzione e l'invio della risposta al dispositivo mittente;
@@ -135,10 +135,50 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		È infine importante notare che Google non garantisce il richiamo della propria Actions in nessuna condizione: l'algoritmo di ricerca, infatti, ha come obiettivo principale fornire all'utente i migliori risultati possibili nel momento in cui viene eseguita la ricerca e ciò può non corrispondere con la propria Actions.
 	\subsection{App Actions}
 		\subsubsection{Descrizione}
+		Le App Actions sono delle funzionalità aggiuntive di Assistant che interagiscono esclusivamente con le applicazione Android ma ancora in via di sviluppo. In particolare permettono agli utenti di eseguire il \textit{deep linking} delle funzionalità specifiche di un'applicazione attraverso un comando vocale ed il loro risultato può manifestarsi sotto forma di risposta vocale oppure grafica facendo opzionalmente uso delle \textit{Android Slides}.
+		Infine è importante notare che le App Actions sono per ora fornite in anteprima e supportano solo la lingua inglese americana.
 		\subsubsection{Funzionamento}
-		\subsubsection{Costruzione}
-	\subsection{Proof of concept}	
-
+		Il funzionamento delle App Actions è composto dai seguenti passi:
+		\begin{enumerate}
+			\item un utente invoca una App Actions attraverso un apposito comando vocale;
+			\item il dispositivo esegue il software che riconosce il comando vocale trasformandolo in stringhe di testo;
+			\item il dispositivo invia la stringa riconosciuta ad un server remoto di Google, tramite protocollo \textit{HTTPs}, dove risiede la \textit{NLU} per l'elaborazione;
+			\item la \textit{NLU} del server remoto prova a verificare la possibile corrispondenza tra la stringa ricevuta e la frase che lo sviluppatore ha predisposto per l'attivazione;
+			\item se non vi è alcuna corrispondenza l'assistente eseguirà una ricerca in Internet della richiesta ritornando l'esito come risposta;
+			\item se la corrispondenza ha dato esito positivo viene selezionato l'intento associato con il suo servizio di \textit{fulfillment} che si occupa dell'esecuzione;
+			\item la conclusione prevede la risposta all'utente in termini di funzionalità eseguita.
+		\end{enumerate}
+		\subsubsection{Progettazione}
+		La progettazione di App Actions presuppone l'esistenza di un'applicazione costruita per Android a cui aggiungerla. Gli elementi cardine la decisione della frase di invocazione in quanto non è possibile averne solo una per ogni intento e rappresenta l'unica modalità di attivazione della Action e la scelta dell'intento stesso in quanto deve essere il più adeguato a ciò che si vuole realizzare tra quelli possibili. Gli intenti disponibili sono solo quelli preconfigurati da Google e i macro argomenti che trattano sono:
+		\begin{itemize}
+			\item attivare funzionalità delle applicazioni;
+			\item effettuare degli ordini online;
+			\item operazioni in ambito finanziario;
+			\item ordinare cibi e bevande da un menù preconfigurato;
+			\item monitoraggio di salute e fitness;
+			\item richiedere trasporto tramite Taxi.
+		\end{itemize}
+		Ad oggi non è ancora possibile costruire un intento personalizzato.
+		\subsubsection{Implementazione}
+		Dopo aver progettato la Action si passa all'implementazione. Questa consiste nell'associare l'intento ed il suo \textit{fulfillment} all'applicazione. Più in dettaglio si deve:
+		\begin{itemize}
+			\item registrare il proprio intento nel file \textit{actions.xml} mappando gli eventuali parametri con il servizio di \textit{fulfillment} collegato;
+			\item aggiornare il file \textit{AndroidManifest.xml} inserendo le dipendenze con gli intenti designati.
+		\end{itemize}
+		Dopo aver svolto questi compiti è necessario associare la Action con il plug-in \textit{App Actions Test Tool} integrato in Android Studio ed eseguire almeno un test altrimenti non è possibile richiamarla.
+	\subsection{Proof of concept}
+		\subsubsection{Analisi dei requisiti}
+		Per il proof of concept relativo ad Assistant, in comune accordo con il tutor e sulla base delle ricerche effettuate, è stato scelto di implementare una App Action sull'argomento del fitness. Il suo scopo è verificare la fattibilità e le potenzialità delle App Action, nonostante il loro attuale supporto alla sola lingua inglese, con un esempio concreto.
+		Ho quindi deciso di realizzare un timer con un'interfaccia grafica minimale che calcoli il tempo che si impiega nel svolgere attività fisica per ogni sport disponibile nei \textit{built-in intents}.
+		\subsubsection{Implementazione}	
+		Nell'attività di implementazione ho seguito le linee guida fornite da Google e come primo compito ho realizzato un'applicazione Android che presenta tutte le funzionalità previste e fruibili tramite l'interfaccia grafica. Più in dettaglio l'utente può attivare il timer dall'apposito pulsante, fermare l'attività in qualunque momento e visualizzare i risultati nello storico.
+		%TODO:IMMAGINI DELL'INTERFACCIA GRAFICA
+		A questo punto ho registrato gli intenti scelti nel file \textit{actions.xml} e aggiunte le dipendenze nel file \textit{AndroidManifest.xml} ed infine ho sviluppato il codice che deve essere eseguito al lancio del comando vocale.
+		%TODO:IMMAGINE DI ACTIONS.XML
+		\subsubsection{Test}
+		Per eseguire i test ho configurato il plug-in \textit{App Actions Test Tool} che permette di eseguire le verifiche su un dispositivo fisico, in quanto il supporto al simulatore non è ancora attivo, e di associare la mia Action ad Assistant.
+		%TODO:IMMAGINE APP ACTIONS TEST TOOL
+		
 %**************************************************************
 \section{Alexa}
 	\subsection{Introduzione}
@@ -234,7 +274,19 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		Di particolare rilevanza è il salvataggio dei dati durante la conversazione in quanto permette di richiedere determinati dati possibilmente importanti per la corretta esecuzione della Skill ma soprattutto di dare all'utente la sensazione di interagire con un'intelligenza che ha capacità di memoria. Quest'ultima caratteristica è molto importante perché consente di definire e mantenere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso dell'utente. \\
 		Per capire quali elementi devono essere salvati, Alexa utilizza delle variabili all'interno delle frasi di richiesta dette \textit{slots}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
 	\subsection{Proof of concept}
-
+		\subsubsection{Analisi dei requisiti}
+		Per il proof of concept relativo ad Alexa, in comune accordo con il tutor e sulla base delle ricerche effettuate, è stato scelto di implementare una Skill in grado di riconoscere la data di nascita di una persona. Il suo scopo è verificare le capacità conversazionali di Alexa e comprendere il meccanismo di funzionamento da loro adottato con un esempio concreto oltre all'analisi teorica.
+		Ho quindi deciso di realizzare un'interfaccia vocale in grado di comprendere un insieme di frasi preconfigurate per esprimere la propria data di nascita e un insieme di frasi per porre delle domande qualora l'utente fornisca una risposta incompleta o errata.
+		\subsubsection{Implementazione}
+		Per implementare la Skill ho deciso di utilizzare la console fornita da Amazon e che maschera la complessità della \textit{NLU} e della comunicazione con essa. Il primo step è stato definire il modello di interazione composto da:
+		\begin{itemize}
+			\item frasi per la comunicazione con l'utente;
+			\item intento per associare l'azione da eseguire;
+			\item slot per le variabili.
+		\end{itemize}
+		Inizialmente è stato definito l'insieme delle frasi possibili per le richieste dell'utente e le risposte di Alexa. Successivamente è stato implementato un intento personalizzato identificato dal nome \textit{RegisterBirthdayIntent} in cui sono stati definiti gli slot della conversazione: giorno, mese e anno. Infine è stato abilitato il meccanismo di richiesta degli slot in caso di mancanza. In questo modo, sulla base delle frasi che ho configurato, Alexa può continuare a chiedere all'utente giorno, mese e anno finché non saranno forniti.
+		\subsubsection{Test}
+		Per eseguire i test è disponibile uno strumento all'interno della console che integra Alexa; tuttavia non ne permette l'automatizzazione.
 %**************************************************************
 \section{Siri}
 	\subsection{Introduzione}
@@ -330,6 +382,7 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 		\subsubsection{Comunicazione}
 		Dato che lo scopo principale delle Shortcuts che Apple mette a disposizione non è costruire delle conversazioni, è stato deciso di non approfondire il metodo di comunicazione che utilizza. Tuttavia è noto che, come per gli altri assistenti, è possibile inserire dei parametri corrispondenti a variabili all'interno delle frasi che vengono storicizzati affinché la Shortcuts non venga portata a termine.
 	\subsection{Proof of concept}
+	Come \textit{proopf of concept} è stato pensato di costruire un'applicazione che consentisse l'esecuzione di un ordine di alimenti e quindi di aggiungere una Shortcut che inviasse l'ordine tramite Siri. Per problemi di licenze nell'account sviluppatore di Apple non è stato possibile collegare l'applicazione a Siri e quindi l'applicazione.
 
 %**************************************************************
 \section{Trattamento dei dati}
