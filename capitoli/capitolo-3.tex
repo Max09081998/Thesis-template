@@ -388,5 +388,26 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 \section{Trattamento dei dati}
 Per quanto concerne il trattamento dei dati che vengono scambiati nell'esecuzione delle abilità, gli assistenti virtuali operano in modo del tutto simile. \\
 Tutti i dispositivi che integrano un assistente virtuale rimangono sempre in ascolto di qualsiasi parola pronunciata così da essere reattivi in qualunque momento venga lanciata una parola di attivazione che richiami la loro attenzione. Tuttavia, solo le parole recepite dall'attivazione alla conclusione di un'abilità vengono elaborate mentre le altre sono scartate. Questo accade perché le aziende riceverebbero una mole di dati troppo elevata per essere processata, la rete Internet risulterebbe intasata ma soprattutto gli utenti subirebbero una violazione di privacy.
+Inoltre durante lo scambio dei dati utilizzano il meccanismo OAuth 2.0 per l'autenticazione ed il protocollo HTTPs che aggiunge un ulteriore strato di crittografia.
 %**************************************************************
 \section{Risultati della ricerca}
+In questa sezione vengono riportati i risultati salienti della ricerca svolta. Nella seguente tabella è presentato un confronto sulle funzionalità più rilevanti per lo stage e ad alto livello dei tre assistenti.
+
+\\ \\
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+	\hline
+	\textbf{Funzionalità} & \textbf{Assistant} & \textbf{Alexa} & \textbf{Siri} \\\hline
+	
+	Creazione di conversazioni personalizzate & Supporto tramite Conversational Actions sia con le \textit{SDK} sia con Dialogflow  & Supporto tramite Skill sia con le \textit{SDK} sia con Alexa Developer Console & Funzionalità non supportata \\
+	\hline
+	Integrazione nelle pagine Web & Supporto tramite Content Actions & Funzionalità non supportata & Funzionalità non supportata \\
+	\hline
+	Integrazione nelle applicazioni & Supporto tramite App Actions solo su applicazioni Android & Funzionalità non implementata & Supporto tramite Shortcuts solo su applicazioni dell'ecosistema Apple \\
+	\hline
+\end{tabularx}
+\\ \\
+
+Nello sviluppo di abilità mirate alle conversazioni gli assistenti virtuali di Google e Amazon offrono rispettivamente Conversational Actions e Skills che sono molto simili come struttura e forniscono le stesse funzionalità. \\
+Apple e Google che rientrano nel mercato dei dispositivi smart quali computer, smartphone e tablet si pongono l'obiettivo di migliorare l’interazione degli utenti con i propri prodotti ed perciò permettono la creazione di abilità personalizzate all'interno delle proprie applicazioni, rispettivamente Shortcuts e App Actions.
+Infine solo Google offre la possibilità integrare Assistant nell'interazione con le pagine Web in quanto fornisce il motore di ricerca più diffuso al mondo.
+%INSERIRE LE CONCLUSIONI
