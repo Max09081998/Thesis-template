@@ -11,9 +11,11 @@
 
 %**************************************************************
 \section{Premessa}
-Un assistente virtuale è un software capace di interpretare il linguaggio naturale e dialogare con gli utenti che ne fanno uso, eseguendo determinati compiti. Generalmente necessita di un'attività di addestramento, precedente al suo utilizzo, che gli permetta di apprendere e migliorare le proprie abilità. \\
-Gli assistenti virtuali analizzati sono Assistant, Alexa e Siri ma, nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile. Inizialmente lo sviluppatore deve costruire un'abilità che viene richiamata attraverso l'assistente virtuale assegnando nome, frasi di richiamo e azioni da eseguire. Queste abilità sono chiamate \textit{Action} per Assistant, \textit{Skill} per Alexa e \textit{Shortcuts} per Siri. Dato che gli assistenti virtuali attuali sono pensati per un utilizzo di breve durata, è molto importante progettare le abilità considerando questo fattore, con l'obiettivo di dare agli utenti una migliore esperienza d'uso. \\
-Una caratteristica comune alle abilità di tutti gli assistenti successivamente trattati è il meccanismo di funzionamento su cui si fondano: gli intenti. Questi consistono in un'azione che soddisfa una richiesta vocale effettuata da un utente e il servizio che la esegue, più concretamente il codice, viene detto \textit{fulfillment}. Questo concetto sarà spiegato più dettagliatamente per ciascun assistente nel paragrafo dedicato al funzionamento.
+\gls{apig}
+Un assistente virtuale è un software capace di interpretare il linguaggio naturale e dialogare con gli utenti che ne fanno uso, eseguendo determinati compiti. \\
+Gli assistenti virtuali analizzati sono Assistant, Alexa e Siri ma, nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile: lo sviluppatore deve costruire un'abilità, addestrarla e permettere all'utente di richiamarla. Queste abilità sono chiamate \textit{Action} per Assistant, \textit{Skill} per Alexa e \textit{Shortcuts} per Siri e sono caratterizzate da nome, frasi di richiamo e azioni da eseguire. \\
+La prima proprietà in comune è meccanismo di funzionamento delle abilità trattate: gli intenti. Essi consistono in un'azione che soddisfa una richiesta vocale effettuata da un utente e il servizio che la esegue, più concretamente il codice, viene detto \textit{fulfillment}. La seconda proprietà in comune è la possibilità di integrare l'interfaccia vocale a quella grafica ove possibile. Questo non viene trattato nell'analisi ma permetterà di giungere a conclusioni interessanti nel seguito. \\
+L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assistenti che sono state studiate, fornendo principi e metodi ad alto livello relative alla progettazione e all'implementazione ma non nel dettaglio perché spiegate nelle pagine di documentazione.
 
 %**************************************************************
 \section{Assistant}
@@ -22,13 +24,10 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	Reso pubblico dal 2016, Assistant è ora integrato in tutti i dispositivi con sistema operativo Android, a partire dalla versione 6.0 se hanno a disposizione almeno 1.5 GB di memoria RAM oppure dalla versione 5.0 se hanno a disposizione almeno 1 GB di memoria RAM. È inoltre installabile nei dispositivi con sistema operativo iOS a partire dalla versione 10 e iPadOS; tuttavia l'integrazione è pessima in quanto per richiamarlo è necessario invocare Siri. Infine è fruibile nei dispositivi della linea Home e Nest di Google, costruiti e pensati appositamente per ottimizzarne le funzionalità.
 	\subsection{Casi d'uso}
 	\begin{itemize}
-		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico: \textit{Home Actions};
-		\item dialogo con l'utente eseguendo anche operazioni specifiche: \textit{Conversational Actions};
+		\item dialogo con l'utente: \textit{Conversational Actions};
 		\item integrazione di contenuti multimediali pensati per Assistant all'interno di pagine web: \textit{Content Actions}.
-		\item integrazione di Assistant nelle applicazioni Android per eseguirne determinate funzionalità: \textit{App Actions};
-		\item integrazione di Assistant all'interno di propri dispositivi per usi sperimentali.
+		\item integrazione di Assistant nelle applicazioni Android per eseguire determinate funzionalità: \textit{App Actions};
 	\end{itemize}
-	Le \textit{Home Actions} e l'integrazione ad uso sperimentale non sono oggetto di analisi in quanto non interessano lo stage proposto.
 	\subsection{Conversational Actions}
 		\subsubsection{Descrizione}
 		Le \textit{Conversational Actions} estendono le funzionalità di Assistant con l'obiettivo di creare esperienza di conversazione personalizzata con gli utenti. Esse infatti permettono di gestire le richieste rivolte all'Assistente e le risposte costruite a seguito dell'elaborazione. Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle apposite \textit{SDK}.
@@ -185,12 +184,7 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	Alexa è l'assistente virtuale di Amazon ed è capace di riconoscere un comando vocale, elaborarlo attraverso un ragionamento e fornire una risposta. È una tecnologia in continuo sviluppo grazie anche alla consistente mole di dati che Amazon ha a disposizione per il suo addestramento. \\
 	La prima versione di Alexa risale al 2014 e da allora ha fatto notevoli miglioramenti. È integrato in tutti i dispositivi della linea Echo di Amazon costruiti appositamente per ottimizzarne l'utilizzo; tuttavia è installabile in tutti i dispositivi con sistema operativo Android in versione 5.0 o maggiore, iOS in versione 9.0 o maggiore e iPadOS.
 	\subsection{Casi d'uso}
-	\begin{itemize}
-		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico attraverso le \textit{Skill};
-		\item dialogo con l'utente eseguendo anche operazioni specifiche attraverso le \textit{Skill};
-		\item integrazione di Alexa all'interno di un proprio dispositivo per usi sperimentali.
-	\end{itemize}
-	Le \textit{Skill} per il controllo di dispositivi intelligenti e l'integrazione di Alexa in un dispositivo per usi sperimentali non sono oggetto di analisi in quanto non interessano lo stage proposto.
+	Il caso d'uso analizzato è: dialogo con l'utente attraverso le \textit{Skill}.
 	\subsection{Skill di conversazione}
 		\subsubsection{Descrizione}
 		Le \textit{Skill} consistono in funzionalità personalizzate e aggiuntive per Alexa mirate a migliorare l'esperienza d'uso degli utenti. Attraverso le Skill lo sviluppatore può ricevere le richieste rivolte ad Alexa, soddisfarle e restituire una risposta. Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle \textit{API} presenti nell'\textit{Alexa Skill Kit}. \\
@@ -293,14 +287,10 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 	Siri è l'assistente virtuale di Apple ed è capace di riconoscere un comando vocale, elaborarlo attraverso un ragionamento e fornire una risposta. È una tecnologia in continuo sviluppo grazie anche alla contingente mole di dati a disposizione di Apple per il suo addestramento. \\
 	La prima versione è stata introdotta in iOS 5 nel 2012, senza ancora offrire il supporto a tutte le lingue e a tutti i dispositivi. Ora invece è integrato in Homepod e tutti i dispositivi con sistema operativo iOS versione 8.0 o superiore, iPadOS, watchOS, tvOS e MacOS versione 10.12 o superiore. Rimane comunque un esclusiva di Apple e non è installabile in altri sistemi.
 	\subsection{Casi d'uso}
-	\begin{itemize}
-		\item controllo di dispositivi intelligenti all'interno di un ambiente domestico attraverso le \textit{Shortcuts};
-		\item dialogo con l'utente eseguendo operazioni specifiche nelle applicazioni attraverso i \textit{Comandi}.
-	\end{itemize}
-	Le \textit{Shortcuts} per il controllo di dispositivi intelligenti non sono oggetto di analisi in quanto non interessano lo stage proposto.
+	Il caso d'uso analizzato è: esecuzione di operazioni specifiche nelle applicazioni attraverso i \textit{Comandi}.
 	\subsection{Shortcuts}
 		\subsubsection{Descrizione}
-		Le Shortcuts consistono in funzionalità aggiuntive per Siri e migliorano l'esperienza d'uso dei dispositiv da parte degli utenti. In particolare è possibile accedere all'applicazione Shortcuts (Comandi se le impostazioni sono in lingua italiana) e al suo interno, per ogni altra applicazione installata nel proprio dispositivo, sono visualizzate tutte le frasi messe a disposizione dagli sviluppatori per eseguire operazioni tramite Siri. L'utente può inoltre personalizzare tali frasi per renderle più intuitive e facili da ricordare. \\
+		Le Shortcuts consistono in funzionalità aggiuntive per Siri e migliorano l'esperienza d'uso dei dispositivi da parte degli utenti. In particolare è possibile accedere all'applicazione Shortcuts (Comandi se le impostazioni sono in lingua italiana) e al suo interno, per ogni altra applicazione installata nel proprio dispositivo, sono visualizzate tutte le frasi messe a disposizione dagli sviluppatori per eseguire operazioni tramite Siri. L'utente può inoltre personalizzare tali frasi per renderle più intuitive e facili da ricordare. \\
 		L'obiettivo principale delle Shortcuts è migliorare e personalizzare l'interattività con le applicazioni dell'ecosistema Apple mentre l'aspetto conversazionale risulta finalizzato solo allo scopo principale.
 		\subsubsection{Funzionamento}
 		Il principio di funzionamento si articola nei seguenti passi:
@@ -386,28 +376,32 @@ Una caratteristica comune alle abilità di tutti gli assistenti successivamente 
 
 %**************************************************************
 \section{Trattamento dei dati}
-Per quanto concerne il trattamento dei dati che vengono scambiati nell'esecuzione delle abilità, gli assistenti virtuali operano in modo del tutto simile. \\
-Tutti i dispositivi che integrano un assistente virtuale rimangono sempre in ascolto di qualsiasi parola pronunciata così da essere reattivi in qualunque momento venga lanciata una parola di attivazione che richiami la loro attenzione. Tuttavia, solo le parole recepite dall'attivazione alla conclusione di un'abilità vengono elaborate mentre le altre sono scartate. Questo accade perché le aziende riceverebbero una mole di dati troppo elevata per essere processata, la rete Internet risulterebbe intasata ma soprattutto gli utenti subirebbero una violazione di privacy.
-Inoltre durante lo scambio dei dati utilizzano il meccanismo OAuth 2.0 per l'autenticazione ed il protocollo HTTPs che aggiunge un ulteriore strato di crittografia.
+Per quanto concerne il trattamento dei dati che vengono scambiati durante l'esecuzione delle abilità, gli assistenti virtuali operano in modo del tutto simile. \\
+Tutti i dispositivi che integrano un assistente virtuale rimangono sempre in ascolto di qualsiasi parola pronunciata in modo da essere reattivi qualora venga lanciata una parola di attivazione che richiami la loro attenzione. Tuttavia solo le parole recepite dall'attivazione alla conclusione di un'abilità vengono elaborate mentre le altre non sono considerate. Questo accade perché le aziende riceverebbero una mole di dati troppo elevata per essere processata, le reti per la connessione sarebbero intasate ma soprattutto gli utenti subirebbero una violazione di privacy. \\
+Infine per garantire sicurezza durante lo scambio dei dati utilizzano il meccanismo \textit{OAuth 2.0} per l'autenticazione ed il protocollo \textit{HTTPs} che aggiunge uno strato di crittografia.
 %**************************************************************
-\section{Risultati della ricerca}
-In questa sezione vengono riportati i risultati salienti della ricerca svolta. Nella seguente tabella è presentato un confronto sulle funzionalità più rilevanti per lo stage e ad alto livello dei tre assistenti.
+\section{Risultati}
+In questa sezione vengono riportati i risultati salienti della ricerca svolta. Nella seguente tabella è presentato un confronto tra le funzionalità ad alto livello dei tre assistenti che sono state più rilevanti per lo stage. \\ \\
 
-\\ \\
 \begin{tabularx}{\textwidth}{|X|X|X|X|}
 	\hline
 	\textbf{Funzionalità} & \textbf{Assistant} & \textbf{Alexa} & \textbf{Siri} \\\hline
 	
-	Creazione di conversazioni personalizzate & Supporto tramite Conversational Actions sia con le \textit{SDK} sia con Dialogflow  & Supporto tramite Skill sia con le \textit{SDK} sia con Alexa Developer Console & Funzionalità non supportata \\
+	Creazione di conversazioni personalizzate & Supporto tramite Conversational Actions sia con le \textit{SDK} sia con \textit{Dialogflow}  & Supporto tramite Skill sia con le \textit{SDK} sia con Alexa Developer Console & Funzionalità non supportata \\
 	\hline
 	Integrazione nelle pagine Web & Supporto tramite Content Actions & Funzionalità non supportata & Funzionalità non supportata \\
 	\hline
-	Integrazione nelle applicazioni & Supporto tramite App Actions solo su applicazioni Android & Funzionalità non implementata & Supporto tramite Shortcuts solo su applicazioni dell'ecosistema Apple \\
+	Integrazione nelle applicazioni & Supporto tramite App Actions solo su applicazioni Android & Funzionalità non supportata & Supporto tramite Shortcuts solo su applicazioni dell'ecosistema Apple \\
 	\hline
 \end{tabularx}
 \\ \\
 
-Nello sviluppo di abilità mirate alle conversazioni gli assistenti virtuali di Google e Amazon offrono rispettivamente Conversational Actions e Skills che sono molto simili come struttura e forniscono le stesse funzionalità. \\
-Apple e Google che rientrano nel mercato dei dispositivi smart quali computer, smartphone e tablet si pongono l'obiettivo di migliorare l’interazione degli utenti con i propri prodotti ed perciò permettono la creazione di abilità personalizzate all'interno delle proprie applicazioni, rispettivamente Shortcuts e App Actions.
-Infine solo Google offre la possibilità integrare Assistant nell'interazione con le pagine Web in quanto fornisce il motore di ricerca più diffuso al mondo.
+Nello sviluppo di abilità mirate alle conversazioni gli assistenti virtuali di Google e Amazon offrono rispettivamente strumenti molto simili come struttura e funzionalità offerte. \\
+Apple e Google rientrano nel mercato di dispositivi quali computer, smartphone e tablet e si pongono l'obiettivo di migliorare l’interazione degli utenti con i propri prodotti offrendo la possibilità di creare abilità personalizzate all'interno delle proprie applicazioni. La differenza principale risiede nelle lingue supportate in quanto Apple fornisce il supporto a tutte le lingue in cui Siri è disponibile mentre Google per ora solo in inglese. \\
+Infine Google è l'unico ad offrire l'integrazione di Assistant nell'interazione con le pagine Web. \\
+In generale ho riscontrato che gli assistenti virtuali attuali sono pensati per un utilizzo di breve durata perciò è molto importante progettare le loro abilità seguendo questo principio per dare agli utenti un'esperienza d'uso migliore.
+Oltre all'analisi delle funzionalità ho analizzato l'intelligenza degli assistenti e ho trovato i risultati di un test svolto su di essi in questo ambito che consiste nel verificare quale assistente è in grado di comprendere e rispondere correttamente al maggior numero di domande su un campione di 800. \\
+%DIAGRAMMA RISULTATO
+Come si può vedere dal diagramma, l'esito è stato a favore di Google con un netto vantaggio. \\
+Dunque da questa ricerca è emerso come Google fornisca un insieme più completo di funzionalità per il proprio assistente e come l'intelligenza che lo caratterizza sia superiore a quella degli altri probabilmente per la cospicua quantità di dati di varie categorie che ha a disposizione. 
 %INSERIRE LE CONCLUSIONI
