@@ -10,16 +10,18 @@
 %\intro{Breve introduzione al capitolo}\\
 
 \section{Introduzione alle grammatiche}
+%TODO:Tuttavia, per costruzione, se l'utente esprimesse una frase che anche per una singola lettera non corrispondesse ad una di quelle generate dalla \emph{\gls{gramg}} non sarebbe riconosciuta.
 Zucchetti negli ultimi anni ha investito molto nella ricerca di una tecnologia che gli permettesse di interagire con i propri prodotti attraverso comandi vocali ed ora sta realizzando delle regole che consentono di generare un numero di \emph{grammatiche} potenzialmente infinito e capace di comprendere ed elaborare il linguaggio naturale.
-Gli assistenti virtuali presenti sul mercato sono basati sul seguente concetto: provare a capire tutto ciò che viene detto dagli utenti anche a costo di commettere degli errori. Questa filosofia è mirata a dare all'utente la sensazione di utilizzare uno strumento in grado di capire e ragionare in qualsiasi momento ed è già utilizzata in larga scala da grandi aziende quali Google, Amazon e Apple. Tuttavia, per le funzionalità della maggior parte dei prodotti Zucchetti, tale principio non è applicabile. Infatti necessitano che, quando una frase viene riconosciuta e compresa, il margine di errore sia nullo. Un classico esempio è il trasferimento di denaro in cui se la comprensione del comando avviene in modo errato c'è il rischio di causa danni contingenti agli utenti. \\
-Dunque Zucchetti ha intrapreso una strada diversa sviluppando una tecnologia mirata a alla massima precisione accettando talvolta di non riconoscere i comandi ricevuti. Essa consiste quindi in regole molto semplici ed intuitive da applicare a stringhe di testo e riassunte in quattro azioni principali:
+Gli assistenti virtuali presenti sul mercato sono basati sul seguente concetto: provare ad interpretare l'input ricevuto anche se non corrisponde esattamente ad uno di quelli previsti a costo di commettere degli errori. Questa filosofia è mirata a dare all'utente la percezione di utilizzare uno strumento in grado di capire e ragionare in qualsiasi momento ed è già utilizzata in larga scala da aziende del calibro di Google, Amazon e Apple. Tuttavia, per le funzionalità offerte dalla maggior parte dei prodotti Zucchetti, tale principio non è applicabile poiché necessitano che la comprensione dell'input abbia margine di errore nullo. Un classico esempio è il trasferimento di denaro in cui se la comprensione del comando avviene in modo errato c'è il rischio di causare danni contingenti agli utenti. \\
+Zucchetti ha perciò intrapreso una strada diversa sviluppando una tecnologia con l'obiettivo di massimizzare la precisione della comprensione dei comandi, accettando piuttosto di rigettarli. Essa consiste in regole molto semplici ed intuitive da applicare e riassunte in cinque operazioni chiave:
 \begin{itemize}
-	\item concatenazione di elementi;
-	\item scelta tra più elementi;
-	\item ripetizione di uno o più elementi;
-	\item opzionalità di un elemento.
+	\item concatenazione di stringhe;
+	\item scelta tra più stringhe;
+	\item ripetizione di uno o più stringhe;
+	\item opzionalità di una stringa;
+	\item rilasciare una stringa a scelta dello sviluppatore in qualsiasi punto all'interno come segnale per l'elaborazione.
 \end{itemize}
-A partire da ciò viene costruita una \emph{\gls{gramg}} che permette di interpretare un insieme finito di frasi che rappresentano il dominio della conversazione che si vuole intrattenere. La difficoltà principale è comprendere esattamente l'insieme delle possibili frasi, trovate con un'analisi probabilistica e statistica sul proprio contesto, che si presume l'utente possa dire, senza includere componenti non pertinenti. \\
+A partire da esse viene costruita una \emph{\gls{gramg}} che permette di interpretare un insieme finito di frasi che rappresentano il dominio della conversazione che si vuole intrattenere. La difficoltà principale è scegliere il corretto insieme delle possibili frasi che l'utente può pronunciare eseguendo un'analisi probabilistica e statistica sul proprio contesto, con l'obiettivo di ottenere un numero molto elevato ma pertinente.\\
 Un esempio semplice ma dimostrativo di una \emph{\gls{gramg}} che permette di interpretare alcune frasi di saluto è illustrato nella seguente immagine.
 
 \begin{figure}[htbp]
@@ -75,19 +77,16 @@ Infine l'applicazione della \emph{\gls{gramg}} sui comandi vocali dell'utente tr
 	\end{itemize}
 \section{Progettazione}
 	\subsection{NLU}
-	La \emph{\gls{nlug}} è il nucleo di tutto l'applicativo e la sua corretta progettazione è fondamentale. Essa consiste nella generazione della \emph{\gls{gramg}} che interpreta l'input dell'utente ed è rappresentata nel seguente diagramma \emph{\gls{rldg}}.
+	La \emph{\gls{nlug}} è il nucleo di tutto l'applicativo e la sua corretta progettazione è fondamentale. Essa consiste nella \emph{\gls{gramg}} generata dallo sviluppatore che interpreta l'input dell'utente e nella sua applicazione alle stringhe di testo. La \emph{\gls{gramg}} non è rappresentabile in un unico diagramma \emph{\gls{rldg}} in quanto ha dimensioni troppo elevate perciò sono illustrati solo i frammenti principali.
 	
-	%\mbox{}
-%	\begin{landscape}
-		\begin{figure}[htbp]
-			\begin{center}
-				\includegraphics[height=10cm, width=\linewidth]{railroad_data_nascita.png}
-				\caption{Diagramma railroad della grammatica per la data di nascita prima parte}
-			\end{center}
-		\end{figure}
-	%\end{landscape}
+	\begin{figure}[htbp]
+		\begin{center}
+			\includegraphics[height=10cm, width=\linewidth]{railroad_data_nascita.png}
+			\caption{Diagramma railroad della grammatica per la data di nascita prima parte}
+		\end{center}
+	\end{figure}
 	
-	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD DATA 1
+	Questo diagramma presenta l'insieme di frasi per richiedere la data di nascita in cui prima viene detto il frammento di frase che corrisponde all'introduzione del contenuto vero e proprio come ad esempio "sono nato il" oppure "la mia data di nascita è" e successivamente il contenuto vero e proprio quindi giorno, mese e anno in qualsiasi ordine. Nella figura successiva invece viene presentato il diagramma opposto che prima prevede il contenuto e successivamente la sua introduzione. Questo permette di riconoscere più versioni in cui l'utente può esprimere la data di nascita.
 	
 	\begin{figure}[htbp]
 		\begin{center}
@@ -96,7 +95,8 @@ Infine l'applicazione della \emph{\gls{gramg}} sui comandi vocali dell'utente tr
 		\end{center}
 	\end{figure}
 
-	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD DATA 2
+	La porzione di \emph{\gls{gramg}} illustrata permette globalmente di interpretare la data di nascita. Successivamente, seguendo lo stesso principio di separazione tra i frammenti di frase introduttivi e quelli di vero e proprio contesto, è presentata la porzione di \emph{\gls{gramg}} che illustra la data di compleanno che differisce dalla precedente per l'assenza dell'anno. \\
+	Questa è la prima parte che riporta prima la parte introduttiva e successivamente quella di contenuto.
 	
 	\begin{figure}[htbp]
 		\begin{center}
@@ -104,19 +104,17 @@ Infine l'applicazione della \emph{\gls{gramg}} sui comandi vocali dell'utente tr
 			\caption{Diagramma railroad della grammatica per il compleanno prima parte}
 		\end{center}
 	\end{figure}
-	
-	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD COMPLEANNO 1
-	
+
+	Questa è la prima parte che riporta prima la parte di contenuto e in seguito quella introduttiva.	
 	\begin{figure}[htbp]
 		\begin{center}
 			\includegraphics[height=8cm, width=\linewidth]{railroad_compleanno_2.png}
 			\caption{Diagramma railroad della grammatica per il compleanno seconda parte}
 		\end{center}
 	\end{figure}
-	
-	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD COMPLEANNO 2
+
 	\subsection{Capacità conversazionale}
-	Per l'implementazione della capacità conversazionale il concetto fondamentale è la memoria. Mentre la \emph{\gls{nlug}} permette l'interpretazione del linguaggio naturale, la capacità conversazionale consiste nel mantenere il contesto durante l'intero dialogo. Ho deciso di tenerne traccia all'interno di un oggetto da resettare ad ogni nuova conversazione, in questo modo nella costruzione delle risposte è possibile far uso di tali dati per porre domande mirate al fine di ottenere i dati mancanti che in questo caso specifico possono essere giorno, mese e anno.
+	Per l'implementazione della capacità conversazionale il concetto fondamentale è la memoria infatti, mentre la \emph{\gls{nlug}} permette l'interpretazione del linguaggio naturale, la capacità conversazionale consiste nel mantenere il contesto durante l'intero dialogo. Ho deciso di tenere traccia dei dati che lo costituiscono all'interno di un oggetto che sarà resettato ad ogni nuova conversazione. In questo modo è possibile costruire delle risposte basate sul contesto per porre domande mirate ad ottenere gli eventuali dati mancanti che, in questo caso specifico, sono giorno, mese e anno.
 	\subsection{Interfaccia utente}
 	La progettazione dell'interfaccia utente si articola in due parti:
 	\begin{itemize}
