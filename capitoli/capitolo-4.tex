@@ -77,9 +77,44 @@ Infine l'applicazione della \emph{\gls{gramg}} sui comandi vocali dell'utente tr
 	\subsection{NLU}
 	La \emph{\gls{nlug}} è il nucleo di tutto l'applicativo e la sua corretta progettazione è fondamentale. Essa consiste nella generazione della \emph{\gls{gramg}} che interpreta l'input dell'utente ed è rappresentata nel seguente diagramma \emph{\gls{rldg}}.
 	
-	%TODO: SCHEMA INTERFACCIA VOCALE
+	%\mbox{}
+%	\begin{landscape}
+		\begin{figure}[htbp]
+			\begin{center}
+				\includegraphics[height=10cm, width=\linewidth]{railroad_data_nascita.png}
+				\caption{Diagramma railroad della grammatica per la data di nascita prima parte}
+			\end{center}
+		\end{figure}
+	%\end{landscape}
 	
-	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD
+	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD DATA 1
+	
+	\begin{figure}[htbp]
+		\begin{center}
+			\includegraphics[height=10cm, width=\linewidth]{railroad_data_nascita_2.png}
+			\caption{Diagramma railroad della grammatica per la data di nascita seconda parte}
+		\end{center}
+	\end{figure}
+
+	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD DATA 2
+	
+	\begin{figure}[htbp]
+		\begin{center}
+			\includegraphics[height=8cm, width=\linewidth]{railroad_compleanno.png}
+			\caption{Diagramma railroad della grammatica per il compleanno prima parte}
+		\end{center}
+	\end{figure}
+	
+	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD COMPLEANNO 1
+	
+	\begin{figure}[htbp]
+		\begin{center}
+			\includegraphics[height=8cm, width=\linewidth]{railroad_compleanno_2.png}
+			\caption{Diagramma railroad della grammatica per il compleanno seconda parte}
+		\end{center}
+	\end{figure}
+	
+	%TODO: DESCRIZIONE DEL DIAGRAMMA RAILROAD COMPLEANNO 2
 	\subsection{Capacità conversazionale}
 	Per l'implementazione della capacità conversazionale il concetto fondamentale è la memoria. Mentre la \emph{\gls{nlug}} permette l'interpretazione del linguaggio naturale, la capacità conversazionale consiste nel mantenere il contesto durante l'intero dialogo. Ho deciso di tenerne traccia all'interno di un oggetto da resettare ad ogni nuova conversazione, in questo modo nella costruzione delle risposte è possibile far uso di tali dati per porre domande mirate al fine di ottenere i dati mancanti che in questo caso specifico possono essere giorno, mese e anno.
 	\subsection{Interfaccia utente}
