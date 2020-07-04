@@ -43,8 +43,27 @@ Nonostante il loro principio di funzionamento sia relativamente semplice da comp
 
 Risulta evidente infatti come questa raffigurazione sia molto più efficace e intuitiva. \\
 Inoltre per l'applicazione effettiva della \emph{\gls{gramg}} sugli input dell'utente avviene attraverso un apposito \emph{\gls{parsg}}\glsfirstoccur che mi è stato consegnato dall'azienda per lo sviluppo del progetto. \\
-Infine per riassumere gli aspetti positivi e negativi di questa tecnologia viene riportata la seguente tabella.
-%TODO:TABELLA PRO E CONTRO
+Infine per riassumere gli aspetti positivi e negativi di questa tecnologia paragonata anche a quella attualmente utilizzata da Google, Alexa e Siri per i dati a disposizione, viene riportata la seguente tabella.
+
+\begin{table}
+	\begin{tabularx}{\textwidth}{|X|X|X|}
+		\hline
+		\textbf{Caratteristica} & \textbf{Zucchetti} & \textbf{Aziende concorrenti} \\\hline
+		
+		Precisione nella comprensione & Estrema precisione: quando afferma di aver compreso un frase ha la certezza di averlo fatto correttamente.  & Buona precisione: quando afferma di aver compreso una frase, non sempre è corretta. \\
+		\hline
+		Propensione alla comprensione & Comprende solo le frasi che lo sviluppatore mette a disposizione attraverso una \emph{\gls{gramg}}. & Cerca di interpretare anche frasi che non corrispondono esattamente alle configurazioni, talvolta commettendo degli errori. \\
+		\hline
+		Verbosità nello sviluppo & Poca verbosità in quanto, per costruzione, ad un aumento minimale vocaboli si ottiene un grande aumento delle frasi possibilmente interpretabili. & Dati non disponibili. \\
+		\hline
+		Facilità della sintassi & Molto facili da gestire in quanto è basata su regole semplici ma con grosse potenzialità & Dati non disponibili. \\
+		\hline
+		Prestazioni & Prestazioni molto elevate dovute ad un'ottima integrazione del \emph{\gls{parsg}} e all'esecuzione in locale senza quindi onere nella comunicazione. & Prestazioni altrettanto elevate ma con l'incognita dei tempi di latenza dovuti all'esecuzione in remoto del \emph{\gls{parsg}} per interpretare l'input. \\
+		\hline
+	\end{tabularx}
+	\caption{Tabella di confronto tra la tecnologia Zucchetti e quella dei concorrenti per l'interpretazione del linguaggio naturale}
+\end{table}
+
 \section{Analisi dei requisiti}
 	\subsection{Descrizione del problema}
 	Durante l'attività di ricerca ed analisi sugli assistenti virtuali, in particolare nello sviluppo del \emph{\gls{pocg}} che fa uso di Alexa, è emerso un concetto importante, caratteristico anche del lavoro che sta svolgendo l'azienda: la conversazionalità. Essa rappresenta la capacità di intrattenere una conversazione da parte di un software simulando la presenza di una persona. \\
@@ -129,7 +148,7 @@ Infine per riassumere gli aspetti positivi e negativi di questa tecnologia viene
 		
 		\begin{figure}[htbp]
 			\begin{center}
-				\includegraphics[height=2cm, width=\linewidth]{interfaccia-grafica.PNG}
+				\includegraphics[height=1.7cm, width=\linewidth]{interfaccia-grafica.PNG}
 				\caption{Interfaccia grafica dell'applicazione}
 			\end{center}
 		\end{figure}
