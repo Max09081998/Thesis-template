@@ -145,7 +145,6 @@ Infine per riassumere gli aspetti positivi e negativi di questa tecnologia parag
 	\end{itemize}
 		\subsubsection{Interfaccia grafica}
 		L'interfaccia grafica è stata progettata con un numero di elementi minimali all'interno ed è illustrata nella seguente immagine.
-		
 		\begin{figure}[htbp]
 			\begin{center}
 				\includegraphics[height=1.7cm, width=\linewidth]{interfaccia-grafica.PNG}
@@ -157,7 +156,14 @@ Infine per riassumere gli aspetti positivi e negativi di questa tecnologia parag
 		\subsubsection{Interfaccia vocale}
 		L'interfaccia vocale è stata progettata con l'obiettivo di garantire un'esperienza d'uso migliore possibile agli utenti. Ho utilizzato le nozioni apprese dalla documentazione degli assistenti virtuali analizzati per generare un'interfaccia vocale e sono:
 		\begin{itemize}
-			\item %TODO: CERCA COME FARE INTEFACCIA VOCALE DA GOOGLE/ALEXA
+			\item capire quali sono gli utenti che devono interagire con la propria applicazione. In questo caso ha importanza relativa in quanto si tratta di un \emph{\gls{pocg}};
+			\item provare a costruire finestre di dialogo molteplice e provare quelle che risultano più naturali su un insieme di persone esterne. Nel mio caso l'ho provato con alcuni colleghi e persone esterne;
+			\item scegliere una stile di conversazione che si adatti maggiormente al contesto della propria applicazione;
+			\item dare una spiegazione iniziale di ciò che si può dire o fare in caso di interfaccia grafica ausiliaria;
+			\item valutare l'utilizzo di un'interfaccia grafica di ausilio per mantenere meglio il contesto in caso sia corposo;
+			\item gestire correttamente i possibili errori dovuti anche ad input scorretti dell'utente;
+			\item dare la possibilità di aiutare l'utente in caso di difficoltà con frasi mirate;
+			\item permette all'utente di interrompere l'esecuzione in qualsiasi momento senza bloccarlo.
 		\end{itemize}		
 		Tutti i componenti espressi nell'analisi sono quindi stati progettati. In particolare i comandi corrispondenti all'interruzione forzata dell'applicazione e alla richiesta d'aiuto che sono stati utilizzati risultano un'elaborazione di un sottoinsieme di quelli ricavati da un'analisi comportamentale di Zucchetti sugli utenti, qualora siano tranquilli e rilassati ma anche arrabbiati e agitati. \\
 		Per gli input dell'utente l'interfaccia vocale è realizzata automaticamente a partire dalla progettazione della \emph{\gls{gramg}} per la quale sono comunque stati applicati i principi descritti mentre per l'output è stata personalizzata sulla base dell'elaborazione. Si è quindi deciso di fornire un set di frasi con significato uguale ma con una sintassi leggermente diversa da cui viene scelta al momento la frasi di input secondo un algoritmo pseudo-casuale.
