@@ -25,7 +25,7 @@ Un esempio semplice ma dimostrativo di una \emph{\gls{gramg}} che permette di in
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[height=1.7cm, width=\linewidth]{esempio-grammatica.PNG}
+		\includegraphics[height=1.8cm, width=\linewidth]{esempio-grammatica.PNG}
 		\caption{Esempio di una grammatica}
 	\end{center}
 \end{figure}
@@ -102,16 +102,18 @@ Infine per riassumere gli aspetti positivi e negativi di questa tecnologia viene
 		
 	\begin{figure}[htbp]
 		\begin{center}
-			\includegraphics[height=10cm, width=\linewidth]{railroad_data_nascita.png}
+			\includegraphics[height=12cm, width=\linewidth]{railroad_data_nascita.png}
 			\caption{Diagramma railroad della grammatica per la data di nascita prima parte}
 		\end{center}
 	\end{figure}
+
+	\pagebreak
 	
 	Nella figura successiva invece è rappresentato il diagramma \emph{\gls{rldg}} opposto in cui prima è previsto il contenuto ovvero giorno, mese e anno, sempre in tutte le possibili combinazioni, ed in seguito le sue frasi introduttive. Questo permette di riconoscere un maggior numero di versioni in cui l'utente può esprimere la data di nascita.
 	
 	\begin{figure}[htbp]
 		\begin{center}
-			\includegraphics[height=10cm, width=\linewidth]{railroad_data_nascita_2.png}
+			\includegraphics[height=12cm, width=\linewidth]{railroad_data_nascita_2.png}
 			\caption{Diagramma railroad della grammatica per la data di nascita seconda parte}
 		\end{center}
 	\end{figure}
@@ -121,23 +123,26 @@ Infine per riassumere gli aspetti positivi e negativi di questa tecnologia viene
 	
 	\begin{figure}[htbp]
 		\begin{center}
-			\includegraphics[height=8cm, width=\linewidth]{railroad_compleanno.png}
+			\includegraphics[height=9cm, width=\linewidth]{railroad_compleanno.png}
 			\caption{Diagramma railroad della grammatica per il compleanno prima parte}
 		\end{center}
 	\end{figure}
+	\pagebreak
 
 	La prossima figura, invece, riporta la porzione che presenta prima la parte di contenuto e dopo quella introduttiva.
 	\begin{figure}[htbp]
 		\begin{center}
-			\includegraphics[height=8cm, width=\linewidth]{railroad_compleanno_2.png}
+			\includegraphics[height=9cm, width=\linewidth]{railroad_compleanno_2.png}
 			\caption{Diagramma railroad della grammatica per il compleanno seconda parte}
 		\end{center}
 	\end{figure}
+	\pagebreak
 
 	\subsection{Capacità conversazionale}
 	Nella progettazione della capacità conversazionale il concetto fondamentale è la memoria. Infatti, mentre la \emph{\gls{nlug}} permette l'interpretazione del linguaggio naturale, la capacità conversazionale consente di mantenere il contesto durante l'intero dialogo. \\
-	Ho deciso di tenere traccia dei dati che lo costituiscono all'interno di un oggetto che sarà resettato ad ogni nuova conversazione. In questo modo è possibile costruire delle risposte basate sul contesto per porre domande mirate ad ottenere gli eventuali dati mancanti ovvero giorno, mese e anno. \\
-	Infine la \emph{\gls{gramg}} descritta in precedenza è stata progettata anche per riconoscere singole parti di contenuto e di conseguenza viene riutilizzata anche per l'implementazione della conversazione. 
+	Ho deciso di tenere traccia dei dati che lo costituiscono all'interno di un oggetto che sarà resettato ad ogni nuova conversazione. In questo modo è possibile costruire delle risposte basate sul contesto per porre domande mirate ad ottenere eventuali dati mancanti ovvero giorno, mese e anno. \\
+	Infine per l'implementazione della conversazione è sufficiente implementare la \emph{\gls{gramg}} descritta in precedenza in quanto è stata progettata anche per riconoscere singole parti di contenuto. \\
+	Per un ulteriore migliramento sarebbe stato possibile tenere traccia dei dati forniti dall'utente in modo permanente, ad esempio in un database, così che ad un nuovo utilizzo dell'utente, anche a distanza di tempo, l'applicazione si ricordasse di ciò che era stato detto in precedenza e potesse riprende la conversazione. Questo però avrebbe comportato alcuni vincoli quali, ad esempio, la realizzazione di un sistema di autenticazione, diventando troppo complesso nel tempo a disposizione. 
 	\subsection{Interfaccia utente}
 	La progettazione dell'interfaccia utente si articola in due parti:
 	\begin{itemize}
@@ -170,12 +175,53 @@ Infine per riassumere gli aspetti positivi e negativi di questa tecnologia viene
 		Sulla base di queste indicazioni sono stati progettati tutti i componenti espressi nell'analisi. \\
 		Per gli input dell'utente, l'interfaccia vocale è stata realizzata in conseguenza alla progettazione della \emph{\gls{gramg}}, per la quale sono comunque stati applicati i principi descritti mentre per l'output è stata personalizzata sulla base dell'elaborazione. Per la risposta si è infatti deciso di fornire un set di frasi con significato uguale ma con sintassi leggermente diversa, da cui viene scelta la frase a tempo di esecuzione secondo un algoritmo pseudo-casuale.
 \section{Codifica}
-Per realizzare l'interfaccia grafica ho implementato una semplice pagina in \emph{\gls{html}} con un altrettanto semplice foglio di stile in \emph{\gls{css}} per presentarla in modo più efficace. \\
-Per realizzare i meccanismi di riconoscimento e di sintesi vocale ho utilizzato rispettivamente un componente jquery integrato in un'apposita classe Javascript che fornisce a tempo di esecuzione i diversi spezzoni di frase che sta riconoscendo e un oggetto della Web Speech \emph{\gls{apig}}. \\
-Per utilizzare la \emph{\gls{nlug}} progettata ho realizzato una classe Javascript e simulato il meccanismo degli intenti %TODO:SISTEMA QUESTA PARTE
-Per realizzare la capacità conversazionale ho creato due oggetti Javascript in cui il primo contiene giorno, mese, anno e contesto che può variare tra data di nascita e di compleanno mentre il secondo degli attributi booleani per giorno, mese e anno che se a true indicano un cambiamento rispetto a quanto espresso in precedenza. %TODO:Controlla che ci sia tutto
-
+%TODO:PARLARE DEI NUMERI RANDOM
+Per realizzare l'interfaccia grafica ho implementato una pagina in \emph{\gls{html}} che richiama un foglio di stile in \emph{\gls{css}} per rendere la sua presentazione più efficace. \\
+Per realizzare il meccanismo di riconoscimento vocale ho utilizzato un componente \emph{jQuery} integrato in una classe Javascript, capace anche di fornire i diversi spezzoni di frase che sta riconoscendo a tempo di esecuzione mentre per la sintesi vocale ho utilizzato un oggetto della \emph{Web Speech} \emph{\gls{apig}}. \\
+Per utilizzare la \emph{\gls{nlug}} ho realizzato un meccanismo che simula quello degli intenti già presente negli assistenti virtuali più diffusi nel mercato. Ho quindi implementato una funzione che esegue il \emph{\gls{parsg}} sulla \emph{\gls{gramg}} per verificare un'eventuale corrispondenza tra input riconosciuto e frasi a disposizione dell'applicazione. Se l'esito risulta positivo significa che è stato richiamato uno degli intenti e di conseguenza la funzione di elaborazione associata, altrimenti viene riferita all'utente la mancata comprensione. La funzione di elaborazione seziona l'input per analizzare ogni sua singola parte, aggiorna gli oggetti Javascript per la capacità conversazionale e richiama infine la funzione di costruzione della risposta da sintetizzare vocalmente con i parametri corretti. \\
+Per realizzare la capacità conversazionale ho creato due oggetti Javascript in cui il primo contiene giorno, mese, anno e contesto che può variare tra data di nascita e di compleanno mentre il secondo contiene gli attributi booleani per giorno, mese e anno che, se a true, indicano un cambiamento rispetto a quanto espresso in precedenza.
 \section{Test}
-
-\section{Sviluppi futuri}
-Sarebbe stato possibile tenere traccia dei dati forniti dall'utente in modo permanente ad esempio all'interno di un database così che ad un nuovo utilizzo dell'utente l'applicazione si ricordasse di ciò che era stato detto precedentemente. Questo però pone alcuni vincoli quali un sistema di autenticazione dell'utente perciò diventa complesso.
+L'applicazione si presenta come \emph{\gls{pocg}} e perciò non è stata prevista l'implementazione dei test di unità, integrazione, sistema e collaudo. Tuttavia si è deciso di verificare il funzionamento della \emph{\gls{nlug}} con appositi test soprattutto per esplorare le loro modalità di implementazione. \\
+Ho quindi sviluppato test caratterizzati da input sotto forma di stringa che rappresentano le frasi ragionevolmente pronunciabili dagli utente derivate dall'analisi statistica e probabilistica svolta durante l'attività di progettazione. Tuttavia essa potrà difficilmente essere completa di tutte le richieste: è sempre possibile che un utente, per cultura personale, si esprima in un modi diversi da quelli previsti. Perciò è importante trovare un compromesso tra tempo speso e numero di frasi verificate dall'insieme totale che la \emph{\gls{nlug}} può comprendere e scegliere degli input significativi. \\
+Per rispondere a queste due esigenze ho quindi creato un totale di 50 input che verificano tutti gli aspetti principali e gran parte di quelli marginali ma comunque importanti. In seguito viene illustrato un esempio di alcuni dei test svolti.
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[height=\linewidth, width=\linewidth]{test_esempio.PNG}
+		\caption{Esempio di alcune frasi di utilizzare per i test}
+	\end{center}
+\end{figure}
+Inoltre, per verificare l'efficacia dell'interfaccia vocale, ho dato la possibilità ad utenti esterni di provare l'applicazione e ciò mi ha permesso di comprendere e sistemare numerosi difetti difficilmente riscontrabili diversamente.
+\section{Risultati}
+I risultati ottenuti sono stati molto positivi in quanto l'applicazione funziona correttamente ed ha soddisfatto ampiamente le aspettative dell'azienda. \\
+Dato che il nucleo principale si basa sull'interfaccia vocale, è possibile visualizzare esclusivamente il riconoscimento dei comandi e le risposte all'interno della console. A questo proposito sono quindi delle figure che illustrano un esempio di conversazione. \\
+Questa è la figura che rappresenta l'attività di riconoscimento dell'input con la risposta dell'applicazione. Più in dettaglio l'utente esprime solo giorno e mese di nascita e l'applicazione gli risponde confermando l'input e chiedendo l'anno di nascita per completare l'esecuzione. \\
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[height=6cm, width=9cm]{esempio-funzionamento-app-pt1.PNG}
+		\caption{Esempio funzionamento applicazione: inizio conversazione}
+	\end{center}
+\end{figure}
+\\
+Questa è la figura che rappresenta il nuovo input con la risposta conclusiva dell'applicazione. Più in dettaglio l'utente esprime l'anno di nascita come richiesto e l'applicazione gli risponde confermando l'intera data di nascita e chiudendo la conversazione. \\
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[height=4cm, width=9cm]{esempio-funzionamento-app-pt2.PNG}
+		\caption{Esempio funzionamento applicazione: conclusione conversazione}
+	\end{center}
+\end{figure}
+\section{Considerazioni}
+Dai risultati ottenuti sono emerse delle considerazioni legate a due tematiche:
+\begin{enumerate}
+	\item ampliamento del contesto interpretabile dalla \emph{\gls{nlug}};
+	\item utilizzo dei motori di regole per la costruzione di risposte; 
+\end{enumerate}
+La prima considerazione consiste nelle problematiche che comporta l'ampliamento del contesto dell'applicazione verso nuove tematiche aggiuntive e diverse dalla data di nascita. In merito a ciò la \emph{\gls{gramg}} rimane molto valida perché permette di ampliare notevolmente il contesto senza troppe difficoltà ma l'interpretazione di dati aggiuntivi rischia facilmente di diventare ambigua. In particolare mi riferisco a casi come nome e cognome in cui la \emph{\gls{nlug}} fatica a distinguerli in quanto sono entrambi stringhe talvolta interscambiabili: una stringa interpretata come un nome può essere in realtà un cognome. Una soluzione non definitiva ma accettabile entro certi limiti è la mappatura di tutte le stringhe di nomi e cognomi. Questo può essere fattibile se i domini sono piccoli, limitati e ben conosciuti ma ciò non è sempre possibile. \\
+La seconda considerazione consiste nell'utilizzo di un motore di regole per la costruzione delle componenti della risposta. In generale esso permette di creare oggetti i cui parametri sono determinati da regole preconfigurate. \\
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[height=2.1cm, width=9cm]{rule-reactor.PNG}
+		\caption{Logo del motore di regole}
+	\end{center}
+\end{figure}
+\\
+La sua applicazione potrebbe essere la seguente: costruire delle regole sulla base dei risultati ottenuti dall'elaborazione della \emph{\gls{nlug}} e dalla componentistica pseudo-casuale che, se saranno soddisfatte, permetteranno di costruire la risposta da ritornare all'utente sotto forma di oggetto. In questo modo rendono possibile la scrittura di codice facilmente comprensibile e manutenibile nel tempo rispetto all'utilizzo in cascata del costrutto if-else come previsto tutorial degli assistenti virtuali analizzati. Tuttavia questo motore di regole è ancora in via di sviluppo e si hanno a disposizione pochi esempi concreti.

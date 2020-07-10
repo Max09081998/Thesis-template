@@ -12,10 +12,10 @@
 %**************************************************************
 \section{Descrizione del progetto}
 Il progetto di stage è legato ad uno degli ambiti più innovativi della ricerca scientifica e informatica: il riconoscimento e l'elaborazione del linguaggio naturale da parte di un calcolatore. \\
-Nel corso degli ultimi anni, l'azienda sta affrontando la sfida della comprensione di comandi vocali per permettere agli utenti di comunicare con i propri prodotti. Infatti stanno sviluppando una loro tecnologia caratterizzata da regole deterministiche capaci di generare grammatiche che riconoscono il linguaggio naturale. \\ Su questo argomento si è costruito il progetto di stage che si articola in due parti:
+L'azienda sta affrontando la sfida della comprensione di comandi vocali per permettere agli utenti di comunicare con i propri prodotti parlando. Infatti stanno sviluppando una loro tecnologia caratterizzata da regole deterministiche capaci di generare grammatiche che riconoscono il linguaggio naturale. \\ Su questo argomento è stato costruito il progetto di stage che si articola in due macro parti:
 \begin{enumerate}
 	\item studio degli assistenti virtuali più comuni ed utilizzati;
-	\item creazione di un'applicazione sotto forma di \emph{\gls{pocg}}\glsfirstoccur in grado di intrattenere una conversazione.
+	\item creazione di un'applicazione sotto forma di \emph{\gls{pocg}} in grado di intrattenere una conversazione.
 \end{enumerate}
 La prima parte richiede un'analisi dettagliata e comparativa dei tre assistenti virtuali più utilizzati:
 \begin{itemize}
@@ -23,45 +23,47 @@ La prima parte richiede un'analisi dettagliata e comparativa dei tre assistenti 
 	\item Alexa: assistente virtuale di Amazon;
 	\item Siri: assistente virtuale di Apple.
 \end{itemize}
-Lo studio deve comprendere principalmente le loro capacità conversazionali e di interazione con le applicazioni, prestando particolare attenzione alla costruzione di abilità personalizzate e integrate nei propri prodotti che comunichino con gli assistenti ma che posseggano una propria \emph{\gls{nlug}} da utilizzare. Le altre capacità suscitano un interesse minore in quanto l'azienda punta alla realizzazione di un assistente utile solo nei propri prodotti e non su larga scala. Inoltre, per dare concretezza alle funzionalità più significative che sono state riscontrate, è richiesto un \emph{\gls{pocg}} per ogni assistente.\\
-Sulla base dei risultati ottenuti si concretizza la seconda parte del lavoro: creare un'applicazione con un'interfaccia vocale e una propria \emph{\gls{nlug}} basata su grammatiche costruite mediante la tecnologia di Zucchetti, che permetta di intrattenere una conversazione con l'utente. \\
-Il contenuto dell'applicazione non è vincolato dall'azienda in quanto l'obiettivo è approfondire l'abilità conversazionale e non costruire un'applicazione direttamente utilizzabile nei software Zucchetti. In comune accordo è stato quindi scelto il contesto della data di nascita poiché è ricco di sfumature sia nelle richieste che nelle risposte e possiede parametri specifici e funzionali alla sperimentazione sulla capacità di conversazione.
-Dunque lo scopo generale del progetto di stage è svolgere un'attività di ricerca e di approfondimento nella tematica del linguaggio naturale poiché è una tecnologia non ancora pienamente affermata ma con ampi margini di sviluppo.
+Lo studio deve comprendere le loro capacità conversazionali e di interazione con le applicazioni, prestando particolare attenzione alla costruzione di abilità personalizzate e integrate in prodotti che comunichino con gli assistenti ma posseggano una propria \emph{\gls{nlug}} da utilizzare. Le altre capacità suscitano minor interesse in quanto l'azienda punta alla realizzazione di un assistente utile solo ad interfacciarsi con i propri prodotti e non su larga scala. Inoltre, per dare concretezza alle funzionalità riscontrate e più significative di ogni assistente, è richiesto un \emph{\gls{pocg}}.\\
+La seconda parte del lavoro consiste nella creazione di un'applicazione con una propria \emph{\gls{nlug}} basata su grammatiche costruite mediante la tecnologia di Zucchetti ed un'interfaccia vocale, che permetta di intrattenere una conversazione con gli utenti. \\
+Il contenuto dell'applicazione non è vincolato dall'azienda in quanto l'obiettivo è approfondire le capacità della loro tecnologia e non costruire un'applicazione direttamente utilizzabile nei software Zucchetti. In comune accordo è stato scelto il contesto della data di nascita poiché ricco di sfumature sia nelle richieste che nelle risposte e possiede parametri specifici e funzionali alla sperimentazione della capacità di conversazione. \\
+Per concludere, lo scopo generale dello di stage è svolgere un'attività di ricerca e di approfondimento nella tematica del linguaggio naturale su tecnologie già presenti sul mercato e su quella Zucchetti.
 
 \section{Obiettivi}
+\label{section:obiettivi}
 	\subsection{Classificazione}
-	La classificazione degli obiettivi permette di identificarli univocamente e adottando la seguente notazione:
+	La classificazione degli obiettivi permette di identificarli univocamente adottando la seguente notazione:
 	\begin{itemize}
 		\item \textit{OB-x}: obiettivi obbligatori, vincolanti e primari richiesti dall'azienda;
 		\item \textit{OD-x}: obiettivi desiderabili, non vincolanti o strettamente necessari ma dal riconoscibile valore aggiunto;
-		\item \textit{OF-x}: obiettivi facoltativi dal valore aggiunto riconoscibile ma difficilmente raggiunbili a causa di agenti esterni all'attività di stage.
+		\item \textit{OF-x}: obiettivi facoltativi dal valore aggiunto tangibile ma difficilmente raggiunbili a causa di agenti esterni all'attività di stage.
 	\end{itemize}
 	Il simbolo 'x' rappresenta un numero progressivo intero maggiore di zero.
 	
 	\subsection{Obiettivi obbligatori}
 	\begin{itemize}
 		\item \textbf{OB-1}: studio e analisi delle capacità e delle modalità di utilizzo lato sviluppatore di Assistant;
-		\item \textbf{OB-2}: implementazione di un \emph{\gls{pocg}} che implementi una funzionalità di Assistant accordata sulla base dei risultati della ricerca;
+		\item \textbf{OB-2}: implementazione di un \emph{\gls{pocg}} che realizzi una funzionalità di Assistant accordata sulla base dei risultati della ricerca;
 		\item \textbf{OB-3}: studio e analisi delle capacità e delle modalità di utilizzo lato sviluppatore di Alexa;
-		\item \textbf{OB-4}: implementazione di un \emph{\gls{pocg}} che implementi una funzionalità di Alexa accordata sulla base dei risultati della ricerca;
-		\item \textbf{OB-5}: redazione di un documento che tratti l'analisi dettagliata e comparativa in merito alle tecnologie degli assistenti virtuali studiati;
-		\item \textbf{OB-6}: studio di regole e caratteristiche dell'algoritmo di Zucchetti per la costruzione di grammatiche che riconoscono il linguaggio naturale;
-		\item \textbf{OB-7}: realizzazione di un'applicazione con una propria \emph{\gls{nlug}} basata su una grammatica generata dall'algoritmo di Zucchetti e con capacità conversazionale tramite interfaccia vocale.
+		\item \textbf{OB-4}: implementazione di un \emph{\gls{pocg}} che realizzi una funzionalità di Alexa accordata sulla base dei risultati della ricerca;
+		\item \textbf{OB-5}: redazione di un documento che riporta un'analisi dettagliata e comparativa degli assistenti virtuali studiati;
+		\item \textbf{OB-6}: studio di regole e caratteristiche dell'algoritmo di Zucchetti per la costruzione di \emph{grammatiche} che riconoscono il linguaggio naturale;
+		\item \textbf{OB-7}: realizzazione di un'applicazione con una propria \emph{\gls{nlug}} basata su una \emph{\gls{gramg}} generata mediante la tecnologia Zucchetti che interagisca con gli utenti tramite interfaccia vocale.
 	\end{itemize}
 	\subsection{Obiettivi desiderabili}
 	Inizialmente era stato identificato come obiettivo desiderabile l'implementazione di una componente di addestramento per l'applicazione finale. Tuttavia nel corso dello stage, date anche alcune interessanti funzionalità trovate, questo obiettivo è stato modificato nel seguente:
 	\begin{itemize}
-		\item \textbf{OD-1}: implementazione di un meccanismo che permetta lo scambio di informazioni specifiche e possibilmente memorizzate durante la conversazione.
+		\item \textbf{OD-1}: implementazione della capacità conversazionale tramite lo scambio di informazioni specifiche, possibilmente memorizzate, durante la conversazione mirato a soddisfare una determinata funzionalità.
 	\end{itemize}
 	\subsection{Obiettivi facoltativi}
 	\begin{itemize}
 		\item \textbf{OF-1}: studio e analisi delle capacità e delle modalità di utilizzo lato sviluppatore di Siri;
-		\item \textbf{OF-2}: implementazione di un \emph{\gls{pocg}} che implementi una funzionalità di Siri accordata sulla base dei risultati della ricerca;
+		\item \textbf{OF-2}: implementazione di un \emph{\gls{pocg}} che realizzi una funzionalità di Siri accordata sulla base dei risultati della ricerca;
 	\end{itemize} 
 
 \section{Pianificazione delle attività}
 Lo stage è stato svolto in modalità \emph{smart working} con la possibilità di rimanere in comunicazione con il tutor aziendale attraverso Skype. In particolare l'orario di lavoro è stato 9:00-13:00, 14:00-18:00 e sono stati stabiliti sia una chiamata al termine di ogni giornata che la compilazione di un registro delle attività giornaliero per tracciare e monitorare il lavoro svolto con l'obiettivo di ricevere \emph{feedback} costanti dal tutor aziendale. \\
 La pianificazione è stata svolta su un totale di 320 ore suddivise secondo quanto riportato nella tabella seguente.
+\pagebreak
 \begin{table}
 	\begin{tabularx}{\textwidth}{|c|c|X|}
 		\hline
@@ -75,17 +77,18 @@ La pianificazione è stata svolta su un totale di 320 ore suddivise secondo quan
 		\hline
 		40 & 25/05/2020 - 29/05/2020 & Test e documentazione comparativa di quanto svolto nelle settimane precedenti. \\
 		\hline
-		40 & 01/06/2020 - 05/06/2020 & Apprendimento di sistema creato da Zucchetti per l'interazione mediante comandi vocali. \\
+		40 & 01/06/2020 - 05/06/2020 & Apprendimento della tecnologia Zucchetti per il riconoscimento e l'elaborazione di comandi vocali. \\
 		\hline
-		40 & 08/06/2020 - 12/06/2020 & Realizzazione di un'applicazione che implementi una grammatica costruita utilizzando la tecnologia di Zucchetti. \\
+		40 & 08/06/2020 - 12/06/2020 & Realizzazione di un'applicazione che implementi una \emph{\gls{nlug}} basata su una \emph{\gls{gramg}} costruita mediante la tecnologia di Zucchetti. \\
 		\hline
-		40 & 15/06/2020 - 19/06/2020 & Implementazione del meccanismo per lo scambo di informazioni con capacità di memorizzazione. \\
+		40 & 15/06/2020 - 19/06/2020 & Implementazione della capacità conversazionale con scambio e memorizzazione di informazioni. \\
 		\hline
 		40 & 22/06/2020 - 26/06/2020 & Test e documentazione di quanto svolto nelle settimane precedenti. \\	
 		\hline
 	\end{tabularx}
 	\caption{Pianificazione delle attività}
 \end{table}
+
 La pianificazione di dettaglio di ogni settimana è stata strutturata sulla base degli obiettivi stabiliti e viene ora riportata.
 	\subsection*{Prima Settimana}
 	Gli obiettivi prefissati sono:
@@ -95,7 +98,7 @@ La pianificazione di dettaglio di ogni settimana è stata strutturata sulla base
 	\end{itemize}
 	Le attività previste riguardano l'analisi di Assistant sotto alcuni aspetti principali e sono:
 	\begin{itemize}
-		\item modalità di implemetazione degli intenti relativi alle abilità;
+		\item modalità di implemetazione degli intenti;
 		\item progettazione delle abilità con attenzione all'interfaccia vocale;
 		\item interazione dell'utente con l'assistente;
 		\item modalità e sicurezza nel trasferimento dei dati;
@@ -109,7 +112,7 @@ La pianificazione di dettaglio di ogni settimana è stata strutturata sulla base
 	\end{itemize}
 	Le attività previste sono l'analisi di Alexa sotto alcuni aspetti principali:
 	\begin{itemize}
-		\item modalità di implemetazione degli intenti relativi alle abilità;
+		\item modalità di implemetazione degli intenti;
 		\item progettazione delle abilità con attenzione all'interfaccia vocale;
 		\item interazione dell'utente con l'assistente;
 		\item modalità e sicurezza nel trasferimento dei dati;
@@ -123,7 +126,7 @@ La pianificazione di dettaglio di ogni settimana è stata strutturata sulla base
 	\end{itemize}
 	Le attività previste sono l'analisi di Siri sotto alcuni aspetti principali:
 	\begin{itemize}
-		\item modalità di implemetazione per gli intenti relativi alle abilità;
+		\item modalità di implemetazione per gli intenti;
 		\item progettazione delle abilità con attenzione all'interfaccia vocale;
 		\item interazione dell'utente con l'assistente;
 		\item modalità e sicurezza nel trasferimento dei dati;
@@ -137,7 +140,7 @@ La pianificazione di dettaglio di ogni settimana è stata strutturata sulla base
 	Le attività previste sono:
 	\begin{itemize}
 		\item verifica del funzionamento dei \emph{\gls{pocg}} realizzati;
-		\item stesura della documentazione mirata a riportare in modo dettagliato le tecnologie studiate nelle settimane precedenti.
+		\item stesura della documentazione che riporta in modo dettagliato le tecnologie studiate nelle settimane precedenti.
 	\end{itemize}
 	\subsection*{Quinta Settimana}
 	L'obiettivo prefissato è:
@@ -175,7 +178,7 @@ La pianificazione di dettaglio di ogni settimana è stata strutturata sulla base
 \section{Tecnologie e strumenti utilizzati}
 	\subsection{Tecnologie}
 		\subsubsection{Kotlin}
-		Kotlin è un linguaggio di programmazione fortemente tipizzato, multi-paradigma, multi-piattaforma e open source, sviluppato da Jetbrains nel 2011. È pienamente compatibile con ogni applicazione basata sulla \emph{\gls{jvmg}}\glsfirstoccur, comprese quelle Android. Nel mio caso ho utilizzato Kotlin per costruire un'applicazione Android sotto forma di \emph{\gls{pocg}} che implementi una particolare funzionalità di Assistant.
+		Kotlin è un linguaggio di programmazione fortemente tipizzato, multi-paradigma, multi-piattaforma e open source, sviluppato da Jetbrains nel 2011. È pienamente compatibile con ogni applicazione basata sulla \emph{\gls{jvmg}}\glsfirstoccur. Nel mio caso ho utilizzato Kotlin per costruire un'applicazione Android sotto forma di \emph{\gls{pocg}} che implementi una particolare funzionalità di Assistant.
 		\subsubsection{ECMAScript}
 		ECMAScript versione 6 abbreviato in \emph{\gls{es6}} è lo standard di Javascript, un linguaggio di programmazione debolmente tipizzato, orientato agli oggetti e agli eventi che viene utilizzato nella programmazione Web lato client o lato server tramite Node.js. Nel mio caso ho utilizzato \emph{\gls{es6}} per costruire un \emph{\gls{pocg}} che implementi una particolare funzionalità di Alexa nella sua console dedicata. Inoltre ho realizzato la parte principale dell'applicazione che fa uso della tecnologia di Zucchetti.
 		\subsubsection{Swift}
@@ -183,19 +186,19 @@ La pianificazione di dettaglio di ogni settimana è stata strutturata sulla base
 		\subsubsection{HTML}
 		\emph{\gls{html}}\glsfirstoccur è un linguaggio di markup principalmente pensato per pagine o applicazioni basate su web. Io ho utilizzato \emph{\gls{html}5}, l'ultima versione, in quanto è più semplice e veloce nella sintassi e non necessito di piena compatibilità con tutti i browser o le versioni meno recenti.
 		\subsubsection{CSS}
-		\emph{\gls{css}}\glsfirstoccur è un linguaggio per la realizzazione di fogli di stile da applicare a pagine o applicazione basate su web. Io ho utilizzato \emph{\gls{css}3}, l'ultima versione, per l'interfaccia grafica minimale necessaria.
+		\emph{\gls{css}}\glsfirstoccur è un linguaggio per la realizzazione di fogli di stile da applicare a pagine o applicazioni basate su web. Io ho utilizzato \emph{\gls{css}3}, l'ultima versione, per l'interfaccia grafica dell'applicazione finale.
 		\subsubsection{jQuery}
 		jQuery è una libreria JavaScript ricca di funzionalità. Permette di eseguire operazioni di spostamento e manipolazione dei documenti \emph{\gls{html}}, gestire degli eventi, creare animazioni e utilizzare Ajax con una \emph{\gls{apig}} di facile utilizzo.
 	\subsection{Strumenti}
 		\subsubsection{Android Studio}
-		Android Studio è un ambiente di sviluppo integrato per realizzare applicazioni da utilizzare nella piattaforma Android e basato sul software IntelliJ IDEA di JetBrains. Pubblicato a fine 2014 ha sostituito l'utilizzo dei plug-in specifici di Eclipse per lo sviluppo di applicazioni Android diventando il più diffuso. Durante il mio lavoro è stato ausiliario nell'implementazione del \emph{\gls{pocg}} per Assistant. \\
+		Android Studio è un ambiente di sviluppo integrato per realizzare applicazioni da utilizzare nella piattaforma Android ed è basato sul software IntelliJ IDEA di JetBrains. Pubblicato a fine 2014 ha sostituito l'utilizzo dei plug-in specifici di Eclipse per lo sviluppo di applicazioni Android diventando il più diffuso. Durante il mio lavoro è stato ausiliario nell'implementazione del \emph{\gls{pocg}} per Assistant. \\
 		Tra gli strumenti di Android Studio è rilevante App Actions Test Tool che permette di simulare l'utilizzo di Assistant nell'applicazione che si sta sviluppando, in un dispositivo fisico.
 		\subsubsection{Alexa developer console}
-		Alexa developer console è un ambiente di sviluppo di Amazon dedicato alla costruzione di \emph{Skill} per Alexa. Durante il mio lavoro è stato ausiliario all'implementazione del \emph{\gls{pocg}} per Alexa
+		Alexa developer console è un ambiente di sviluppo di Amazon dedicato alla costruzione delle \emph{Skill} per Alexa. Durante il mio lavoro è stato ausiliario all'implementazione del \emph{\gls{pocg}} per Alexa.
 		\subsubsection{Xcode}
-		Xcode è un ambiente di sviluppo integrato per realizzare applicazione da utilizzare nelle piattaforme Apple. Durante il mio lavoro è stato ausiliario nell'implementazione del \emph{\gls{pocg}} per Siri.
+		Xcode è un ambiente di sviluppo integrato per realizzare applicazione da utilizzare nelle piattaforme Apple. Durante il mio lavoro è stato ausiliario all'implementazione del \emph{\gls{pocg}} per Siri.
 		\subsubsection{WebStorm}
-		WebStorm è un ambiente di sviluppo integrato per realizzare applicazioni web con il supporto ad esempio di linguaggi quali \emph{\gls{html}}, \emph{\gls{css}}, \emph{\gls{es6}} e \emph{\gls{php}}\glsfirstoccur. Durante il mio lavoro è stato ausiliario per l'implementazione dell'intera applicazione finale.
+		WebStorm è un ambiente di sviluppo integrato per realizzare applicazioni web con il supporto ad esempio di linguaggi quali \emph{\gls{html}}, \emph{\gls{css}}, \emph{\gls{es6}} e \emph{\gls{php}}\glsfirstoccur. Durante il mio lavoro è stato ausiliario all'implementazione dell'applicativo finale.
 
 \section{Motivazioni personali}
 Durante l'iniziativa StageIT, dedicata agli stage in azienda, ho inizialmente cercato una proposta che trattasse argomenti innovativi, possibilmente di ricerca, rientranti in una delle seguenti tematiche:
@@ -204,7 +207,7 @@ Durante l'iniziativa StageIT, dedicata agli stage in azienda, ho inizialmente ce
 	\item blockchain;
 	\item analisi e previsioni di dati.
 \end{itemize}
-La scelta è ricaduta sulla proposta di Zucchetti. \\
-La motivazione principale è stata l'impiego di uno dei rami dell'intelligenza artificiale, la comprensione del linguaggio naturale, che rappresenta parte di una sfida intrapresa da decenni: superare il \emph{\gls{ttg}}\glsfirstoccur. È un argomento non trattato nel percorso di studi che ho svolto ma a mio parere molto interessante. \\
-La seconda motivazione risiede sul contenuto specifico del progetto che ho personalmente trovato molto stimolante perché mi ha permesso di imparare e realizzare qualcosa di innovativo ma in gran parte basato su conoscenze apprese durante l'attività di ricerca. \\
-La terza motivazione risiede nell'azienda stessa in quanto è una delle software house più grandi in Italia, dalle innumerevoli possibilità lavorative in altrettanti ambiti volti anche alla ricerca e con cui ho anche avuto un ottimo rapporto di collaborazione per lo svolgimento del progetto didattico del corso di Ingegneria del Software.
+Dopo aver consultato diverse azienda, la scelta è ricaduta sulla proposta di Zucchetti. \\
+La motivazione principale è stata l'impiego di uno dei rami dell'intelligenza artificiale, la comprensione del linguaggio naturale, che rappresenta parte di una sfida intrapresa da decenni: superare il \emph{\gls{ttg}}\glsfirstoccur. È un argomento non trattato nel mio percorso di studi ma a mio parere molto interessante. \\
+La seconda motivazione risiede nel contenuto specifico del progetto che ho trovato molto stimolante perché mi permetteva di imparare e realizzare qualcosa di innovativo ma in gran parte basato su conoscenze apprese durante l'attività di ricerca autonoma. \\
+La terza motivazione risiede nell'azienda stessa in quanto è una delle software house più grandi in Italia, dalle innumerevoli possibilità lavorative in altrettanti ambiti volti anche alla ricerca con cui ho anche avuto un ottimo rapporto di collaborazione per lo svolgimento del progetto didattico del corso di Ingegneria del Software.

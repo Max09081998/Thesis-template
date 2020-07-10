@@ -4,7 +4,7 @@
 
 %**************************************************************
 \chapter{Gli assistenti virtuali}
-\label{cap:descrizione-stage}
+\label{cap:assistenti-virtuali}
 %**************************************************************
 
 %\intro{Breve introduzione al capitolo}\\
@@ -12,9 +12,10 @@
 %**************************************************************
 \section{Premessa}
 Un assistente virtuale è un software capace di interpretare il linguaggio naturale e dialogare con gli utenti che ne fanno uso, eseguendo determinati compiti. \\
-Gli assistenti virtuali analizzati sono Assistant, Alexa e Siri ma, nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile: lo sviluppatore deve costruire un'abilità, addestrarla e permettere all'utente di richiamarla. Queste abilità sono chiamate \emph{Action} per Assistant, \emph{Skill} per Alexa e \emph{Shortcuts} per Siri e sono caratterizzate da nome, frasi di richiamo e azioni da eseguire. \\
-La prima proprietà in comune è meccanismo di funzionamento delle abilità trattate: gli intenti. Essi consistono in un'azione che soddisfa una richiesta vocale effettuata da un utente e il servizio che la esegue, più concretamente il codice, viene detto \emph{fulfillment}. La seconda proprietà in comune è la possibilità di integrare l'interfaccia vocale a quella grafica ove possibile. Questo non viene trattato nell'analisi ma permetterà di giungere a conclusioni interessanti nel seguito. \\
-L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assistenti che sono state studiate, fornendo principi e metodi ad alto livello relative alla progettazione e all'implementazione ma non nel dettaglio perché spiegate nelle pagine di documentazione.
+Gli assistenti virtuali analizzati sono Assistant, Alexa e Siri e, nonostante siano software di tre aziende diverse, il loro funzionamento è molto simile: lo sviluppatore deve costruire un'abilità secondo principi molto simili, addestrare l'intelligenza che la costituisce e permettere all'utente di richiamarla. Queste abilità sono chiamate \emph{Action} per Assistant, \emph{Skill} per Alexa e \emph{Shortcuts} per Siri e sono caratterizzate da nome, frasi di richiamo e azioni da eseguire. \\
+La prima proprietà in comune è meccanismo di funzionamento delle abilità: gli intenti. Essi consistono in un'azione che soddisfa una richiesta vocale effettuata da un utente e il servizio che la esegue, detto \emph{fulfillment}. \\
+La seconda proprietà in comune è la possibilità di integrare all'interfaccia grafica quella grafica, ove possibile. Questo non viene trattato direttamente nell'analisi ma permetterà di giungere a conclusioni importanti nel seguito. \\
+L'obiettivo dell'analisi riportata è presentare le sole funzionalità degli assistenti che sono state studiate, fornendo principi e metodi ad alto livello relativi a progettazione e implementazione; tuttavia non sono molto dettagliati perché ampiamente spiegati nelle pagine di documentazione.
 
 %**************************************************************
 \section{Assistant}
@@ -27,40 +28,53 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 			\caption{Logo di Assistant}
 		\end{center}
 	\end{figure}
+\pagebreak
 	
 	Reso pubblico dal 2016, Assistant è ora integrato in tutti i dispositivi con sistema operativo Android, a partire dalla versione 6.0 se hanno a disposizione almeno 1.5 GB di memoria \emph{\gls{ram}}\glsfirstoccur oppure dalla versione 5.0 se hanno a disposizione almeno 1 GB di memoria \emph{\gls{ram}}. È inoltre installabile nei dispositivi con sistema operativo iOS a partire dalla versione 10 e iPadOS; tuttavia l'integrazione è pessima in quanto per richiamarlo è necessario invocare Siri. Infine è fruibile nei dispositivi della linea Home e Nest di Google, costruiti e pensati appositamente per ottimizzarne le funzionalità.
 	\subsection{Casi d'uso}
 	\begin{itemize}
 		\item dialogo con l'utente: \emph{Conversational Actions};
-		\item integrazione di contenuti multimediali pensati per Assistant all'interno di pagine web: \emph{Content Actions}.
+		\item integrazione di contenuti multimediali pensati per Assistant all'interno di pagine web: \emph{Content Actions};
 		\item integrazione di Assistant nelle applicazioni Android per eseguire determinate funzionalità: \emph{App Actions};
 	\end{itemize}
 	\subsection{Conversational Actions}
 		\subsubsection{Descrizione}
-		Le \emph{Conversational Actions} estendono le funzionalità di Assistant con l'obiettivo di creare esperienza di conversazione personalizzata con gli utenti. Esse infatti permettono di gestire le richieste rivolte all'Assistente e le risposte costruite a seguito dell'elaborazione. Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie alle apposite \emph{\gls{sdkg}}\glsfirstoccur.
+		Le \emph{Conversational Actions} estendono le funzionalità di Assistant con l'obiettivo di creare esperienze di conversazione personalizzate con gli utenti. Esse infatti permettono di gestire le richieste rivolte all'Assistente e le risposte costruite a seguito dell'elaborazione. Una caratteristica importante è la possibilità di comunicare con servizi Web o applicazioni esterne che forniscono una logica di conversazione aggiuntiva grazie agli appositi \emph{\gls{sdkg}}\glsfirstoccur.
 		\subsubsection{Funzionamento}
-		Il principio di funzionamento si articola nei seguenti passi:
+		Il principio di funzionamento è illustrato nella seguente figura.
+		\pagebreak
+				
+		\begin{figure}[htbp]
+			\begin{center}
+				\includegraphics[height=9cm, width=\linewidth]{Assistant-conversation-fulfillment.PNG}
+				\caption{Schema di funzionamento delle conversazioni con Assistant}
+			\end{center}
+		\end{figure}
+%	\pagebreak
+		
+		Esso si articola quindi nei seguenti passi:
 		\begin{enumerate}
 			\item un utente lancia una richiesta sotto forma di comando vocale al dispositivo che ospita Assistant;
-			\item il dispositivo esegue la porzione di software che riconosce il comando vocale trasformandolo in stringhe di testo;
+			\item il dispositivo esegue la porzione di software di Assistant che riconosce il comando vocale trasformandolo in stringhe di testo;
 			\item il dispositivo invia la stringa riconosciuta ad un server remoto di Google, tramite protocollo \emph{\gls{httpg}S}\glsfirstoccur, dove risiede la \emph{\gls{nlug}} per l'elaborazione;
 			\item la \emph{\gls{nlug}} del server remoto prova a verificare la possibile corrispondenza tra la stringa ricevuta e l'insieme di frasi che lo sviluppatore ha inserito durante la costruzione della propria abilità;
 			\item se non vi è alcuna corrispondenza viene subito ritornata una risposta negativa e riferito all'utente. Si ricomincia quindi dal punto 1;
-			\item se una corrispondenza ha dato esito positivo viene selezionato l'intento associato con il suo servizio di \emph{fulfillment} che si occupa dell'esecuzione;
-			\item la conclusione dell'esecuzione prevede la costruzione e l'invio della risposta al dispositivo mittente;
-			\item il dispositivo riferisce la riposta all'utente che potrà poi procedere con una nuova richiesta, fino al termine dell'esecuzione dell'abilità previsto dal programmatore durante la costruzione, oppure interrompere forzatamente la conversazione.
+			\item se una corrispondenza ha dato esito positivo viene selezionato l'intento e attivato il suo servizio di \emph{fulfillment} che si occupa dell'esecuzione;
+			\item la conclusione prevede il ritorno a cascata delle chiamate effettuate ed infine la costruzione e l'invio della risposta al dispositivo mittente;
+			\item il dispositivo riferisce la riposta all'utente che potrà procedere con una nuova richiesta fino al termine dell'esecuzione dell'abilità configurato durante la costruzione oppure interrompere forzatamente la conversazione.
 		\end{enumerate}
-		Qualora la richiesta dell'utente fosse di invocazione, prima di scegliere l'intento da eseguire viene cercata una corrispondenza tra le \emph{Action} a disposizione per capire quale avviare.
+		Qualora l'utente effettuasse una richiesta invocazione, prima di scegliere l'intento da eseguire viene cercata una corrispondenza tra le \emph{Action} a disposizione per capire quale avviare.
 		Infine, affinché la \emph{Action} tenga un comportamento adeguato, è necessario applicare correttamente i principi di costruzione e svolgere una consistente attività di addestramento durante lo sviluppo.
 		%TODO: METTERE DEPLOY NEL GLOSSARIO 
 		\subsubsection{Progettazione}
-		Nella costruzione di una\emph{Action} la prima attività da svolgere è l'analisi dei requisiti ovvero comprendere dettagliatamente il comportamento che si vuole ottenere. L'attività successiva, invece, è la progettazione che deve essere mirata a tre aspetti:
+		Nella costruzione di una \emph{Action} la prima attività da svolgere è l'analisi dei requisiti ovvero comprendere dettagliatamente il comportamento che si vuole ottenere e non viene trattato in quanto di poco interesse per la ricerca. \\
+		L'attività successiva, invece, è la progettazione ed è mirata a tre aspetti:
 		\begin{itemize}
 			\item modalità di invocazione;
 			\item tipologia e formato delle richieste accettate;
 			\item tipologia e formato delle risposte che l'utente si aspetta.
 		\end{itemize}
-		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo dell'\emph{Action} che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi dall'assistente, cercando di rendere la conversazione più naturale possibile. Durante l'esecuzione della \emph{\gls{buildg}}\glsfirstoccur della \emph{Action}, Assistant sarà addestrato sulle frasi immesse al fine di interpretarle correttamente. \\
+		Per la progettazione di richieste e risposte è necessario ragionare sullo scopo dell'\emph{Action} che si vuole implementare e svolgere un'analisi statistica e probabilistica sulle frasi che l'utente potrebbe pronunciare o aspettarsi dall'assistente, cercando di rendere la conversazione più naturale possibile. Durante l'esecuzione della \emph{\gls{buildg}}\glsfirstoccur dell'\emph{Action}, Assistant sarà addestrato sulle frasi immesse al fine di interpretarle correttamente. \\
 		Per la modalità di invocazione, invece, Google fa una distinzione:
 		\begin{itemize}
 			\item invocazione esplicita;
@@ -75,7 +89,7 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 			\item elementi aggiuntivi: l'utente può pronunciare parole aggiuntive con lo scopo di contestualizzare o precisare il dominio della richiesta.
 		\end{enumerate}
 		Grazie a questa struttura fissa, Assistant riesce a comprendere quale \emph{Action} attivare per avviare la conversazione. \\
-		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver esplicitato l'\emph{Action} o direttamente l'intento da eseguire. In questo caso la business logic di Assistant ha il compito di comprendere la richiesta e associare l'\emph{Action} che ritiene più corretta; qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa e ritornerà i risultati come risposta. Tuttavia il funzionamento di questa modalità non è garantito da Google in quanto è ancora in via di sviluppo e richiede, come condizione necessaria ma non sufficiente, che lo sviluppatore abbia inserito un numero di frasi ampio e completo per l'addestramento.
+		L'invocazione implicita, invece, si verifica quando l'utente effettua una richiesta senza aver esplicitato l'\emph{Action} o l'intento da eseguire. In questo caso la business logic di Assistant ha il compito di comprendere la richiesta e associare l'\emph{Action} che ritiene più corretta; qualora non ne trovasse alcuna, effettuerà una ricerca in Internet inserendo come testo la richiesta stessa e ritornerà i risultati come risposta. Tuttavia il funzionamento di questa modalità non è garantito da Google in quanto è ancora in via di sviluppo e richiede come condizione necessaria ma non sufficiente che lo sviluppatore abbia inserito un numero di frasi ampio e completo per l'addestramento.
 		\subsubsection{Implementazione}
 		L'attività che segue è l'implementazione e per svolgerla Google offre due strumenti:
 		\begin{itemize}
@@ -83,8 +97,8 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 			\item Conversational Actions SDK.
 		\end{itemize}
 		Dialogflow è uno strumento utilizzato per creare conversazioni personalizzate in modo semplice ed intuitivo. Si basa sulla \emph{\gls{nlug}} di Assistant e si appoggia ad un \emph{webhook} per la gestione dei dati, \emph{\gls{firebaseg}}\glsfirstoccur è quello predefinito. \\
-		Per costruire una \emph{Conversational Action} necessita un agente ovvero un modulo di comprensione del linguaggio naturale che gestisce le conversazioni con gli utenti sgravando lo sviluppatore di numerosi oneri; deve quindi essere creato prima di iniziare l'effettiva costruzione. A causa dei limiti imposti dall'account \emph{Firebase} disponibile non si è potuto approfondire il suo funzionamento come invece si è fatto per uno strumento simile con Alexa; tuttavia i principi di funzionamento e implementazione sono molto simili. \\
-		Le Conversational Actions SDK consistono in un'interfaccia \emph{\gls{httpg}S} che permette di costruire ed eseguire le \emph{Conversational Actions} all'interno di una propria applicazione per elaborare le richieste effettuate ad Assistant. Grazie all'interfaccia \emph{\gls{httpg}S} infatti Assistant può comunicare con applicazioni terze; il requisito che ne deriva è possedere una propria \emph{\gls{nlug}}per la comprensione del linguaggio naturale. L'architettura ad alto livello del sistema che rappresenta l'utilizzo delle \emph{Conversational Actions} attraverso \emph{\gls{sdkg}} è così composta:
+		Per costruire una \emph{Conversational Action} necessita un agente ovvero un modulo di comprensione del linguaggio naturale che gestisce le conversazioni con gli utenti sgravando lo sviluppatore di numerosi oneri; deve quindi essere creato prima di iniziare l'effettiva costruzione. A causa dei limiti imposti dall'account \emph{Firebase} disponibile non si è potuto approfondire il suo funzionamento come invece si è fatto per Alexa con uno strumento simile fornito da Amazon; tuttavia i principi di funzionamento e implementazione sono molto simili. \\
+		Le Conversational Actions SDK consistono in un'interfaccia \emph{\gls{httpg}S} che permette di costruire ed eseguire le \emph{Conversational Actions} all'interno di una propria applicazione per elaborare le richieste effettuate ad Assistant. Grazie ad essa infatti Assistant può comunicare con applicazioni terze; il requisito che ne deriva è possedere una propria \emph{\gls{nlug}} per la comprensione del linguaggio naturale. L'architettura ad alto livello del sistema che rappresenta l'utilizzo delle \emph{Conversational Actions} attraverso \emph{\gls{sdkg}} è così composta:
 		\begin{itemize}
 			\item dispositivo fisico con Assistant integrato che riceve la richiesta vocale dell'utente;
 			\item \emph{\gls{nlug}} di Google che ha il compito di riconoscere la richiesta dell'utente e associare l'intento corretto;
@@ -95,7 +109,7 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 		Le componenti di un agente di Dialogflow oppure una \emph{Conversational Actions} costruita con le \emph{\gls{sdkg}} sono uguali:
 		\begin{itemize}
 			\item Default Actions: azione cui corrisponde l'evento chiamato \textit{GOOGLE}\_\textit{ASSISTANT}\\ \_\textit{WELCOME} per Dialogflow e \textit{actions.intent.MAIN} per le \emph{\gls{sdkg}} che rappresenta la prima interazione con l'\emph{Action}; una condizione necessaria che la caratterizza è l'esistenza di uno ed un solo intento per gestire questo evento. La risposta predefinita è statica e preconfigurata ma è comunque possibile renderla dinamica costruendo un servizio di \emph{fulfillment} che la compone a tempo di esecuzione;
-			\item Addictional Actions: azione aggiuntiva alla Default Actions utilizzata per aggiungere e specificare le capacità dell'\emph{Action}. Possono essere molteplici e sono automaticamente indicizzate per l'invocazione implicita.
+			\item Addictional Actions: azione aggiuntiva alla Default Actions utilizzata per aggiungere e specificare le capacità dell'\emph{Action} stessa. Possono essere molteplici e sono automaticamente indicizzate per l'invocazione implicita.
 		\end{itemize}
 		Ognuna di queste componenti corrisponde ad un intento che l'\emph{Actions} può gestire. \\
 		Una volta stabilite queste componenti, è necessario definire l'interfaccia della propria conversazione. Per poterlo fare si deve creare un intento definendo:
@@ -107,28 +121,28 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 			\item azioni da eseguire;
 			\item eventuali parametri aggiuntivi per la conversazione e formato della risposta.
 		\end{itemize}
-		Le azioni da eseguire corrispondono alla creazione di un \emph{fulfillment} che fornisce la logica per processare la richiesta dell'utente e genera una risposta. \\
+		Le azioni da eseguire corrispondono alla creazione di un \emph{fulfillment} che fornisce la logica per processare la richiesta dell'utente e generare una risposta. \\
 		Qui emerge una grande differenza tra Dialogflow e \emph{\gls{sdkg}}: mentre il primo utilizza la \emph{\gls{nlug}} di Google rivelandosi quindi di poco interesse per i progetti dell'azienda, il secondo prevede l'utilizzo obbligatorio di una \emph{\gls{nlug}} proprietaria dello sviluppatore che invece si è rivelato utile per l'azienda.
 		\subsubsection{Comunicazione}
 		Lo scambio di dati tra il dispositivo che interagisce direttamente con l'utente e la \emph{\gls{nlug}} di Assistant avviene tramite oggetti JSON di cui però non viene fornita la struttura nella documentazione. \\
 		Lo scambio di dati che invece avviene tra la \emph{\gls{nlug}} di Assistant e quella della proprio applicativo, diretta conseguenza dell'utilizzo delle \emph{\gls{sdkg}}, prevede un metodo di comunicazione dedicato. Google perciò impone l'utilizzo di oggetti JSON con una struttura fissata in cui campi dati più importanti sono:
 		\begin{itemize}
-			\item isInSandbox: attributo booleano, se vale true indica l'utilizzo in un ambiente di prova e, qualora sia utilizzato, vieta lo scambio di denaro;
+			\item isInSandbox: attributo booleano, se vale true indica l'utilizzo in un ambiente di test;
 			\item Surface: oggetto che contiene la modalità di interazione, scelta tra solo testuale, solo visiva e multimediale;
 			\item Inputs: oggetto che contiene l'insieme degli input specificati per la \emph{Actions} tra cui la richiesta dell'utente sotto forma di stringa testuale;
 			\item User: oggetto che contiene le informazioni dell'utente che ha eseguito la richiesta;
 			\item Device: oggetto che contiene le informazioni del dispositivo da cui è arrivata la richiesta;
 			\item Conversation: oggetto che contiene i dati strettamente legati alla conversazione in corso tra cui conversationId che la identifica univocamente e conversationToken che salva i dati durante la conversazione.
 		\end{itemize}
-		Di particolare rilevanza è il salvataggio dei dati durante la conversazione in quanto permette di richiedere determinati dati possibilmente importanti per la corretta esecuzione dell'\emph{Action} ma soprattutto di dare all'utente la sensazione di interagire con un'intelligenza che ha capacità di memoria. Quest'ultima caratteristica è molto importante perché consente di definire e mantenere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso dell'utente. \\
-		Per capire quali elementi devono essere salvati, Assistant utilizza delle variabili all'interno delle frasi di richiesta dette \emph{tips}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
+		Di particolare rilevanza è il salvataggio dei dati durante la conversazione in quanto permette di avere sempre a disposizione determinati dati, possibilmente importanti, per la corretta esecuzione dell'\emph{Action} ma soprattutto di dare all'utente la sensazione di interagire con un sistema intelligente che ha capacità di memoria. Quest'ultima caratteristica è molto importante perché consente di definire e mantenere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso. \\
+		Per capire quali elementi devono essere salvati, Assistant utilizza delle variabili all'interno delle frasi di richiesta dette \emph{tips}. Esse sono definite dallo sviluppatore durante la progettazione e, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato \emph{conversationToken}. Il loro limite è rappresentato dalla conversazione stessa: al termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
 	\subsection{Content Actions}
 		\subsubsection{Descrizione}
-		Le \emph{Content Actions} sono delle funzionalità basate su Assistant ma integrate nelle pagine Web. In particolare, inserendo dati strutturati all'interno di una pagina Web, permettono di costruire \emph{Actions} che ne presentano il contenuto in modo interattivo ad una richiesta vocale di un utente.
+		Le \emph{Content Actions} sono delle funzionalità basate su Assistant ma integrate nelle pagine Web. In particolare, inserendo dati strutturati al loro interno, permettono di costruire \emph{Actions} che ne presentano il contenuto in modo interattivo a seguito di un comando vocale.
 		\subsubsection{Funzionamento}
 		Il loro funzionamento verte esclusivamente sull'algoritmo di Google ed piuttosto semplice: l'utente esegue una ricerca in internet con un comando vocale lanciato ad Assistant e, se l'algoritmo di Google trova una \emph{Content Actions} che ha corrispondenza con la richiesta effettuata, il risultato sarà la risposta della \emph{Actions} stessa.
 		\subsubsection{Dati strutturati}
-		Le \emph{Content Actions} si basano sui dati strutturati. Essi sono rappresentati da un oggetto JSON iniettato dinamicamente in una pagina HTML e contengono un insieme di metadati che definiscono le proprietà del contenuto multimediale che si vuole creare. Alcune di esse sono obbligatorie perché vengono utilizzate da Assistant per accedere al contenuto multimediale, molte altre sono opzionali ma consigliate per ottenere una migliore indicizzazione nel motore di ricerca. \\
+		Le \emph{Content Actions} sono basate su dati strutturati. Essi corrispondono ad un oggetto JSON iniettato dinamicamente in una pagina \emph{\gls{html}} e contengono un insieme di metadati che definiscono le proprietà del contenuto multimediale che si vuole creare. Alcune di esse sono obbligatorie perché vengono utilizzate da Assistant per accedere al contenuto multimediale, molte altre sono opzionali ma consigliate per ottenere una migliore indicizzazione nel motore di ricerca. \\
 		Esistono inoltre due formati alternativi agli oggetti JSON ma poco raccomandati:
 		\begin{itemize}
 			\item microdata: tag HTML che permette di includere dati strutturati al suo interno;
@@ -136,18 +150,27 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 		\end{itemize}
 		Sono messi a disposizione principalmente per compatibilità con sistemi che ne fanno uso.
 		\subsubsection{Costruzione}
-		Per costruire una \emph{Content Actions} è necessaria una progettazione mirata della pagina e a tal proposito Google offre un insieme di template pensati per podcasts ricette, news, \emph{How-to guides} e FAQs. \\
+		Per costruire una \emph{Content Actions} è necessaria una progettazione mirata della pagina e a tal proposito Google offre un insieme di template pensati per le attività che più si prestano: podcasts ricette, news, \emph{How-to guides} e FAQs. \\
 		Durante la realizzazione della pagina, invece, si devono inserire i dati strutturati in base alle proprie esigenze ed effettuare dei test per verificarne la corretta indicizzazione attraverso gli strumenti forniti da Google. \\
 		È infine importante notare che Google non garantisce il richiamo della propria \emph{Actions} in nessuna condizione: l'algoritmo di ricerca, infatti, ha come obiettivo principale fornire all'utente i migliori risultati possibili nel momento in cui viene eseguita la ricerca e ciò può non corrispondere con la propria \emph{Actions}.
 	\subsection{App Actions}
 		\subsubsection{Descrizione}
-		Le \emph{App Actions} sono delle funzionalità aggiuntive di Assistant che interagiscono esclusivamente con le applicazione Android ma ancora in via di sviluppo. In particolare permettono agli utenti di eseguire il \emph{deep linking} delle funzionalità specifiche di un'applicazione attraverso un comando vocale ed il loro risultato può manifestarsi sotto forma di risposta vocale oppure grafica facendo opzionalmente uso delle \emph{Android Slides}.
+		Le \emph{App Actions} sono delle funzionalità aggiuntive di Assistant che interagiscono esclusivamente con applicazioni Android ma sono ancora in via di sviluppo. In particolare permettono agli utenti di eseguire il \emph{deep linking} delle funzionalità specifiche di un'applicazione attraverso un comando vocale ed il loro risultato può manifestarsi sotto forma di risposta vocale oppure grafica, facendo opzionalmente uso delle \emph{Android Slides}.
 		Infine è importante notare che le \emph{App Actions} sono per ora fornite in anteprima e supportano solo la lingua inglese americana.
 		\subsubsection{Funzionamento}
-		Il funzionamento delle \emph{App Actions} è composto dai seguenti passi:
+		Il funzionamento delle \emph{App Actions} è rappresentato dalla seguente figura.
+		
+		\begin{figure}[htbp]
+			\begin{center}
+				\includegraphics[height=6cm]{AppActions-funzionamento.PNG}
+				\caption{Schema di funzionamento delle App Actions}
+			\end{center}
+		\end{figure}
+		
+		Viene descritto dai seguenti passi:
 		\begin{enumerate}
 			\item un utente invoca una \emph{App Actions} attraverso un apposito comando vocale;
-			\item il dispositivo esegue il software che riconosce il comando vocale trasformandolo in stringhe di testo;
+			\item Assistant riconosce il comando vocale trasformandolo in stringhe di testo;
 			\item il dispositivo invia la stringa riconosciuta ad un server remoto di Google, tramite protocollo \emph{\gls{httpg}S}, dove risiede la \emph{\gls{nlug}} per l'elaborazione;
 			\item la \emph{\gls{nlug}} del server remoto prova a verificare la possibile corrispondenza tra la stringa ricevuta e la frase che lo sviluppatore ha predisposto per l'attivazione;
 			\item se non vi è alcuna corrispondenza l'assistente eseguirà una ricerca in Internet della richiesta ritornando l'esito come risposta;
@@ -175,30 +198,31 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 	\subsection{Proof of concept}
 		\subsubsection{Analisi dei requisiti}
 		Per il proof of concept relativo ad Assistant, in comune accordo con il tutor e sulla base delle ricerche effettuate, è stato scelto di implementare una \emph{App Action} sull'argomento del fitness. Il suo scopo è verificare la fattibilità e le potenzialità delle \emph{App Action}, nonostante il loro attuale supporto alla sola lingua inglese, con un esempio concreto.
-		Ho quindi deciso di realizzare un timer con un'interfaccia grafica minimale che calcoli il tempo che si impiega nel svolgere attività fisica per ogni sport disponibile nei \emph{built-in intents}.
+		Ho quindi deciso di realizzare un timer con un'interfaccia grafica minimale che calcoli il tempo impiegato nello svolgimento di attività fisica per ogni sport disponibile nei \emph{built-in intents}, con la possibilità di attivarlo tramite comando vocale.
 		\subsubsection{Implementazione}	\mbox{}
-		Nell'attività di implementazione ho seguito le linee guida fornite da Google e come primo compito ho realizzato un'applicazione Android che presenta tutte le funzionalità previste e fruibili tramite l'interfaccia grafica. Più in dettaglio l'utente può attivare il timer dall'apposito pulsante, fermare l'attività in qualunque momento e visualizzare i risultati nello storico. 
+		Nell'attività di implementazione ho seguito le linee guida fornite da Google. Inizialmente ho realizzato un'applicazione Android che presentasse tutte le funzionalità previste, fruibili tramite l'interfaccia grafica. Più in dettaglio l'utente può attivare il timer dall'apposito pulsante, fermare l'attività in qualunque momento e visualizzare i risultati nello storico. 
 		
 		\pagebreak
 		
 		\begin{figure}[htbp]
 			\begin{center}
-				\includegraphics[height=\linewidth]{funzionamento AppActions.jpg}
+				\includegraphics[height=6.1cm]{funzionamento AppActions.jpg}
 				\caption{Esempio interfaccia PoC con Assistant}
 			\end{center}
 		\end{figure}
 	
 		A questo punto ho registrato gli intenti scelti nel file \emph{actions.xml} e aggiunte le dipendenze nel file \emph{AndroidManifest.xml} ed infine ho sviluppato il codice che deve essere eseguito al lancio del comando vocale.
-	
-		\subsubsection{Test} \mbox{}
+
+		\subsubsection{Test}
 		Per eseguire i test ho configurato il plug-in \emph{App Actions Test Tool} che permette di eseguire le verifiche su un dispositivo fisico, in quanto il supporto al simulatore non è ancora attivo, e di associare la mia \emph{Action} ad Assistant.
 		
 		\begin{figure}[htbp]
 			\begin{center}
-				\includegraphics{AppActionsTestTool.PNG}
+				\includegraphics[height=7cm, width=8cm]{AppActionsTestTool.PNG}
 				\caption{App Actions Test Tool}
 			\end{center}
 		\end{figure}
+	\pagebreak
 		
 %**************************************************************
 \section{Alexa}
@@ -296,7 +320,7 @@ L'obiettivo dell'analisi svolta è presentare le sole funzionalità degli assist
 			\item response: oggetto che definisce che cosa il dispositivo deve renderizzare per rispondere all'utente.
 		\end{itemize}
 		Di particolare rilevanza è il salvataggio dei dati durante la conversazione in quanto permette di richiedere determinati dati possibilmente importanti per la corretta esecuzione della \emph{Skill} ma soprattutto di dare all'utente la sensazione di interagire con un'intelligenza che ha capacità di memoria. Quest'ultima caratteristica è molto importante perché consente di definire e mantenere il contesto della conversazione, qualunque esso sia, incrementando notevolmente la qualità dell'esperienza d'uso dell'utente. \\
-		Per capire quali elementi devono essere salvati, Alexa utilizza delle variabili all'interno delle frasi di richiesta dette \emph{slots}. Essi devono essere definiti dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
+		Per capire quali elementi devono essere salvati, Alexa utilizza delle variabili all'interno delle frasi di richiesta dette \emph{slots}. Esse sono definite dallo sviluppatore durante la progettazione così che, quando l'utente pronuncia parole o dati in una posizione all'interno della frase corrispondente a quella di una variabile, vengono automaticamente salvati nel campo chiamato conversationToken. Il loro limite è rappresentato dalla conversazione stessa: al suo termine tutti i dati salvati vengono persi. Perciò, se si vuole una persistenza duratura nel tempo, bisogna utilizzare un database.
 	\subsection{Proof of concept}
 		\subsubsection{Analisi dei requisiti}
 		Per il proof of concept relativo ad Alexa, in comune accordo con il tutor e sulla base delle ricerche effettuate, è stato scelto di implementare una \emph{Skill} in grado di riconoscere la data di nascita di una persona. Il suo scopo è verificare le capacità conversazionali di Alexa e comprendere il meccanismo di funzionamento da loro adottato con un esempio concreto oltre all'analisi teorica.
