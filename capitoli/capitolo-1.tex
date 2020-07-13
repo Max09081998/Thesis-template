@@ -20,11 +20,11 @@
 
 %**************************************************************
 \section{Descrizione del progetto}
-Il progetto di stage è legato ad uno dei rami più conosciuti dell'intelligenza artificiale: l'interpretazione del linguaggio naturale. Questo argomento non è trattato nel percorso di studi della laurea triennale dunque e personalmente lo ritengo una sfida ed una motivazione aggiuntiva per conoscere e scoprire nuove tecnologie. \\
-Nelle prime settimane il lavoro si è articolato in attività di ricerca e sperimentazione su tre assistenti virtuali: Assistant, Alexa e Siri. Successivamente ho studiato la tecnologia Zucchetti per l'interpretazione del linguaggio naturale e ho realizzato un'applicazione basata su di essa, che rispetti i principi di progettazione appresi durante le precedenti ricerche e provi ad implementare un meccanismo di conversazione.
+Il progetto di stage è legato ad uno dei rami più conosciuti dell'intelligenza artificiale: l'interpretazione del linguaggio naturale. Questo argomento non è trattato nel percorso di studi della laurea triennale e personalmente lo ritengo una sfida ed una motivazione aggiuntiva per conoscere e scoprire nuove tecnologie. \\
+Nelle prime settimane il lavoro si è articolato in attività di ricerca, sperimentazione e documentazione su tre assistenti virtuali: Assistant, Alexa e Siri. Successivamente ho studiato la tecnologia Zucchetti per l'interpretazione del linguaggio naturale e ho realizzato un'applicazione basata su di essa, che rispetti i principi di progettazione appresi durante le precedenti ricerche ed implementi un meccanismo di conversazione.
 %**************************************************************
 \section{Zucchetti S.p.A}
-Il progetto di stage è stato svolto con Zucchetti, un'azienda italiana fondata più di 40 anni fa che produce soluzioni software, hardware e servizi per soddisfare le esigenze tecnologiche dei propri clienti, anche a livello internazionale. Le sedi sono dislocate in numerose città italiane tra cui Padova dove ho svolto lo stage e Lodi dove risiede la sede amministrativa.
+Il progetto di stage è stato svolto con Zucchetti, un'azienda italiana fondata più di 40 anni fa che produce soluzioni software, hardware e servizi per soddisfare le esigenze tecnologiche dei propri clienti, anche a livello internazionale. Le sedi sono dislocate in numerose città italiane tra cui Padova dove ho svolto lo stage e Lodi che rappresenta la sede amministrativa.
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -33,44 +33,50 @@ Il progetto di stage è stato svolto con Zucchetti, un'azienda italiana fondata 
 	\end{center}
 \end{figure}
 
-Domenico Zucchetti, fondatore dell'azienda, ha avuto la geniale intuizione di costruire un software per agevolare il lavoro dei commercialisti, allora completamente cartaceo e manuale. Con il passare degli anni il suo prodotto ha avuto un successo sempre maggiore tanto da ottenere collaborazioni con aziende del calibro di \emph{\gls{ibmg}}\glsfirstoccur. A partire da questo, Zucchetti ha continuato a perseguire l'innovazione del proprio prodotto integrandolo con nuovi moduli quali \emph{\gls{erpg}}\glsfirstoccur e la più recente fatturazione elettronica, per conferire maggiore flessibilità e adattabilità ad ogni tipologia di impresa, senza limitarsi ai commercialisti. \\
-Forte del suo prodotto, negli ultimi decenni l'azienda si è espansa a livello nazionale ed internazionale, ponendosi sul mercato con una vasta gamma di servizi per innumerevoli settori quali industria manifatturiera, trasporti, logistica, sanità, fitness e molti altri. \\
-Uno dei pilastri di Zucchetti che ha indubbiamente contribuito alla sua espansione è l'innovazione e la propensione alla ricerca di nuove tecnologie. A questo proposito la sede di Padova è composta da un reparto di ricerca e sviluppo, nel quale sono stato inserito durante la mia esperienza di stage, coordinato dal dott. Gregorio Piccoli che mi ha proposto il progetto si è offerto come mio tutor.
+Domenico Zucchetti, fondatore dell'azienda, ha avuto la geniale intuizione di costruire un software per agevolare il lavoro dei commercialisti, allora completamente cartaceo e manuale. Con il passare degli anni il suo prodotto ha riscontrato sempre maggior successo tanto da ottenere collaborazioni con aziende del calibro di \emph{\gls{ibmg}}\glsfirstoccur. A partire da questo, Zucchetti ha continuato a perseguire la strada dell'innovazione integrando il proprio prodotto con moduli nuovi, quali \emph{\gls{erpg}}\glsfirstoccur e la più recente fatturazione elettronica, per conferire maggiore flessibilità e adattabilità ad ogni tipologia di impresa, senza limitarsi ai commercialisti. \\
+Forte del suo prodotto, negli ultimi decenni l'azienda si è espansa a livello nazionale ed internazionale, ponendosi sul mercato con una vasta gamma di servizi per innumerevoli settori tra cui industria manifatturiera, trasporti, logistica, sanità, fitness e molti altri. \\
+Uno dei pilastri di Zucchetti che ha indubbiamente contribuito alla sua espansione è l'innovazione e la propensione alla ricerca di nuove tecnologie. A questo proposito la sede di Padova è composta da un reparto di ricerca e sviluppo, nel quale sono stato inserito durante la mia esperienza di stage, coordinato dal dott. Gregorio Piccoli che mi ha proposto il progetto e si è offerto come mio tutor.
 %**************************************************************
 \section{Lo stage proposto}
 \subsection{Contesto del lavoro}
 L'azienda sta cercando di introdurre nei propri prodotti, in particolare nel software gestionale, un'interfaccia vocale che permetta agli utenti di interagire in modo più veloce e spontaneo nelle operazioni comuni. Il loro obiettivo è quindi implementare un'interfaccia diversa da quella grafica, con caratteristiche proprie, che esprima un modo nuovo di comunicare con le applicazioni. Esso, seppur ancora poco sviluppato, possiede grandi potenzialità. \\
-Per raggiungere questo traguardo il principale ostacolo da superare è il riconoscimento del linguaggio naturale attraverso un'applicativo software. Perciò l'azienda ha sviluppato delle regole per la creazione di \emph{grammatiche} che permettano di eseguire il \emph{parsing} dei comandi vocali. Tuttavia è una tecnologia ancora in fase di sviluppo e proprio per questo, come progetto di stage, mi sono stati proposte due tematiche mirate ad un'attività di esplorazione. Esse sono pensate per suddividere il lavoro in due parti:
+Per raggiungere questo traguardo il principale ostacolo da superare è il riconoscimento del linguaggio naturale attraverso un'applicativo software. Perciò l'azienda ha sviluppato delle regole per la creazione di \emph{grammatiche} che permettano di eseguire il \emph{parsing} dei comandi vocali. Tuttavia è una tecnologia ancora in fase di sviluppo e proprio per questo, come progetto di stage, mi sono state proposte due tematiche mirate ad un'attività di esplorazione. Esse sono pensate per suddividere il lavoro in due parti:
 \begin{enumerate}
-	\item analizzare i tre assistenti virtuali attualmente più diffusi sul mercato, Assistant, Alexa e Siri, per comprenderne le abilità e verificare il loro possibile impiego nei prodotti dell'azienda in merito alla comunicazione vocale;
-	\item implementare una \emph{\gls{nlug}}\glsfirstoccur basata su una \emph{\gls{gramg}}\glsfirstoccur costruita con la nuova tecnologia Zucchetti, possibilmente con capacità conversazionale ed ispirata agli assistenti virtuali precedentemente analizzati.
+	\item analizzare i tre assistenti virtuali attualmente più diffusi sul mercato, Assistant, Alexa e Siri, per comprenderne le abilità e verificare i loro possibili impieghi nei prodotti dell'azienda;
+	\item implementare una \emph{\gls{nlug}}\glsfirstoccur basata su una \emph{\gls{gramg}}\glsfirstoccur costruita con la nuova tecnologia Zucchetti, possibilmente con capacità conversazionale, ed ispirata agli assistenti virtuali precedentemente analizzati.
 \end{enumerate}
-Più nello specifico gli obiettivi da perseguire sono descritti nella sezione \hyperref[section:obiettivi]{2.2} tuttavia possono essere riassunti nei seguenti punti:
+Più nello specifico gli obiettivi da perseguire sono descritti nella sezione \hyperref[section:obiettivi]{2.2} ma possono essere riassunti nei seguenti punti:
 \begin{itemize}
-	\item analizzare le tecnologie offerte ed i principi di implementazione delle abilità di Assistant, Alexa e Siri con \emph{\gls{pocg}}\glsfirstoccur concreti;
-	\item capire dalle ricerche svolte se esistono componenti rilevanti per il progetto aziendale che riguardano la realizzazione di un'interfaccia vocale;
+	\item analizzare le tecnologie offerte ed i principi di implementazione delle abilità di Assistant, Alexa e Siri con \emph{\gls{pocg}}\glsfirstoccur che le concretizzano;
+	\item capire dalle ricerche svolte se esistono componenti rilevanti per i progetti aziendali che riguardano la realizzazione di un'interfaccia vocale;
 	\item implementare un'applicazione ispirata alle nozioni studiate e che utilizzi una \emph{\gls{gramg}} costruita mediante la tecnologia Zucchetti, possibilmente con capacità conversazionale.
 \end{itemize}
 \subsection{Problematiche incontrate}
-Lo stage è stato svolto esclusivamente da remoto e ciò ha in parte influenzato il piano di lavoro, ponendo come facoltativi degli obiettivi sicuramente raggiungibili in presenza. In particolare il riferimento è all'attività legata a Siri in quanto, per la maggior parte dei compiti, necessita di un computer con sistema operativo MacOS che è stato possibile reperire solo per un breve periodo di tempo. Inoltre, a causa delle restrizioni dell'account sviluppatore Apple a disposizione, non si è potuta concludere l'attività. \\
-Ad ogni modo, considerando la nuova esperienza di lavoro remoto sia per me che per l'azienda, non sono emerse ulteriori problematiche.
+Lo stage è stato svolto esclusivamente da remoto e ciò ha in parte influenzato il piano di lavoro, ponendo come facoltativi degli obiettivi quasi sicuramente raggiungibili in presenza come quelli dell'attività legata a Siri. Infatti, per la maggior parte dei compiti, necessita di un computer con sistema operativo MacOS che ho potuto reperire solo per un breve periodo di tempo ed inoltre, a causa delle restrizioni dell'account sviluppatore Apple a disposizione, non si è potuta concludere l'attività. \\
+Ad ogni modo, considerando la nuova esperienza di lavoro remoto sia per me che per l'azienda, lo stage è stato molto positivo e non sono emerse ulteriori problematiche.
 \subsection{Sintesi dei risultati}
-Nonostante il problema legato all'attività con Siri, è stato possibile concludere e rispettare il piano di lavoro con risultati ottimi. \\
-Gli esiti della ricerca hanno soddisfatto le aspettative, confermando alcune intuizioni del tutor e facendo emergere nuovi elementi importanti per gli sviluppi della loro interfaccia vocale. Anche l'esito dell'applicazione ha dato ottimi frutti, confermando le caratteristiche delle loro \emph{grammatiche} e portando alla luce nozioni e tematiche rilevanti per gli sviluppi della loro \emph{\gls{nlug}}. Esse sono: capacità di memorizzazione, comprensione del contesto e architettura delle applicazioni che ne fanno uso.
+Nonostante il problema legato all'attività con Siri, è stato possibile concludere lo stage rispettando il piano di lavoro e con risultati ottimi. \\
+Gli esiti della ricerca delle prime settimane hanno soddisfatto le aspettative, confermando alcune intuizioni del tutor e facendo emergere nuovi elementi importanti per gli sviluppi della loro interfaccia vocale. Le conferme riguardano l'utilizzo di Assistant ed Alexa per comunicare con i prodotti aziendali attraverso appositi \emph{\gls{sdkg}}\glsfirstoccur offerti rispettivamente da Google e Amazon; Apple invece non fornisce lo stesso per Siri affermando la sua politica di ecosistema chiuso. I nuovi elementi rilevati sono le tecniche di progettazione e realizzazione della capacità conversazionale e l'integrazione dell'assistente virtuale all'interno di applicazioni mobile, fornita solo da Assistant e Siri. Essi sono emersi principalmente grazie ai \emph{\gls{pocg}} costruiti in modo mirato sulle funzionalità più interessanti per l'azienda e hanno fornito molti spunti di riflessione su possibili nuove implementazioni. I loro risultati sono così riassunti:
+\begin{itemize}
+	\item \emph{\gls{pocg}} di Assistant: utilizzo dell'assistente virtuale per attivare determinate funzionalità di un'applicazione. Nel mio caso si tratta di un timer per fare attività fisica;
+	\item \emph{\gls{pocg}} di Alexa: effettuare una conversazione con l'assistente virtuale finalizzata ad eseguire una determinata funzione. Nel mio caso si tratta di riferire la data di nascita al mio applicativo;
+	\item \emph{\gls{pocg}} di Siri: utilizzo dell'assistente virtuale per creare comandi personalizzati di attivazione delle applicazioni o delle loro specifiche funzionalità. Sebbene non sia stato possibile completarlo con successo, i dati ricavati sono stati ugualmente soddisfacenti.
+\end{itemize}
+Anche l'esito dell'applicazione ha dato ottimi frutti, confermando le caratteristiche delle \emph{grammatiche} Zucchetti ovvero facilità e grande flessibilità nell'utilizzo e portando alla luce nozioni e tematiche rilevanti per gli sviluppi della loro \emph{\gls{nlug}}, quali capacità di memorizzazione, comprensione del contesto e architettura del software che ne fa uso. L'applicazione è costituita da una \emph{\gls{nlug}} capace di interpretare data di nascita e di compleanno attraverso una conversazione. Questo significa, ad esempio, che l'utente può fornire una data parziale ed in seguito l'applicazione chiederà i dati mancanti con domande mirate.
 %**************************************************************
 \section{Organizzazione del testo}
-
+Il capitolo finora trattato è di introduzione mentre il seguito del documento è organizzato secondo questa struttura:
 \begin{description}
-    \item[{\hyperref[cap:lo-stage]{Il secondo capitolo}}] descrive obiettivi, pianificazione, strumenti e tecnologie del progetto di stage e le motivazioni che mi hanno portato a sceglierlo.
+    \item[{\hyperref[cap:lo-stage]{Il secondo capitolo}}] descrive obiettivi, pianificazione, strumenti e tecnologie del progetto di stage ed infine le motivazioni che mi hanno portato a sceglierlo.
     
-    \item[{\hyperref[cap:assistenti-virtuali]{Il terzo capitolo}}] descrive il lavoro di ricerca sugli assistenti virtuali Assistant, Alexa e Siri e le considerazioni tratte al termine.
+    \item[{\hyperref[cap:assistenti-virtuali]{Il terzo capitolo}}] descrive il lavoro di analisi e ricerca sugli assistenti virtuali Assistant, Alexa e Siri e le considerazioni tratte al termine.
     
-    \item[{\hyperref[cap:applicazione]{Il quarto capitolo}}] descrive la tecnologia Zucchetti e l'applicazione costruita per la comprensione del linguaggio naturale con capacità conversazionale.
+    \item[{\hyperref[cap:applicazione]{Il quarto capitolo}}] descrive inizialmente la tecnologia Zucchetti ed in seguito l'applicazione costruita per la comprensione del linguaggio naturale con capacità conversazionale.
     
-    \item[{\hyperref[cap:conclusione]{Il quinto capitolo}}] è conclusivo dell'elaborato, riassume il lavoro svolto, il raggiungimento degli obiettivi ed infine riporta un'analisi retrospettiva dell'intera esperienza di stage.
+    \item[{\hyperref[cap:conclusione]{Il quinto capitolo}}] rappresenta le conclusioni dell'elaborato: riassume il lavoro svolto, il raggiungimento degli obiettivi ed infine riporta un'analisi retrospettiva dell'intera esperienza di stage.
 \end{description}
 
-Riguardo la stesura del testo, relativamente al documento, sono state adottate le seguenti convenzioni tipografiche:
+Riguardo la stesura del testo di questo documento sono state adottate le seguenti convenzioni tipografiche:
 \begin{itemize}
 	\item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
 	\item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \emph{parola}\glsfirstoccur;
