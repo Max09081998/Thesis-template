@@ -10,8 +10,8 @@
 %\intro{Breve introduzione al capitolo}\\
 
 \section{Introduzione alle grammatiche}
-Zucchetti negli ultimi anni ha investito molto nella ricerca di una tecnologia che gli permettesse di interagire con i propri prodotti attraverso comandi vocali ed ora sta realizzando delle regole per generare \emph{grammatiche} capaci di comprendere ed elaborare un numero potenzialmente infinito di frasi del linguaggio naturale. \\
-Gli assistenti virtuali presenti sul mercato sono basati sul seguente concetto: provare in ogni modo ad interpretare l'input ricevuto anche se non corrisponde esattamente ad uno di quelli previsti, a costo di commettere degli errori. L'obiettivo di questa filosofia è dare all'utente la percezione di utilizzare uno strumento in grado di capire e ragionare in qualsiasi condizione ed è già utilizzata in larga scala da aziende del calibro di Google, Amazon e Apple. Tuttavia, per le funzionalità offerte dalla maggior parte dei prodotti Zucchetti, tale principio non è applicabile poiché necessitano che la comprensione dell'input abbia margine di errore nullo. Un classico esempio è il trasferimento di denaro in cui se la comprensione del comando avviene in modo errato c'è il rischio di causare danni contingenti agli utenti. \\
+Zucchetti negli ultimi anni ha investito molto nella ricerca di una tecnologia che gli permettesse di interagire con i propri prodotti attraverso comandi vocali. Ora infatti possiedono delle regole per generare \emph{grammatiche} capaci di comprendere ed elaborare un numero potenzialmente infinito di frasi del linguaggio naturale, anche se non ancora pronte per la produzione. \\
+Gli assistenti virtuali presenti sul mercato sono basati sul seguente concetto: provare in ogni modo ad interpretare l'input ricevuto anche se non corrisponde esattamente ad uno di quelli previsti, a costo di commettere degli errori. L'obiettivo di questa filosofia è dare all'utente la percezione di utilizzare uno strumento in grado di capire e ragionare in qualsiasi condizione ed è già utilizzata in larga scala da aziende del calibro di Google, Amazon e Apple. Tuttavia, per le funzionalità offerte dalla maggior parte dei prodotti Zucchetti, tale principio non è applicabile poiché necessitano che la comprensione dell'input abbia margine di errore nullo. Un classico esempio è il trasferimento di denaro in cui, se la comprensione del comando avviene in modo errato, c'è il forte rischio di causare danni contingenti agli utenti. \\
 Zucchetti ha perciò intrapreso una strada diversa sviluppando una tecnologia che si pone l'obiettivo di massimizzare la precisione nella comprensione dei comandi, accettando piuttosto di rigettarli qualora non abbia la piena certezza. Essa consiste in regole molto semplici ed intuitive da applicare e riassunte in cinque operazioni chiave:
 \begin{itemize}
 	\item concatenazione di stringhe;
@@ -20,8 +20,8 @@ Zucchetti ha perciò intrapreso una strada diversa sviluppando una tecnologia ch
 	\item opzionalità di una stringa;
 	\item rilascio di una stringa a scelta dello sviluppatore in qualsiasi punto dell'interpretazione come segnale per l'elaborazione dei risultati.
 \end{itemize}
-A partire da esse viene costruita una \emph{\gls{gramg}} che permette di interpretare un insieme finito di input rappresentanti il dominio della conversazione che si vuole intrattenere. La difficoltà principale è scegliere il corretto insieme delle possibili frasi che l'utente può pronunciare con l'obiettivo di ottenerne un numero elevato ma pertinente, eseguendo un'analisi probabilistica e statistica sul proprio contesto. Il problema infatti è che, qualora l'utente esprimesse una frase che differisca anche per una singola lettera da quelle generate dalla \emph{\gls{gramg}}, non sarebbe riconosciuta. \\
-Un esempio semplice ma dimostrativo di una \emph{\gls{gramg}} che permette di interpretare alcune frasi di saluto è illustrato nella seguente immagine.
+A partire da esse viene costruita una \emph{\gls{gramg}} che permette di interpretare un insieme finito di input rappresentanti il dominio della conversazione che si vuole intrattenere. La difficoltà principale è scegliere il corretto insieme delle frasi possibilmente pronunciabili dall'utente con l'obiettivo di ottenerne un numero elevato ma pertinente. Per fare ciò, è necessario eseguire un'analisi probabilistica e statistica sul proprio contesto. Il problema infatti è che, qualora l'utente esprimesse una frase che differisca anche per una singola lettera da quelle generate dalla \emph{\gls{gramg}}, non sarebbe riconosciuta. \\
+Un esempio semplice ma dimostrativo di una \emph{\gls{gramg}} che interpreta alcune frasi di saluto è illustrato nella seguente immagine.
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -32,7 +32,7 @@ Un esempio semplice ma dimostrativo di una \emph{\gls{gramg}} che permette di in
 
 \vspace{2cm}
 
-Nonostante il loro principio di funzionamento sia relativamente semplice da comprendere, non sono altrettanto facili da interpretare se raggiungono grandi dimensioni, soprattutto per uno sviluppatore terzo che le dovrà riutilizzare in futuro. Per migliorare questo aspetto l'azienda ha deciso di utilizzare i diagrammi \emph{\gls{rldg}}\glsfirstoccur come strumento di rappresentazione come si può vedere nella figura successiva.
+Nonostante il loro principio di funzionamento sia relativamente semplice da comprendere, non sono altrettanto facili da analizzare se raggiungono grandi dimensioni, soprattutto per uno sviluppatore terzo che le dovrà riutilizzare in futuro. Per migliorare questo aspetto l'azienda ha deciso di utilizzare i diagrammi \emph{\gls{rldg}}\glsfirstoccur come strumento di rappresentazione. \\
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -41,9 +41,9 @@ Nonostante il loro principio di funzionamento sia relativamente semplice da comp
 	\end{center}
 \end{figure}
 
-Risulta evidente infatti come questa raffigurazione sia molto più efficace e intuitiva. \\
-Inoltre l'applicazione effettiva della \emph{\gls{gramg}} sugli input dell'utente avviene attraverso un apposito \emph{\gls{parsg}}\glsfirstoccur che mi è stato consegnato dall'azienda per lo sviluppo del progetto. \\
-Infine per riassumere gli aspetti positivi e negativi di questa tecnologia viene presentato un paragone a quella attualmente utilizzata dagli assistenti virtuali presentati in precedenza. Non tutti i paragoni sono possibili a causa della mancanza di dati a disposizione ma viene comunque riportato nella seguente tabella.
+Risulta evidente come questa raffigurazione della \emph{\gls{gramg}} precedente sia molto più efficace e intuitiva. \\
+Infine l'applicazione effettiva della \emph{\gls{gramg}} sugli input, invece, avviene attraverso un apposito \emph{\gls{parsg}}\glsfirstoccur che mi è stato consegnato dall'azienda per lo sviluppo del progetto. \\
+Per riassumere gli aspetti positivi e negativi di questa tecnologia viene presentato un paragone con quella attualmente utilizzata dagli assistenti virtuali descritti in precedenza; tuttavia non tutti sono disponibili a causa della mancanza di dati a disposizione.
 
 %\begin{table}
 	\begin{longtable}{|p{3cm}|p{4.5cm}|p{4.5cm}|}
@@ -60,7 +60,7 @@ Infine per riassumere gli aspetti positivi e negativi di questa tecnologia viene
 		\hline
 		Prestazioni & Prestazioni molto elevate dovute ad un'ottima integrazione del \emph{\gls{parsg}} e all'esecuzione in locale, senza quindi onere nella comunicazione. & Prestazioni altrettanto elevate con l'incognita dei tempi di latenza dovuti all'esecuzione in remoto del \emph{\gls{parsg}} di interpretazione dell'input. \\
 		\hline
-		\caption{Tabella di confronto tra la tecnologia Zucchetti e quella dei concorrenti per l'interpretazione del linguaggio naturale}
+		\caption{Tabella di confronto tra la tecnologia Zucchetti e quella degli altri assistenti virtuali per l'interpretazione del linguaggio naturale}
 	\end{longtable}
 %\end{table}
 
